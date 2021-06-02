@@ -1,15 +1,38 @@
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button
+} from '@material-ui/core';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListAltSharpIcon from '@material-ui/icons/ListAltSharp';
 
 const drawerWidth = 240;
+
+const modules =[
+  'Module 1',
+  'Module 2',
+  'Module 3',
+  'Module 4',
+  'Module 5',
+  'Module 6',
+  'Module 7',
+  'Module 8',
+  'Module 9',
+  'Module 10',
+  'Module 11',
+  'Module 12',
+]
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,9 +50,10 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  toolbar: theme.mixins.toolbar,
 }));
 
-function App({window}) {
+function App({ window }) {
   const classes = useStyles();
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -41,7 +65,7 @@ function App({window}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Pacemaker
+            Séries 200
           </Typography>
           <Button color="inherit">Déconnecter</Button>
         </Toolbar>
@@ -53,10 +77,17 @@ function App({window}) {
           paper: classes.drawerPaper,
         }}
       >
-        <div>
         <div className={classes.toolbar} />
-          <Divider />
-        </div>
+        <Divider />
+        <List>
+        {modules.map((text) => (
+          <ListItem button key={text}>
+            <ListItemIcon><ListAltSharpIcon /></ListItemIcon>
+            <ListItemText primary={text} />
+            {/* {open ? <ExpandLess /> : <ExpandMore />} */}
+          </ListItem>
+        ))}
+      </List>
       </Drawer>
     </div>
   );
