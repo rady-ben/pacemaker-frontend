@@ -2,13 +2,11 @@ import {
     Drawer as MuDrawer,
     Divider,
     List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ListAltSharpIcon from '@material-ui/icons/ListAltSharp';
 import { DRAWER_WIDTH } from '../constant/ui';
+import ListItem from './ListItem';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,10 +29,7 @@ const Drawer = ({ listItems }) => {
             <Divider />
             <List>
                 {listItems.map((text) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon><ListAltSharpIcon /></ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                    <ListItem lable={text} />
                 ))}
             </List>
         </MuDrawer>
