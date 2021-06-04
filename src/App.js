@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import Header from './component/Header';
 import Drawer from './component/Drawer';
-import Question from './component/Question';
+import Question from './component/Question/Question';
 
 
 
