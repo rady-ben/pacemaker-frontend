@@ -3,7 +3,10 @@ import {
     Typography,
     Divider,
     List,
-    ListItem
+    ListItem,
+    Box,
+    Button,
+    ButtonGroup
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../../constant/ui';
@@ -69,11 +72,19 @@ const Question = () => {
                         <ListItem>
                             <ResponseProposition label={text} />
                         </ListItem>
-
                     ))
                 }
         </List>
         <Divider className={classes.divider} />
+        <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
+            <Button variant="contained" color="primary">
+                Valider
+            </Button>
+            <ButtonGroup color="primary" aria-label="outlined primary button group">
+                <Button>Precedant</Button>
+                <Button>Suivant</Button>
+            </ButtonGroup>
+      </Box>
       </Paper>
       </>
     );
