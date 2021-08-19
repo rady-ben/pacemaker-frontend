@@ -21,12 +21,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Header = () => {
+const Header = ({drawerOpen, toggleDrawer}) => {
     const classes = useStyles();
+
+    const innerToggleDrawer = () => {
+        toggleDrawer(!drawerOpen)
+    }
+
     return (
         <AppBar>
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <IconButton 
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="menu"
+                    onClick={innerToggleDrawer}
+                >
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>

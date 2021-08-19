@@ -1,4 +1,4 @@
-import { 
+import {
     Drawer as MuDrawer,
     Divider,
     List,
@@ -12,32 +12,57 @@ import ListItem from './ListItem';
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
-      width: DRAWER_WIDTH,
+        width: DRAWER_WIDTH,
     },
     toolbar: theme.mixins.toolbar,
-  }));
+}));
 
-const Drawer = ({ listItems }) => {
+const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
     const classes = useStyles();
+    const innerToggleDrawer = () => {
+        toggleDrawer(!drawerOpen)
+    }
     return (
-        <Hidden
-            smDown
-        >
-            <MuDrawer
-                variant="permanent"
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
+        <>
+            <Hidden
+                smDown
             >
-                <div className={classes.toolbar} />
-                <Divider />
-                <List>
-                    {listItems.map((text) => (
-                        <ListItem lable={text} />
-                    ))}
-                </List>
-            </MuDrawer>
-        </Hidden>
+                <MuDrawer
+                    variant="permanent"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.toolbar} />
+                    <Divider />
+                    <List>
+                        {listItems.map((text) => (
+                            <ListItem lable={text} />
+                        ))}
+                    </List>
+                </MuDrawer>
+            </Hidden>
+            <Hidden
+                smUp
+            >
+                <MuDrawer
+                    variant="temporary"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    open={drawerOpen}
+                    onClose={innerToggleDrawer}
+                >
+                    <div className={classes.toolbar} />
+                    <Divider />
+                    <List>
+                        {listItems.map((text) => (
+                            <ListItem lable={text} />
+                        ))}
+                    </List>
+                </MuDrawer>
+            </Hidden>
+        </>
     );
 }
 

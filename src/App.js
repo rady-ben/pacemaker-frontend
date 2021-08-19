@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { useState } from 'react';
 import './App.css';
 import Header from './component/Header';
 import Drawer from './component/Drawer';
@@ -23,10 +23,18 @@ const modules = [
 
 
 function App() {
+  const [drawerOpen, toggleDrawer] = useState(false);
   return (
     <div>
-      <Header />
-      <Drawer listItems={modules} />
+      <Header 
+        drawerOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+      />
+      <Drawer 
+        listItems={modules}
+        drawerOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+      />
       <Question />
     </div>
   );
