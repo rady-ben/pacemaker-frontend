@@ -23,10 +23,12 @@ const propositions = [
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-        marginLeft: theme.spacing(4) + DRAWER_WIDTH,
-        marginRight: theme.spacing(4),
+        [theme.breakpoints.up('md')]: {
+            marginTop: theme.spacing(4),
+            marginBottom: theme.spacing(4),
+            marginLeft: theme.spacing(4) + DRAWER_WIDTH,
+            marginRight: theme.spacing(4),
+        },
         padding: theme.spacing(2)
     },
     divider: {

@@ -3,6 +3,7 @@ import {
     Divider,
     List,
 } from '@material-ui/core';
+import { Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../constant/ui';
 import ListItem from './ListItem';
@@ -19,20 +20,24 @@ const useStyles = makeStyles((theme) => ({
 const Drawer = ({ listItems }) => {
     const classes = useStyles();
     return (
-        <MuDrawer
-            variant="permanent"
-            classes={{
-                paper: classes.drawerPaper,
-            }}
+        <Hidden
+            smDown
         >
-            <div className={classes.toolbar} />
-            <Divider />
-            <List>
-                {listItems.map((text) => (
-                    <ListItem lable={text} />
-                ))}
-            </List>
-        </MuDrawer>
+            <MuDrawer
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.toolbar} />
+                <Divider />
+                <List>
+                    {listItems.map((text) => (
+                        <ListItem lable={text} />
+                    ))}
+                </List>
+            </MuDrawer>
+        </Hidden>
     );
 }
 
