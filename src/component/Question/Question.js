@@ -77,6 +77,10 @@ const Question = () => {
         setPropositions([...tab]);
     }
 
+    const toggleValidation = () => {
+        setValidated(!validated)
+    }
+
     return (
         <>
         <div className={classes.toolbar} />
@@ -111,7 +115,7 @@ const Question = () => {
                         <ListItem>
                             <ResponseProposition
                                 label={proposition.label}
-                                status={proposition.status}
+                                status={validated ? proposition.status : 'default'}
                                 checked={proposition.checked}
                                 index={index}
                                 handleCheckProposition={handleCheckProposition}
@@ -123,7 +127,11 @@ const Question = () => {
         </List>
         <Divider className={classes.divider} />
         <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
-            <Button variant="contained" color="primary">
+            <Button 
+                variant="contained"
+                color="primary"
+                onClick={toggleValidation}
+            >
                 Valider
             </Button>
             <ButtonGroup color="primary" aria-label="outlined primary button group">
