@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Paper,
     Typography,
@@ -12,14 +13,41 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 
-const propositions = [
-    'Proposiont 1',
-    'Proposiont 2',
-    'Proposiont 3',
-    'Proposiont 4',
-    'Proposiont 5',
-    'Proposiont 6',
-  ]
+
+
+
+const defaultPropositions = [
+    {
+        label: 'Proposiont 1 (correct)',
+        status: 'success',
+        checked: false,
+    },
+    {
+        label: 'Proposiont 2 (error)',
+        status: 'error',
+        checked: false,
+    },
+    {
+        label: 'Proposiont 3 (correct)',
+        status: 'success',
+        checked: false,
+    },
+    {
+        label: 'Proposiont 4 (error)',
+        status: 'error',
+        checked: false,
+    },
+    {
+        label: 'Proposiont 5 (error)',
+        status: 'error',
+        checked: false,
+    },
+    {
+        label: 'Proposiont 6 (correct)',
+        status: 'success',
+        checked: false,
+    },
+]
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -40,6 +68,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Question = () => {
     const classes = useStyles();
+    const [validated, setValidated] = useState(false);
+    const [propositions, setPropositions] = useState(defaultPropositions);
+
+    const handleCheckProposition = ({ index, checked }) => {
+        let tab = propositions;
+        tab[index].checked=checked;
+        setPropositions([...tab]);
+    }
+
     return (
         <>
         <div className={classes.toolbar} />
@@ -70,11 +107,15 @@ const Question = () => {
         <Divider className={classes.divider} />
         <List>
                 {
-                    propositions.map((text) => (
+                    propositions.map((proposition, index) => (
                         <ListItem>
                             <ResponseProposition
-                                label={text}
-                                status="success"
+                                label={proposition.label}
+                                status={proposition.status}
+                                checked={proposition.checked}
+                                index={index}
+                                handleCheckProposition={handleCheckProposition}
+                                propositions={propositions}
                             />
                         </ListItem>
                     ))
@@ -86,7 +127,9 @@ const Question = () => {
                 Valider
             </Button>
             <ButtonGroup color="primary" aria-label="outlined primary button group">
-                <Button>Precedant</Button>
+                <Button>
+                    Precedant
+                </Button>
                 <Button>Suivant</Button>
             </ButtonGroup>
       </Box>
