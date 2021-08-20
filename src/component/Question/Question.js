@@ -72,7 +72,10 @@ const Question = () => {
                 {
                     propositions.map((text) => (
                         <ListItem>
-                            <ResponseProposition label={text} />
+                            <ResponseProposition
+                                label={text}
+                                status="success"
+                            />
                         </ListItem>
                     ))
                 }
