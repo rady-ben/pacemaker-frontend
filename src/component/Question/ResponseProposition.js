@@ -5,8 +5,6 @@ import {
 } from '@material-ui/core';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -58,20 +56,23 @@ const ResponseProposition = ({ label, status, index, checked, handleCheckProposi
         })
     }
 
-    const CustomCheckBox = status === 'success' ? <DoneIcon
-        className={classes.iconSuccess}
+    const CustomCheckBox = status === 'success' ? <GreenCheckbox
+        checked={checked}
+        onChange={handleClick}
     />
-        : (status === 'error' ? <ErrorOutlineIcon
+        : (status === 'error' ? <RedCheckbox
+            checked={checked}
             className={classes.iconError}
         /> : <Checkbox
             checked={checked}
             onChange={handleClick}
+            color="primary"
         />)
 
     return (
         <FormControlLabel
             control={
-CustomCheckBox
+                CustomCheckBox
             }
             label={<Typography className={classes.label}>{label}</Typography>}
         />
