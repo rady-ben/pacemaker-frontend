@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
     FormControlLabel,
     Checkbox,
@@ -6,7 +5,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
-
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -15,8 +15,16 @@ const useStyles = makeStyles((theme) => ({
         width: '100%'
     },
     label: {
-        color: props=> props.status === 'success' ? theme.palette.success.contrastText : 
-        (props.status === 'error' ? theme.palette.error.contrastText : null),
+        color: props=> props.status === 'success' ? theme.palette.success.main : 
+        (props.status === 'error' ? theme.palette.error.main : null),
+    },
+    iconError: {
+        marginRight: theme.spacing(1),
+        color: red[600]
+    },
+    iconSuccess: {
+        marginRight: theme.spacing(1),
+        color: green[600]
     }
 }));
 
@@ -50,17 +58,20 @@ const ResponseProposition = ({ label, status, index, checked, handleCheckProposi
         })
     }
 
-    const CustomCheckBox = status === 'success' ? GreenCheckbox
-    : (status === 'error' ? RedCheckbox : Checkbox)
+    const CustomCheckBox = status === 'success' ? <DoneIcon
+        className={classes.iconSuccess}
+    />
+        : (status === 'error' ? <ErrorOutlineIcon
+            className={classes.iconError}
+        /> : <Checkbox
+            checked={checked}
+            onChange={handleClick}
+        />)
 
     return (
         <FormControlLabel
-            className={classes.container}
             control={
-                <CustomCheckBox 
-                    checked={checked}
-                    onChange={handleClick}
-                />
+CustomCheckBox
             }
             label={<Typography className={classes.label}>{label}</Typography>}
         />

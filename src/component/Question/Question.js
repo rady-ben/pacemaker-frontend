@@ -7,8 +7,10 @@ import {
     ListItem,
     Box,
     Button,
-    ButtonGroup
+    ButtonGroup,
 } from '@material-ui/core';
+import _ from 'lodash';
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
@@ -81,6 +83,14 @@ const Question = () => {
         setValidated(!validated)
     }
 
+    const validateResponses = () => {
+        const valide =propositions.find((proposition)=>(
+            (proposition.status==='success' && !proposition.checked)
+            || (proposition.status==='error' && proposition.checked)
+        ))
+        return _.isEmpty(valide);
+    }
+
     return (
         <>
         <div className={classes.toolbar} />
@@ -109,6 +119,14 @@ const Question = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
         </Typography>
         <Divider className={classes.divider} />
+        {
+            !validated
+            ?null
+            :validateResponses()
+            ?<Alert severity="success">Réponse juste!</Alert>
+            :<Alert severity="error">Réponse fausse!</Alert>
+        }
+        
         <List>
                 {
                     propositions.map((proposition, index) => (
@@ -135,7 +153,9 @@ const Question = () => {
                 Valider
             </Button>
             <ButtonGroup color="primary" aria-label="outlined primary button group">
-                <Button>
+                <Button
+                    onClick={validateResponses}
+                >
                     Precedant
                 </Button>
                 <Button>Suivant</Button>
