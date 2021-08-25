@@ -66,6 +66,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     toolbar: theme.mixins.toolbar,
+    note: {
+        width: "100%",
+        marginTop: theme.spacing(4),
+    },
 }));
 
 const Question = () => {
@@ -156,6 +160,13 @@ const Question = () => {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
                     </Typography>
+                    <textarea
+                        className={classes.note}
+                        rows={10}
+                        placeholder="Vous pouvez ajoutez vos note ici .."
+                    >
+                        
+                    </textarea>
                 </>
                 }
         <Divider className={classes.divider} />
