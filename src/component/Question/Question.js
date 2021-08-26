@@ -91,7 +91,7 @@ const Question = () => {
 
     const handleCheckProposition = ({ index, checked }) => {
         let tab = propositions;
-        tab[index].checked=checked;
+        tab[index].checked = checked;
         setPropositions([...tab]);
     }
 
@@ -100,63 +100,63 @@ const Question = () => {
     }
 
     const validateResponses = () => {
-        const valide =propositions.find((proposition)=>(
-            (proposition.status==='success' && !proposition.checked)
-            || (proposition.status==='error' && proposition.checked)
+        const valide = propositions.find((proposition) => (
+            (proposition.status === 'success' && !proposition.checked)
+            || (proposition.status === 'error' && proposition.checked)
         ))
         return _.isEmpty(valide);
     }
 
     return (
         <>
-        <div className={classes.toolbar} />
-        <Paper className={classes.container}>
-        <Box display="flex" flexDirection="row" justifyContent="space-between">
-            <Typography 
-                variant="h4"
-            >
-                Question 1
-            </Typography>
-            <Button 
-                className={classes.synthesisButton}
-                startIcon={<FullscreenIcon/>}
-            >
-                <Typography className={classes.synthesisButtonText}>
-                    Synthèse
+            <div className={classes.toolbar} />
+            <Paper className={classes.container}>
+                <Box display="flex" flexDirection="row" justifyContent="space-between">
+                    <Typography
+                        variant="h4"
+                    >
+                        Question 1
+                    </Typography>
+                    <Button
+                        className={classes.synthesisButton}
+                        startIcon={<FullscreenIcon />}
+                    >
+                        <Typography className={classes.synthesisButtonText}>
+                            Synthèse
+                        </Typography>
+                    </Button>
+                </Box>
+                <Divider className={classes.divider} />
+                <Typography variant="subtitle1">
+                    A J4 post-opératolre, on note une insuffisance cardiaque
+                    gauche algue sur un insuffisance cardiaque chronique et le drain
+                    donne un écoulement purulent. Qu&#39;en pensez-vous?
                 </Typography>
-            </Button>
-        </Box>
-        <Divider className={classes.divider} />
-        <Typography variant="subtitle1">
-            A J4 post-opératolre, on note une insuffisance cardiaque
-            gauche algue sur un insuffisance cardiaque chronique et le drain
-            donne un écoulement purulent. Qu&#39;en pensez-vous?
-        </Typography>
-        <Divider className={classes.divider} />
-        {
-            !validated
-            ?null
-            :validateResponses()
-            ?<Alert severity="success">Réponse juste!</Alert>
-            :<Alert severity="error">Réponse fausse!</Alert>
-        }
-        
-        <List>
+                <Divider className={classes.divider} />
                 {
-                    propositions.map((proposition, index) => (
-                        <ListItem>
-                            <ResponseProposition
-                                label={proposition.label}
-                                status={validated ? proposition.status : 'default'}
-                                checked={proposition.checked}
-                                index={index}
-                                handleCheckProposition={handleCheckProposition}
-                                propositions={propositions}
-                            />
-                        </ListItem>
-                    ))
+                    !validated
+                        ? null
+                        : validateResponses()
+                            ? <Alert severity="success">Réponse juste!</Alert>
+                            : <Alert severity="error">Réponse fausse!</Alert>
                 }
-        </List>
+
+                <List>
+                    {
+                        propositions.map((proposition, index) => (
+                            <ListItem>
+                                <ResponseProposition
+                                    label={proposition.label}
+                                    status={validated ? proposition.status : 'default'}
+                                    checked={proposition.checked}
+                                    index={index}
+                                    handleCheckProposition={handleCheckProposition}
+                                    propositions={propositions}
+                                />
+                            </ListItem>
+                        ))
+                    }
+                </List>
                 {validated && <>
                     <Divider className={classes.divider} />
                     <Typography
@@ -175,30 +175,30 @@ const Question = () => {
                         rows={10}
                         placeholder="Vous pouvez ajoutez vos note ici .."
                     >
-                        
+
                     </textarea>
                 </>
                 }
-        <Divider className={classes.divider} />
-        <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
-            <Button 
-                variant="contained"
-                color="primary"
-                onClick={toggleValidation}
-            >
-                Valider
-            </Button>
-            <ButtonGroup color="primary" aria-label="outlined primary button group">
-                <Button
-                    onClick={validateResponses}
-                >
-                    Precedant
-                </Button>
-                <Button>Suivant</Button>
-            </ButtonGroup>
-        </Box>
-      </Paper>
-      </>
+                <Divider className={classes.divider} />
+                <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={toggleValidation}
+                    >
+                        Valider
+                    </Button>
+                    <ButtonGroup color="primary" aria-label="outlined primary button group">
+                        <Button
+                            onClick={validateResponses}
+                        >
+                            Precedant
+                        </Button>
+                        <Button>Suivant</Button>
+                    </ButtonGroup>
+                </Box>
+            </Paper>
+        </>
     );
 }
 

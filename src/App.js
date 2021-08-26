@@ -26,11 +26,11 @@ function App() {
   const [drawerOpen, toggleDrawer] = useState(false);
   return (
     <div>
-      <Header 
+      <Header
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
       />
-      <Drawer 
+      <Drawer
         listItems={modules}
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
