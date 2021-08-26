@@ -12,6 +12,7 @@ import {
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 
@@ -70,6 +71,17 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         marginTop: theme.spacing(4),
     },
+    synthesisButton: {
+        height: 40,
+        paddingLeft: 12,
+        paddingRight: 12,
+        backgroundColor: theme.palette.grey[200],
+        borderRadius: 8,
+    },
+    synthesisButtonText: {
+        color: theme.palette.grey[800],
+        textTransform: 'none'
+    }
 }));
 
 const Question = () => {
@@ -99,28 +111,26 @@ const Question = () => {
         <>
         <div className={classes.toolbar} />
         <Paper className={classes.container}>
-        <Typography 
-            variant="h4"
-        >
-            Question 1
-        </Typography>
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
+            <Typography 
+                variant="h4"
+            >
+                Question 1
+            </Typography>
+            <Button 
+                className={classes.synthesisButton}
+                startIcon={<FullscreenIcon/>}
+            >
+                <Typography className={classes.synthesisButtonText}>
+                    Synthèse
+                </Typography>
+            </Button>
+        </Box>
         <Divider className={classes.divider} />
         <Typography variant="subtitle1">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            A J4 post-opératolre, on note une insuffisance cardiaque
+            gauche algue sur un insuffisance cardiaque chronique et le drain
+            donne un écoulement purulent. Qu&#39;en pensez-vous?
         </Typography>
         <Divider className={classes.divider} />
         {
@@ -186,7 +196,7 @@ const Question = () => {
                 </Button>
                 <Button>Suivant</Button>
             </ButtonGroup>
-      </Box>
+        </Box>
       </Paper>
       </>
     );
