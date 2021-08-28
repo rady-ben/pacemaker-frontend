@@ -8,7 +8,6 @@ import {
     Box,
     Button,
     ButtonGroup,
-    Modal,
 } from '@material-ui/core';
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
@@ -16,8 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
-
-
+import CustomModal from '../Modal';
 
 
 const defaultPropositions = [
@@ -218,19 +216,10 @@ const Question = () => {
                     </ButtonGroup>
                 </Box>
             </Paper>
-            <Modal
-                open={showSynthesis}
-                onClose={toggleModal}
-            >
-                <div className={classes.modalContainer}>
-                    <Typography variant="subtitle1">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                    </Typography>
-                </div>
-            </Modal>
+            <CustomModal 
+                showSynthesis={showSynthesis}
+                toggleModal={toggleModal}
+            />
         </>
     );
 }
