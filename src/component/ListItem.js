@@ -27,17 +27,51 @@ const cours = [
     'Cours 10',
     'Cours 11',
     'Cours 12',
-  ]
+];
 
 const useStyles = makeStyles((theme) => ({
     nested: {
-      paddingLeft: theme.spacing(4),
+        paddingLeft: theme.spacing(4),
     },
-  }));
+    listItemText: {
+        color: props => (props.selected ? theme.palette.primary.dark : '#000'),
+    }
+}));
+
+const CustomItem = ({
+    text,
+    selected,
+    index,
+    updateSelectedItem,
+}) => {
+    const classes = useStyles({selected});
+    return (
+    <MuListItem
+        button
+        className={classes.nested}
+        onClick={() => {
+            updateSelectedItem(index)
+        }}
+    >
+        <ListItemIcon>
+            <ListAltSharpIcon color={selected? 'primary': 'default'} />
+        </ListItemIcon>
+        <ListItemText
+            primary={text}
+            className={classes.listItemText}
+        />
+    </MuListItem>
+    );
+}
 
 const ListItem = ({ lable }) => {
     const [open, setOpen] = useState(false);
-    const classes = useStyles();
+    const [selectedItem, setSelectedItem] = useState(0);
+
+    const updateSelectedItem = (index) => {
+        setSelectedItem(index)
+    }
+
     const handleClick = () => {
         setOpen(!open);
     };
@@ -56,13 +90,13 @@ const ListItem = ({ lable }) => {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {
-                        cours.map((text) => (
-                            <MuListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <ListAltSharpIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </MuListItem>
+                        cours.map((text, index) => (
+                            <CustomItem 
+                                text={text}
+                                selected={selectedItem===index}
+                                index={index}
+                                updateSelectedItem={updateSelectedItem}
+                            />
                         ))
                     }
                 </List>
