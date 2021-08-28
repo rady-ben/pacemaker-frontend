@@ -1,44 +1,73 @@
 import {
     Typography,
-    Modal,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles((theme) => ({
-    modalContainer: {
-        paddingTop: 20,
-        paddingBottom: 20,
-        maxHeight: '80vh',
-        position: 'absolute',
-        width: '50%',
-        backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(2, 4, 3),
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        overflow: 'auto'
+const styles = (theme) => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(2),
     },
-}));
+    titleText: {
+        maxWidth: '90%',
+    },
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+    },
+});
+
+const CustomDialogTitle = withStyles(styles)((props) => {
+    const { children, classes, onClose } = props;
+    return (
+        <DialogTitle disableTypography className={classes.root}>
+            <Typography
+                variant="h6"
+                className={classes.titleText}
+            >
+                {children}
+            </Typography>
+            <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+                <CloseIcon />
+            </IconButton>
+        </DialogTitle>
+    );
+});
 
 const CustomModal = ({
     showSynthesis,
     toggleModal,
+    modalTitle,
+    modalContent,
 }) => {
-    const classes = useStyles();
+
     return (
-        <Modal
+        <Dialog
             open={showSynthesis}
             onClose={toggleModal}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
         >
-            <div className={classes.modalContainer}>
-                <Typography variant="subtitle1">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                </Typography>
-            </div>
-        </Modal>);
+            <CustomDialogTitle 
+                id="simple-dialog-title"
+                onClose={toggleModal}
+            >
+                {modalTitle}
+            </CustomDialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    {modalContent}
+                </DialogContentText>
+            </DialogContent>
+        </Dialog>);
 }
 
 export default CustomModal;

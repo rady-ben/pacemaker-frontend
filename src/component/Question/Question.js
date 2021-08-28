@@ -51,6 +51,12 @@ const defaultPropositions = [
     },
 ]
 
+const modalTitle = "synthèse du cours";
+const modalContent = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.`;
+
+
 const useStyles = makeStyles((theme) => ({
     container: {
         [theme.breakpoints.up('md')]: {
@@ -219,6 +225,8 @@ const Question = () => {
             <CustomModal 
                 showSynthesis={showSynthesis}
                 toggleModal={toggleModal}
+                modalTitle={modalTitle}
+                modalContent={modalContent}
             />
         </>
     );
