@@ -8,6 +8,7 @@ import {
     Box,
     Button,
     ButtonGroup,
+    Modal,
 } from '@material-ui/core';
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
@@ -81,13 +82,31 @@ const useStyles = makeStyles((theme) => ({
     synthesisButtonText: {
         color: theme.palette.grey[800],
         textTransform: 'none'
-    }
+    },
+    modalContainer: {
+        paddingTop: 20,
+        paddingBottom: 20,
+        maxHeight: '80vh',
+        position: 'absolute',
+        width: '50%',
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(2, 4, 3),
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        overflow: 'auto'
+    },
 }));
 
 const Question = () => {
     const classes = useStyles();
     const [validated, setValidated] = useState(false);
+    const [showSynthesis, setShowSynthesis] = useState(false);
     const [propositions, setPropositions] = useState(defaultPropositions);
+
+    const toggleModal = () => {
+        setShowSynthesis(!showSynthesis)
+    }
 
     const handleCheckProposition = ({ index, checked }) => {
         let tab = propositions;
@@ -120,6 +139,7 @@ const Question = () => {
                     <Button
                         className={classes.synthesisButton}
                         startIcon={<FullscreenIcon />}
+                        onClick={toggleModal}
                     >
                         <Typography className={classes.synthesisButtonText}>
                             Synthèse
@@ -198,6 +218,19 @@ const Question = () => {
                     </ButtonGroup>
                 </Box>
             </Paper>
+            <Modal
+                open={showSynthesis}
+                onClose={toggleModal}
+            >
+                <div className={classes.modalContainer}>
+                    <Typography variant="subtitle1">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                    </Typography>
+                </div>
+            </Modal>
         </>
     );
 }
