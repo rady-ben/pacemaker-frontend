@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     },
     listItemText: {
         color: props => (props.selected ? theme.palette.primary.dark : '#000'),
+        '& span, & svg': {
+            fontWeight: props => (props.selected ? theme.typography.fontWeightBold : null)
+        }
     }
 }));
 
