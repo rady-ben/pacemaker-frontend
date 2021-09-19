@@ -7,28 +7,9 @@ import Question from './component/Question/Question';
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
 
-
-
-const modules = [
-  'Module 1',
-  'Module 2',
-  'Module 3',
-  'Module 4',
-  'Module 5',
-  'Module 6',
-  'Module 7',
-  'Module 8',
-  'Module 9',
-  'Module 10',
-  'Module 11',
-  'Module 12',
-]
-
-
 function App() {
   const [drawerOpen, toggleDrawer] = useState(false);
   const [globalState ,dispatch] = useStore();
-  const [modulesList, setModulesList] = useState(globalState.modules);
   useEffect(() => {
     fetch('http://serie200-api.herokuapp.com/v1.0/module/')
     .then((response) => {
@@ -50,7 +31,7 @@ function App() {
         toggleDrawer={toggleDrawer}
       />
       <Drawer
-        listItems={modulesList}
+        listItems={globalState.modules}
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
       />

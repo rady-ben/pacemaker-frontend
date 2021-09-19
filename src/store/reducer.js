@@ -14,7 +14,7 @@ export const modulesReducer = (state = initialState, action) => {
     console.log(action);
     return {
       ...state,
-      modules: [...state.modules, ...action.modules],
+      modules: [...action.modules],
     };
   }
 };

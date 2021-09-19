@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CustomItem = ({
-    text,
+    name,
     selected,
     index,
     updateSelectedItem,
@@ -60,14 +60,14 @@ const CustomItem = ({
             <ListAltSharpIcon color={selected? 'primary': 'default'} />
         </ListItemIcon>
         <ListItemText
-            primary={text}
+            primary={name}
             className={classes.listItemText}
         />
     </MuListItem>
     );
 }
 
-const ListItem = ({ lable }) => {
+const ListItem = ({item}) => {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(0);
 
@@ -83,19 +83,20 @@ const ListItem = ({ lable }) => {
         <>
             <MuListItem
                 button
-                key={lable}
+                key={item?.id}
                 onClick={handleClick}
             >
                 <ListItemIcon><MenuBookRounded /></ListItemIcon>
-                <ListItemText primary={lable} />
+                <ListItemText primary={item?.name} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </MuListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {
-                        cours.map((text, index) => (
+                        item?.courses?.map((course, index) => (
                             <CustomItem 
-                                text={text}
+                                name={course.name}
+                                id={course.id}
                                 selected={selectedItem===index}
                                 index={index}
                                 updateSelectedItem={updateSelectedItem}
