@@ -6,28 +6,15 @@ import {
     Collapse,
     List
 } from '@material-ui/core';
+import { useParams } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 import {
     ExpandLess,
     ExpandMore,
     MenuBookRounded
 } from '@material-ui/icons'
 import ListAltSharpIcon from '@material-ui/icons/ListAltSharp';
-
-const cours = [
-    'Cours 1',
-    'Cours 2',
-    'Cours 3',
-    'Cours 4',
-    'Cours 5',
-    'Cours 6',
-    'Cours 7',
-    'Cours 8',
-    'Cours 9',
-    'Cours 10',
-    'Cours 11',
-    'Cours 12',
-];
 
 const useStyles = makeStyles((theme) => ({
     nested: {
@@ -43,27 +30,33 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomItem = ({
     name,
-    selected,
     index,
     updateSelectedItem,
+    courseId,
+    moduleId
 }) => {
+    const { moduleId: moduleIdUrl, courseId: courseIdUrl } = useParams();
+    const selected = (JSON.stringify(moduleId)===moduleIdUrl && JSON.stringify(courseId)===courseIdUrl);
     const classes = useStyles({selected});
+
     return (
-    <MuListItem
-        button
-        className={classes.nested}
-        onClick={() => {
-            updateSelectedItem(index)
-        }}
-    >
-        <ListItemIcon>
-            <ListAltSharpIcon color={selected? 'primary': 'default'} />
-        </ListItemIcon>
-        <ListItemText
-            primary={name}
-            className={classes.listItemText}
-        />
-    </MuListItem>
+        <Link to={`/${moduleId}/${courseId}`}>
+            <MuListItem
+                button
+                className={classes.nested}
+                onClick={() => {
+                    updateSelectedItem(index)
+                }}
+            >
+                <ListItemIcon>
+                    <ListAltSharpIcon color={selected ? 'primary' : 'default'} />
+                </ListItemIcon>
+                <ListItemText
+                    primary={name}
+                    className={classes.listItemText}
+                />
+            </MuListItem>
+        </Link>
     );
 }
 
@@ -96,10 +89,11 @@ const ListItem = ({item}) => {
                         item?.courses?.map((course, index) => (
                             <CustomItem 
                                 name={course.name}
-                                id={course.id}
+                                courseId={course.id}
                                 selected={selectedItem===index}
                                 index={index}
                                 updateSelectedItem={updateSelectedItem}
+                                moduleId={item?.id}
                             />
                         ))
                     }

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Route,
+} from "react-router-dom";
 import './App.css';
 import Header from './component/Header';
 import Drawer from './component/Drawer';
@@ -16,7 +19,6 @@ function App() {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
       dispatch(setModules(data))
     })
     .catch((error)=>{
@@ -25,18 +27,22 @@ function App() {
   }, [])
 
   return (
-    <div>
-      <Header
-        drawerOpen={drawerOpen}
-        toggleDrawer={toggleDrawer}
-      />
-      <Drawer
-        listItems={globalState.modules}
-        drawerOpen={drawerOpen}
-        toggleDrawer={toggleDrawer}
-      />
-      <Question />
-    </div>
+    <Router>
+      <Route path="/:moduleId/:courseId">
+        <div>
+          <Header
+            drawerOpen={drawerOpen}
+            toggleDrawer={toggleDrawer}
+          />
+          <Drawer
+            listItems={globalState.modules}
+            drawerOpen={drawerOpen}
+            toggleDrawer={toggleDrawer}
+          />
+          <Question />
+        </div>
+      </Route>
+    </Router>
   );
 }
 
