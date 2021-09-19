@@ -36,8 +36,8 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                     <div className={classes.toolbar} />
                     <Divider />
                     <List>
-                        {listItems.map((text) => (
-                            <ListItem lable={text} />
+                        {listItems.map(({name}) => (
+                            <ListItem lable={name} />
                         ))}
                     </List>
                 </MuDrawer>
@@ -56,8 +56,8 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                     <div className={classes.toolbar} />
                     <Divider />
                     <List>
-                        {listItems.map((text) => (
-                            <ListItem lable={text} />
+                        {listItems.map(({ name }) => (
+                            <ListItem lable={name} />
                         ))}
                     </List>
                 </MuDrawer>

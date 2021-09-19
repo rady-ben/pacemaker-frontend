@@ -13,6 +13,7 @@ import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import { useStore } from '../../store/Store';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
@@ -107,6 +108,7 @@ const Question = () => {
     const [validated, setValidated] = useState(false);
     const [showSynthesis, setShowSynthesis] = useState(false);
     const [propositions, setPropositions] = useState(defaultPropositions);
+    const [globalState] = useStore();
 
     const toggleModal = () => {
         setShowSynthesis(!showSynthesis)
@@ -214,11 +216,19 @@ const Question = () => {
                     </Button>
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
-                            onClick={validateResponses}
+                            onClick={()=>{
+                                console.log(globalState)
+                            }}
                         >
                             Precedant
                         </Button>
-                        <Button>Suivant</Button>
+                        <Button
+                            onClick={() => {
+
+                            }}
+                        >
+                            Suivant
+                        </Button>
                     </ButtonGroup>
                 </Box>
             </Paper>

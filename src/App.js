@@ -4,6 +4,8 @@ import './App.css';
 import Header from './component/Header';
 import Drawer from './component/Drawer';
 import Question from './component/Question/Question';
+import { useStore } from './store/Store';
+import { setModules } from './store/reducer';
 
 
 
@@ -25,19 +27,20 @@ const modules = [
 
 function App() {
   const [drawerOpen, toggleDrawer] = useState(false);
-
+  const [globalState ,dispatch] = useStore();
+  const [modulesList, setModulesList] = useState(globalState.modules);
   useEffect(() => {
     fetch('http://serie200-api.herokuapp.com/v1.0/module/')
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log(data)
+      dispatch(setModules(data))
     })
     .catch((error)=>{
       console.log(error);
     });
-
   }, [])
 
   return (
@@ -47,7 +50,7 @@ function App() {
         toggleDrawer={toggleDrawer}
       />
       <Drawer
-        listItems={modules}
+        listItems={modulesList}
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
       />
