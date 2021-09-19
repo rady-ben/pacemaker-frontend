@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import Header from './component/Header';
 import Drawer from './component/Drawer';
@@ -24,6 +25,21 @@ const modules = [
 
 function App() {
   const [drawerOpen, toggleDrawer] = useState(false);
+
+  useEffect(() => {
+    fetch('http://serie200-api.herokuapp.com/v1.0/module/')
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
+
+  }, [])
+
   return (
     <div>
       <Header
