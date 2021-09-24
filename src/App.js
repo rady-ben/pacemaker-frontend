@@ -1,18 +1,11 @@
-import { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-} from "react-router-dom";
-import './App.css';
-import Header from './component/Header';
-import Drawer from './component/Drawer';
-import Question from './component/Question/Question';
+import { useEffect } from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
+import Home from './routes/home';
 
 function App() {
-  const [drawerOpen, toggleDrawer] = useState(false);
-  const [globalState ,dispatch] = useStore();
+  const [ ,dispatch] = useStore();
   useEffect(() => {
     fetch('http://serie200-api.herokuapp.com/v1.0/module/')
     .then((response) => {
@@ -27,22 +20,11 @@ function App() {
   }, [])
 
   return (
-    <Router>
+    <BrowserRouter>
       <Route path="/:moduleId/:courseId">
-        <div>
-          <Header
-            drawerOpen={drawerOpen}
-            toggleDrawer={toggleDrawer}
-          />
-          <Drawer
-            listItems={globalState.modules}
-            drawerOpen={drawerOpen}
-            toggleDrawer={toggleDrawer}
-          />
-          <Question />
-        </div>
+        <Home />
       </Route>
-    </Router>
+    </BrowserRouter>
   );
 }
 
