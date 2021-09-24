@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
-    useLocation
+    useLocation,
+    Redirect
 } from "react-router-dom";
 import '../App.css';
 import Header from '../component/Header';
@@ -12,8 +13,10 @@ function Home() {
     const [drawerOpen, toggleDrawer] = useState(false);
     const [globalState] = useStore();
     const location = useLocation();
-    console.log(location.pathname);
-
+    if (location.pathname === '/') {
+        return <Redirect to="/19/35" />
+    }
+    
     return (
         <div>
             <Header

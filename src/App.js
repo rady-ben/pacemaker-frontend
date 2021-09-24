@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
 import Home from './routes/home';
@@ -21,9 +21,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Route path="/:moduleId/:courseId">
-        <Home />
-      </Route>
+      <Switch>
+        <Route path="/">
+          <Home />
+        </Route>
+        <Route path="/:moduleId/:courseId">
+          <Home />
+        </Route>
+      </Switch>
     </BrowserRouter>
   );
 }
