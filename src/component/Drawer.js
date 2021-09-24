@@ -25,7 +25,7 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
     return (
         <>
             <Hidden
-                smDown
+                mdDown
             >
                 <MuDrawer
                     variant="permanent"
@@ -43,7 +43,7 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                 </MuDrawer>
             </Hidden>
             <Hidden
-                smUp
+                mdUp
             >
                 <MuDrawer
                     variant="temporary"
