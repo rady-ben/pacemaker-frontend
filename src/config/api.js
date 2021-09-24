@@ -1,0 +1,1 @@
+export const MODULES_API = 'http://serie200-api.herokuapp.com/v1.0/module/'

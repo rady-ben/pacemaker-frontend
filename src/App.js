@@ -3,11 +3,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
 import Home from './routes/home';
+import { MODULES_API } from './config/api';
+
 
 function App() {
   const [ ,dispatch] = useStore();
   useEffect(() => {
-    fetch('http://serie200-api.herokuapp.com/v1.0/module/')
+    fetch(MODULES_API)
     .then((response) => {
       return response.json();
     })
