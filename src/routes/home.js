@@ -13,8 +13,11 @@ function Home() {
     const [drawerOpen, toggleDrawer] = useState(false);
     const [globalState] = useStore();
     const location = useLocation();
+
     if (location.pathname === '/') {
-        return <Redirect to="/19/35" />
+        if (globalState?.modules[0]?.id && globalState?.modules[0]?.courses[0]?.id){
+            return <Redirect to={`${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}`} />
+        }
     }
     
     return (
