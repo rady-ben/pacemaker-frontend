@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const CustomItem = ({
     name,
     index,
-    updateSelectedItem,
     courseId,
     moduleId
 }) => {
@@ -44,9 +43,6 @@ const CustomItem = ({
             <MuListItem
                 button
                 className={classes.nested}
-                onClick={() => {
-                    updateSelectedItem(index)
-                }}
             >
                 <ListItemIcon>
                     <ListAltSharpIcon color={selected ? 'primary' : 'default'} />
@@ -62,12 +58,6 @@ const CustomItem = ({
 
 const ListItem = ({item}) => {
     const [open, setOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(0);
-
-    const updateSelectedItem = (index) => {
-        setSelectedItem(index)
-    }
-
     const handleClick = () => {
         setOpen(!open);
     };
@@ -90,9 +80,7 @@ const ListItem = ({item}) => {
                             <CustomItem 
                                 name={course.name}
                                 courseId={course.id}
-                                selected={selectedItem===index}
                                 index={index}
-                                updateSelectedItem={updateSelectedItem}
                                 moduleId={item?.id}
                             />
                         ))
