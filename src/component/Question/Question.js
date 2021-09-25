@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Paper,
     Typography,
@@ -13,44 +13,14 @@ import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import { useParams } from 'react-router';
 import { useStore } from '../../store/Store';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
+import { QUESTIONS_API } from '../../config/api';
 
 
-const defaultPropositions = [
-    {
-        label: 'Proposiont 1 (correct)',
-        status: 'success',
-        checked: false,
-    },
-    {
-        label: 'Proposiont 2 (error)',
-        status: 'error',
-        checked: false,
-    },
-    {
-        label: 'Proposiont 3 (correct)',
-        status: 'success',
-        checked: false,
-    },
-    {
-        label: 'Proposiont 4 (error)',
-        status: 'error',
-        checked: false,
-    },
-    {
-        label: 'Proposiont 5 (error)',
-        status: 'error',
-        checked: false,
-    },
-    {
-        label: 'Proposiont 6 (correct)',
-        status: 'success',
-        checked: false,
-    },
-]
 
 const modalTitle = "synthèse du cours";
 const modalContent = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
@@ -107,8 +77,44 @@ const Question = () => {
     const classes = useStyles();
     const [validated, setValidated] = useState(false);
     const [showSynthesis, setShowSynthesis] = useState(false);
-    const [propositions, setPropositions] = useState(defaultPropositions);
+    const [synthesis, setSynthesis] = useState('');
+    const [questions, setQuestions] = useState([]);
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [propositions, setPropositions] = useState([]);
     const [globalState] = useStore();
+    const { moduleId, courseId } = useParams();
+    const URL = QUESTIONS_API({
+        moduleId, courseId  
+    });
+    let questionsString =''
+    let propositionsString =''
+
+    useEffect(() => {
+        fetch(URL)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setQuestions([...data.questions])
+                questionsString = JSON.stringify([...data.questions])
+                const tab = [...data?.questions[questionIndex]?.propositions].map(
+                    (proposition)=>({
+                        ...proposition,
+                        label: proposition?.content,
+                        status: proposition?.is_correct ? 'success' : 'error',
+                        checked: false,
+                    })
+                );
+                setPropositions(tab)
+                setSynthesis(data?.synthesis)
+                propositionsString = JSON.stringify(tab)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [moduleId, courseId, questionsString, propositionsString, synthesis]);
+    const question = questions[questionIndex];
+
 
     const toggleModal = () => {
         setShowSynthesis(!showSynthesis)
@@ -140,7 +146,7 @@ const Question = () => {
                     <Typography
                         variant="h4"
                     >
-                        Question 1
+                        {`Question ${questionIndex+1}`}
                     </Typography>
                     <Button
                         className={classes.synthesisButton}
@@ -154,9 +160,9 @@ const Question = () => {
                 </Box>
                 <Divider className={classes.divider} />
                 <Typography variant="subtitle1">
-                    A J4 post-opératolre, on note une insuffisance cardiaque
-                    gauche algue sur un insuffisance cardiaque chronique et le drain
-                    donne un écoulement purulent. Qu&#39;en pensez-vous?
+                    {
+                        question?.content
+                    }
                 </Typography>
                 <Divider className={classes.divider} />
                 {
@@ -172,8 +178,8 @@ const Question = () => {
                         propositions.map((proposition, index) => (
                             <ListItem>
                                 <ResponseProposition
-                                    label={proposition.label}
-                                    status={validated ? proposition.status : 'default'}
+                                    label={proposition?.label}
+                                    status={validated ? proposition?.status : 'default'}
                                     checked={proposition.checked}
                                     index={index}
                                     handleCheckProposition={handleCheckProposition}
@@ -191,10 +197,9 @@ const Question = () => {
                         Commentaire
                     </Typography>
                     <Typography variant="subtitle1">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                        {
+                            question?.comment
+                        }
                     </Typography>
                     <textarea
                         className={classes.note}
@@ -217,7 +222,7 @@ const Question = () => {
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
                             onClick={()=>{
-                                console.log(globalState)
+                                console.log(question)
                             }}
                         >
                             Precedant
@@ -236,7 +241,7 @@ const Question = () => {
                 showSynthesis={showSynthesis}
                 toggleModal={toggleModal}
                 modalTitle={modalTitle}
-                modalContent={modalContent}
+                modalContent={synthesis}
             />
         </>
     );
