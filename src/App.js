@@ -22,7 +22,7 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter basename="pacemaker">
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route exact path="/">
           <Home />
