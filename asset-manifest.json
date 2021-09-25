@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pacemaker-frontend/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/pacemaker-frontend/static/js/main.154ff545.chunk.js",
-    "main.js.map": "/pacemaker-frontend/static/js/main.154ff545.chunk.js.map",
-    "runtime-main.js": "/pacemaker-frontend/static/js/runtime-main.6c80302e.js",
-    "runtime-main.js.map": "/pacemaker-frontend/static/js/runtime-main.6c80302e.js.map",
-    "static/js/2.87cd985d.chunk.js": "/pacemaker-frontend/static/js/2.87cd985d.chunk.js",
-    "static/js/2.87cd985d.chunk.js.map": "/pacemaker-frontend/static/js/2.87cd985d.chunk.js.map",
-    "static/js/3.9bec5a7f.chunk.js": "/pacemaker-frontend/static/js/3.9bec5a7f.chunk.js",
-    "static/js/3.9bec5a7f.chunk.js.map": "/pacemaker-frontend/static/js/3.9bec5a7f.chunk.js.map",
-    "index.html": "/pacemaker-frontend/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/pacemaker-frontend/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.87cd985d.chunk.js.LICENSE.txt": "/pacemaker-frontend/static/js/2.87cd985d.chunk.js.LICENSE.txt"
+    "main.css": "/pacemaker-frontend/pacemaker/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/pacemaker-frontend/pacemaker/static/js/main.154ff545.chunk.js",
+    "main.js.map": "/pacemaker-frontend/pacemaker/static/js/main.154ff545.chunk.js.map",
+    "runtime-main.js": "/pacemaker-frontend/pacemaker/static/js/runtime-main.b240c82b.js",
+    "runtime-main.js.map": "/pacemaker-frontend/pacemaker/static/js/runtime-main.b240c82b.js.map",
+    "static/js/2.87cd985d.chunk.js": "/pacemaker-frontend/pacemaker/static/js/2.87cd985d.chunk.js",
+    "static/js/2.87cd985d.chunk.js.map": "/pacemaker-frontend/pacemaker/static/js/2.87cd985d.chunk.js.map",
+    "static/js/3.9bec5a7f.chunk.js": "/pacemaker-frontend/pacemaker/static/js/3.9bec5a7f.chunk.js",
+    "static/js/3.9bec5a7f.chunk.js.map": "/pacemaker-frontend/pacemaker/static/js/3.9bec5a7f.chunk.js.map",
+    "index.html": "/pacemaker-frontend/pacemaker/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/pacemaker-frontend/pacemaker/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.87cd985d.chunk.js.LICENSE.txt": "/pacemaker-frontend/pacemaker/static/js/2.87cd985d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.6c80302e.js",
+    "static/js/runtime-main.b240c82b.js",
     "static/js/2.87cd985d.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
     "static/js/main.154ff545.chunk.js"
