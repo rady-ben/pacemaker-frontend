@@ -79,15 +79,18 @@ const Question = () => {
     const [showSynthesis, setShowSynthesis] = useState(false);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
+    const [question, setQuestion] = useState({});
     const [questionIndex, setQuestionIndex] = useState(0);
     const [propositions, setPropositions] = useState([]);
     const [globalState] = useStore();
+
     const { moduleId, courseId } = useParams();
     const URL = QUESTIONS_API({
         moduleId, courseId  
     });
     let questionsString =''
     let propositionsString =''
+    let questionString=''
 
     useEffect(() => {
         fetch(URL)
@@ -105,6 +108,7 @@ const Question = () => {
                         checked: false,
                     })
                 );
+                setQuestion({...data.questions[questionIndex]})
                 setPropositions(tab)
                 setSynthesis(data?.synthesis)
                 propositionsString = JSON.stringify(tab)
@@ -112,8 +116,7 @@ const Question = () => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [moduleId, courseId, questionsString, propositionsString, synthesis]);
-    const question = questions[questionIndex];
+    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString]);
 
 
     const toggleModal = () => {
@@ -222,15 +225,17 @@ const Question = () => {
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
                             onClick={()=>{
-                                console.log(question)
+                                setQuestionIndex(questionIndex-1)
                             }}
+                            disabled={questionIndex===0}
                         >
                             Precedant
                         </Button>
                         <Button
                             onClick={() => {
-
+                                setQuestionIndex(questionIndex+1)
                             }}
+                            disabled={questionIndex===questions?.length-1}
                         >
                             Suivant
                         </Button>
