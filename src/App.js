@@ -22,7 +22,7 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="pacemaker">
       <Switch>
         <Route exact path="/">
           <Home />
