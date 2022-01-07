@@ -2,8 +2,8 @@ import {
     Drawer as MuDrawer,
     Divider,
     List,
+    Hidden
 } from '@material-ui/core';
-import { Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../constant/ui';
 import ListItem from './ListItem';
@@ -25,7 +25,7 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
     return (
         <>
             <Hidden
-                mdDown
+                smDown
             >
                 <MuDrawer
                     variant="permanent"
