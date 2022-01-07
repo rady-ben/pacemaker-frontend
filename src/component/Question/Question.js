@@ -20,13 +20,7 @@ import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
 import { QUESTIONS_API } from '../../config/api';
 
-
-
 const modalTitle = "synthèse du cours";
-const modalContent = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.`;
-
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -82,7 +76,6 @@ const Question = () => {
     const [question, setQuestion] = useState({});
     const [questionIndex, setQuestionIndex] = useState(0);
     const [propositions, setPropositions] = useState([]);
-    const [globalState] = useStore();
 
     const { moduleId, courseId } = useParams();
     const URL = QUESTIONS_API({
