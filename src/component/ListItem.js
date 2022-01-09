@@ -82,6 +82,7 @@ const ListItem = ({item}) => {
                                 courseId={course.id}
                                 index={index}
                                 moduleId={item?.id}
+                                key={index}
                             />
                         ))
                     }

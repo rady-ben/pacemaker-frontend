@@ -11,7 +11,6 @@ export const setModules = (modules) => ({
 
 export const modulesReducer = (state = initialState, action) => {
   if (action.type === SET_MODULES) {
-    console.log(action);
     return {
       ...state,
       modules: [...action.modules],

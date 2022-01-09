@@ -15,6 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { useParams } from 'react-router';
+import { useHistory } from "react-router-dom";
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
@@ -76,6 +77,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Question = () => {
+    const { moduleId, courseId, questionId } = useParams();
+    const history = useHistory();
     const classes = useStyles();
     const [validated, setValidated] = useState(false);
     const [showSynthesis, setShowSynthesis] = useState(false);
@@ -83,10 +86,9 @@ const Question = () => {
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
     const [question, setQuestion] = useState({});
-    const [questionIndex, setQuestionIndex] = useState(0);
+    const [questionIndex, setQuestionIndex] = useState(Number(questionId)-1);
     const [propositions, setPropositions] = useState([]);
 
-    const { moduleId, courseId } = useParams();
     const URL = QUESTIONS_API({
         moduleId, courseId  
     });
@@ -194,7 +196,9 @@ const Question = () => {
                 <List>
                     {
                         propositions.map((proposition, index) => (
-                            <ListItem>
+                            <ListItem
+                                key={index}
+                            >
                                 <ResponseProposition
                                     label={proposition?.label}
                                     status={validated ? proposition?.status : 'default'}
@@ -249,6 +253,7 @@ const Question = () => {
                         <Button
                             onClick={() => {
                                 setQuestionIndex(questionIndex+1)
+                                history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`)
                             }}
                             disabled={questionIndex===questions?.length-1}
                         >

@@ -16,7 +16,7 @@ function Home() {
 
     if (location.pathname === '/') {
         if (globalState?.modules[0]?.id && globalState?.modules[0]?.courses[0]?.id){
-            return <Redirect to={`${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}`} />
+            return <Redirect to={`${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}/1`} />
         }
     }
     
