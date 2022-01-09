@@ -8,13 +8,13 @@ import {
     Box,
     Button,
     ButtonGroup,
+    CircularProgress,
 } from '@material-ui/core';
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { useParams } from 'react-router';
-import { useStore } from '../../store/Store';
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
@@ -23,6 +23,14 @@ import { QUESTIONS_API } from '../../config/api';
 const modalTitle = "synthèse du cours";
 
 const useStyles = makeStyles((theme) => ({
+    circularProgressContainer:{
+       height: '100vh',
+       width: '100%',
+       display: 'flex',
+       justifyContent: 'center',
+       alignItems: 'flex-start',
+       marginTop: 50,
+    },
     container: {
         [theme.breakpoints.up('md')]: {
             marginTop: theme.spacing(4),
@@ -71,6 +79,7 @@ const Question = () => {
     const classes = useStyles();
     const [validated, setValidated] = useState(false);
     const [showSynthesis, setShowSynthesis] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
     const [question, setQuestion] = useState({});
@@ -91,6 +100,7 @@ const Question = () => {
                 return response.json();
             })
             .then((data) => {
+                setIsLoading(false);
                 setQuestions([...data.questions])
                 questionsString = JSON.stringify([...data.questions])
                 const tab = [...data?.questions[questionIndex]?.propositions].map(
@@ -109,7 +119,7 @@ const Question = () => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString]);
+    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString, isLoading]);
 
 
     const toggleModal = () => {
@@ -132,6 +142,18 @@ const Question = () => {
             || (proposition.status === 'error' && proposition.checked)
         ))
         return _.isEmpty(valide);
+    }
+    if (isLoading) {
+        return(
+            <>
+                <div className={classes.toolbar} />
+                <div
+                    className={classes.circularProgressContainer}
+                >
+                    <CircularProgress />
+                </div>
+            </>
+        )
     }
 
     return (
