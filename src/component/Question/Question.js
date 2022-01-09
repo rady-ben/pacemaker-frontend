@@ -245,6 +245,8 @@ const Question = () => {
                         <Button
                             onClick={()=>{
                                 setQuestionIndex(questionIndex-1)
+                                setValidated(false);
+                                history.push(`/${moduleId}/${courseId}/${Number(questionId)-1}`)
                             }}
                             disabled={questionIndex===0}
                         >
@@ -253,6 +255,7 @@ const Question = () => {
                         <Button
                             onClick={() => {
                                 setQuestionIndex(questionIndex+1)
+                                setValidated(false);
                                 history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`)
                             }}
                             disabled={questionIndex===questions?.length-1}
