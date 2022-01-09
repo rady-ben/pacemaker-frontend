@@ -10,6 +10,7 @@ import {
     ButtonGroup,
     CircularProgress,
 } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown'
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -117,11 +118,12 @@ const Question = () => {
                 setPropositions(tab)
                 setSynthesis(data?.synthesis)
                 propositionsString = JSON.stringify(tab)
+                setQuestionIndex(Number(questionId)-1)
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString, isLoading]);
+    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString, isLoading, questionId]);
 
 
     const toggleModal = () => {

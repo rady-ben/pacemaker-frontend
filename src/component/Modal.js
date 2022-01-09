@@ -5,6 +5,7 @@ import {
     DialogContent,
     DialogContentText
 } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown'
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -56,16 +57,8 @@ const CustomModal = ({
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <CustomDialogTitle 
-                id="simple-dialog-title"
-                onClose={toggleModal}
-            >
-                {modalTitle}
-            </CustomDialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    {modalContent}
-                </DialogContentText>
+                <ReactMarkdown>{modalContent}</ReactMarkdown>
             </DialogContent>
         </Dialog>);
 }

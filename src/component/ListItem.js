@@ -39,7 +39,7 @@ const CustomItem = ({
     const classes = useStyles({selected});
 
     return (
-        <Link to={`/${moduleId}/${courseId}`}  style={{textDecoration:"none"}}>
+        <Link to={`/${moduleId}/${courseId}/1`}  style={{textDecoration:"none"}}>
             <MuListItem
                 button
                 className={classes.nested}
