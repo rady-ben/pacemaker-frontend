@@ -1,0 +1,11 @@
+export const DISCONNECT = 'Déconnecter';
+export const SERIES_200 = 'Séries 200';
+export const QUESTION = 'Question';
+export const SYNTHESIS = 'Synthèse';
+export const CORRECT_ANSWER = 'Réponse juste!';
+export const WRONG_ANSWER = 'Réponse fausse!';
+export const COMMENT = 'Commentaire';
+export const PERSONAL_COMMENT_PLACEHOLDER= 'Vous pouvez ajoutez vos note ici ..';
+export const VALIDATE = 'Valider';
+export const NEXT = 'Suivant';
+export const PREVIOUS = 'Précédent';

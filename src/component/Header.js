@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
+import { DISCONNECT, SERIES_200 } from '../constant/text';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -41,9 +42,9 @@ const Header = ({drawerOpen, toggleDrawer}) => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    Séries 200
+                    {SERIES_200}
                 </Typography>
-                <Button color="inherit">Déconnecter</Button>
+                <Button color="inherit">{DISCONNECT}</Button>
             </Toolbar>
         </AppBar>
     );

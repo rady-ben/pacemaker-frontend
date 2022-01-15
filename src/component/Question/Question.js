@@ -10,7 +10,6 @@ import {
     ButtonGroup,
     CircularProgress,
 } from '@material-ui/core';
-import ReactMarkdown from 'react-markdown'
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,6 +20,7 @@ import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
 import { QUESTIONS_API } from '../../config/api';
+import { QUESTION, SYNTHESIS, CORRECT_ANSWER, WRONG_ANSWER, COMMENT, PERSONAL_COMMENT_PLACEHOLDER, VALIDATE, NEXT, PREVIOUS } from '../../constant/text';
 
 const modalTitle = "synthèse du cours";
 
@@ -168,7 +168,7 @@ const Question = () => {
                     <Typography
                         variant="h4"
                     >
-                        {`Question ${questionIndex+1}`}
+                        {`${QUESTION} ${questionIndex+1}`}
                     </Typography>
                     <Button
                         className={classes.synthesisButton}
@@ -176,7 +176,7 @@ const Question = () => {
                         onClick={toggleModal}
                     >
                         <Typography className={classes.synthesisButtonText}>
-                            Synthèse
+                            {SYNTHESIS}
                         </Typography>
                     </Button>
                 </Box>
@@ -191,8 +191,8 @@ const Question = () => {
                     !validated
                         ? null
                         : validateResponses()
-                            ? <Alert severity="success">Réponse juste!</Alert>
-                            : <Alert severity="error">Réponse fausse!</Alert>
+                            ? <Alert severity="success">{CORRECT_ANSWER}</Alert>
+                            : <Alert severity="error">{WRONG_ANSWER}</Alert>
                 }
 
                 <List>
@@ -214,24 +214,26 @@ const Question = () => {
                     }
                 </List>
                 {validated && <>
-                    <Divider className={classes.divider} />
-                    <Typography
-                        variant="h6"
-                    >
-                        Commentaire
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        {
-                            question?.comment
-                        }
-                    </Typography>
-                    <textarea
+                    {question?.comment &&
+                        <>
+                            <Divider className={classes.divider} />
+                            <Typography
+                                variant="h6"
+                            >
+                                {COMMENT}
+                            </Typography>
+                            <Typography variant="subtitle1">
+                                {question?.comment}
+                            </Typography>
+                        </>
+                    }
+                    {/* <textarea
                         className={classes.note}
                         rows={10}
-                        placeholder="Vous pouvez ajoutez vos note ici .."
+                        placeholder={PERSONAL_COMMENT_PLACEHOLDER}
                     >
 
-                    </textarea>
+                    </textarea> */}
                 </>
                 }
                 <Divider className={classes.divider} />
@@ -241,7 +243,7 @@ const Question = () => {
                         color="primary"
                         onClick={toggleValidation}
                     >
-                        Valider
+                        {VALIDATE}
                     </Button>
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
@@ -252,7 +254,7 @@ const Question = () => {
                             }}
                             disabled={questionIndex===0}
                         >
-                            Precedant
+                            {PREVIOUS}
                         </Button>
                         <Button
                             onClick={() => {
@@ -262,7 +264,7 @@ const Question = () => {
                             }}
                             disabled={questionIndex===questions?.length-1}
                         >
-                            Suivant
+                            {NEXT}
                         </Button>
                     </ButtonGroup>
                 </Box>
