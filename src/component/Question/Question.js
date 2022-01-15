@@ -22,8 +22,6 @@ import CustomModal from '../Modal';
 import { QUESTIONS_API } from '../../config/api';
 import { QUESTION, SYNTHESIS, CORRECT_ANSWER, WRONG_ANSWER, COMMENT, PERSONAL_COMMENT_PLACEHOLDER, VALIDATE, NEXT, PREVIOUS } from '../../constant/text';
 
-const modalTitle = "synthèse du cours";
-
 const useStyles = makeStyles((theme) => ({
     circularProgressContainer:{
        height: '100vh',
@@ -272,7 +270,6 @@ const Question = () => {
             <CustomModal 
                 showSynthesis={showSynthesis}
                 toggleModal={toggleModal}
-                modalTitle={modalTitle}
                 modalContent={synthesis}
             />
         </>

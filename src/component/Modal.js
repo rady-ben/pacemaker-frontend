@@ -46,7 +46,6 @@ const CustomDialogTitle = withStyles(styles)((props) => {
 const CustomModal = ({
     showSynthesis,
     toggleModal,
-    modalTitle,
     modalContent,
 }) => {
 
