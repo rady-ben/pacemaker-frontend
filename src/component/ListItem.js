@@ -15,6 +15,9 @@ import {
     MenuBookRounded
 } from '@material-ui/icons'
 import ListAltSharpIcon from '@material-ui/icons/ListAltSharp';
+import { logEvent } from "firebase/analytics";
+import { analytics } from '../index';
+import { CLICK_COURSE_LINK } from '../constant/analyticsEvents';
 
 const useStyles = makeStyles((theme) => ({
     nested: {
@@ -39,7 +42,13 @@ const CustomItem = ({
     const classes = useStyles({selected});
 
     return (
-        <Link to={`/${moduleId}/${courseId}/1`}  style={{textDecoration:"none"}}>
+        <Link 
+            to={`/${moduleId}/${courseId}/1`}
+            style={{textDecoration:"none"}}
+            onClick={() => {
+                logEvent(analytics, CLICK_COURSE_LINK)
+            }}
+        >
             <MuListItem
                 button
                 className={classes.nested}

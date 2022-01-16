@@ -9,3 +9,4 @@ export const PERSONAL_COMMENT_PLACEHOLDER= 'Vous pouvez ajoutez vos note ici ..'
 export const VALIDATE = 'Valider';
 export const NEXT = 'Suivant';
 export const PREVIOUS = 'Précédent';
+export const REDO = 'Refaire';

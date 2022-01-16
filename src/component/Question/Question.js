@@ -16,11 +16,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { useParams } from 'react-router';
 import { useHistory } from "react-router-dom";
+import { logEvent } from "firebase/analytics";
 import { DRAWER_WIDTH } from '../../constant/ui';
 import ResponseProposition from './ResponseProposition';
 import CustomModal from '../Modal';
 import { QUESTIONS_API } from '../../config/api';
-import { QUESTION, SYNTHESIS, CORRECT_ANSWER, WRONG_ANSWER, COMMENT, PERSONAL_COMMENT_PLACEHOLDER, VALIDATE, NEXT, PREVIOUS } from '../../constant/text';
+import { QUESTION, SYNTHESIS, CORRECT_ANSWER, WRONG_ANSWER, COMMENT, PERSONAL_COMMENT_PLACEHOLDER, VALIDATE, NEXT, PREVIOUS, REDO } from '../../constant/text';
+import { analytics } from '../../index';
+import { 
+    OPEN_SYNTHESIS_MODAL,
+    CLOSE_SYNTHESIS_MODAL,
+    CHECK_PROPOSITION,
+    UNCHECK_PROPOSITION,
+    CLICK_VALIDATION_BUTTON,
+    CLICK_REDO_BUTTON,
+    CLICK_NEXT_BUTTON,
+    CLICK_PREVIOUS_BUTTON
+} from '../../constant/analyticsEvents';
+
 
 const useStyles = makeStyles((theme) => ({
     circularProgressContainer:{
@@ -125,16 +138,31 @@ const Question = () => {
 
 
     const toggleModal = () => {
+        if(showSynthesis) {
+            logEvent(analytics, CLOSE_SYNTHESIS_MODAL);
+        } else {
+            logEvent(analytics, OPEN_SYNTHESIS_MODAL)
+        }
         setShowSynthesis(!showSynthesis)
     }
 
     const handleCheckProposition = ({ index, checked }) => {
+        if(checked) {
+            logEvent(analytics, CHECK_PROPOSITION);
+        } else {
+            logEvent(analytics, UNCHECK_PROPOSITION);
+        };
         let tab = propositions;
         tab[index].checked = checked;
         setPropositions([...tab]);
     }
 
     const toggleValidation = () => {
+        if (validated){
+            logEvent(analytics, CLICK_REDO_BUTTON);
+        } else {
+            logEvent(analytics, CLICK_VALIDATION_BUTTON);
+        }
         setValidated(!validated)
     }
 
@@ -241,11 +269,12 @@ const Question = () => {
                         color="primary"
                         onClick={toggleValidation}
                     >
-                        {VALIDATE}
+                        {validated ? REDO : VALIDATE}
                     </Button>
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
                             onClick={()=>{
+                                logEvent(analytics, CLICK_PREVIOUS_BUTTON);
                                 setQuestionIndex(questionIndex-1)
                                 setValidated(false);
                                 history.push(`/${moduleId}/${courseId}/${Number(questionId)-1}`)
@@ -256,6 +285,7 @@ const Question = () => {
                         </Button>
                         <Button
                             onClick={() => {
+                                logEvent(analytics, CLICK_NEXT_BUTTON);
                                 setQuestionIndex(questionIndex+1)
                                 setValidated(false);
                                 history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`)
