@@ -3,12 +3,15 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogContentText
+    DialogActions,
+    Button,
 } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown'
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { CLOSE } from '../constant/text';
+
 
 const styles = (theme) => ({
     root: {
@@ -59,6 +62,11 @@ const CustomModal = ({
             <DialogContent>
                 <ReactMarkdown>{modalContent}</ReactMarkdown>
             </DialogContent>
+        <DialogActions>
+          <Button onClick={toggleModal}>
+            {CLOSE}
+          </Button>
+        </DialogActions>
         </Dialog>);
 }
 

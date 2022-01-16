@@ -10,3 +10,4 @@ export const VALIDATE = 'Valider';
 export const NEXT = 'Suivant';
 export const PREVIOUS = 'Précédent';
 export const REDO = 'Refaire';
+export const CLOSE = 'Fermer';
