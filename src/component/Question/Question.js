@@ -172,6 +172,18 @@ const Question = ({ drawerOpen }) => {
         setValidated(!validated)
     }
 
+    const clickPreviousButton = () => {
+        logEvent(analytics, CLICK_PREVIOUS_BUTTON);
+        setQuestionIndex(questionIndex-1);
+        history.push(`/${moduleId}/${courseId}/${Number(questionId)-1}`);
+    }
+
+    const clickNextButton = () => {
+        logEvent(analytics, CLICK_NEXT_BUTTON);
+        setQuestionIndex(questionIndex+1);
+        history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`);
+    }
+
     const validateResponses = () => {
         const valide = propositions.find((proposition) => (
             (proposition.status === 'success' && !proposition.checked)
@@ -179,6 +191,7 @@ const Question = ({ drawerOpen }) => {
         ))
         return _.isEmpty(valide);
     }
+
     if (isLoading) {
         return(
             <>
@@ -279,21 +292,13 @@ const Question = ({ drawerOpen }) => {
                     </Button>
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                         <Button
-                            onClick={()=>{
-                                logEvent(analytics, CLICK_PREVIOUS_BUTTON);
-                                setQuestionIndex(questionIndex-1)
-                                history.push(`/${moduleId}/${courseId}/${Number(questionId)-1}`)
-                            }}
+                            onClick={clickPreviousButton}
                             disabled={questionIndex===0}
                         >
                             {PREVIOUS}
                         </Button>
                         <Button
-                            onClick={() => {
-                                logEvent(analytics, CLICK_NEXT_BUTTON);
-                                setQuestionIndex(questionIndex+1)
-                                history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`)
-                            }}
+                            onClick={clickNextButton}
                             disabled={questionIndex===questions?.length-1}
                         >
                             {NEXT}

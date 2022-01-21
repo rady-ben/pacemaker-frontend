@@ -41,13 +41,15 @@ const CustomItem = ({
     const selected = (JSON.stringify(moduleId)===moduleIdUrl && JSON.stringify(courseId)===courseIdUrl);
     const classes = useStyles({selected});
 
+    const logClickCourseEvent = () => {
+        logEvent(analytics, CLICK_COURSE_LINK)
+    }
+
     return (
         <Link 
             to={`/${moduleId}/${courseId}/1`}
             style={{textDecoration:"none"}}
-            onClick={() => {
-                logEvent(analytics, CLICK_COURSE_LINK)
-            }}
+            onClick={logClickCourseEvent}
         >
             <MuListItem
                 button
