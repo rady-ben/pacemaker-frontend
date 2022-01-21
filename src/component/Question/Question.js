@@ -10,6 +10,7 @@ import {
     ButtonGroup,
     CircularProgress,
 } from '@material-ui/core';
+import clsx from 'clsx';
 import _ from 'lodash';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,10 +49,15 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             marginTop: theme.spacing(4),
             marginBottom: theme.spacing(4),
-            marginLeft: theme.spacing(4) + DRAWER_WIDTH,
+            marginLeft: theme.spacing(4),
             marginRight: theme.spacing(4),
         },
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+    },
+    contentShift: {
+        [theme.breakpoints.up('md')]: {
+            marginLeft: theme.spacing(4) + DRAWER_WIDTH
+        },
     },
     divider: {
         marginBottom: theme.spacing(2),
@@ -88,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Question = () => {
+const Question = ({ drawerOpen }) => {
     const { moduleId, courseId, questionId } = useParams();
     const history = useHistory();
     const classes = useStyles();
@@ -189,7 +195,7 @@ const Question = () => {
     return (
         <>
             <div className={classes.toolbar} />
-            <Paper className={classes.container}>
+            <Paper className={clsx(classes.container, {[classes.contentShift]: drawerOpen})}>
                 <Box display="flex" flexDirection="row" justifyContent="space-between">
                     <Typography
                         variant="h4"

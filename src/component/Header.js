@@ -5,20 +5,24 @@ import {
     IconButton,
     Button
 } from '@material-ui/core';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import { DISCONNECT, SERIES_200 } from '../constant/text';
+import { DRAWER_WIDTH } from '../constant/ui';
 
 const useStyles = makeStyles((theme) => ({
+    contentShift: {
+        [theme.breakpoints.up('md')]: {
+            marginLeft: DRAWER_WIDTH,
+        },
+    },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
     },
     title: {
         flexGrow: 1,
-        textAlign: 'center'
+        textAlign: 'left'
     },
 }));
 
@@ -41,7 +45,10 @@ const Header = ({drawerOpen, toggleDrawer}) => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
+                <Typography 
+                    variant="h6" 
+                    className={clsx(classes.title, {[classes.contentShift]: drawerOpen})}
+                >
                     {SERIES_200}
                 </Typography>
                 <Button color="inherit">{DISCONNECT}</Button>

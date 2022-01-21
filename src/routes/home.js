@@ -31,7 +31,7 @@ function Home() {
                 drawerOpen={drawerOpen}
                 toggleDrawer={toggleDrawer}
             />
-            <Question />
+            <Question drawerOpen={drawerOpen} />
         </div>
     );
 }

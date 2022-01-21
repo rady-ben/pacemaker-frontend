@@ -2,19 +2,26 @@ import {
     Drawer as MuDrawer,
     Divider,
     List,
-    Hidden
+    Hidden,
+    IconButton
 } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../constant/ui';
 import ListItem from './ListItem';
-
-
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: DRAWER_WIDTH,
     },
     toolbar: theme.mixins.toolbar,
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
+      },
 }));
 
 const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
@@ -28,12 +35,18 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                 smDown
             >
                 <MuDrawer
-                    variant="permanent"
+                    variant="persistent"
+                    open={drawerOpen}
+                    anchor="left"
                     classes={{
                         paper: classes.drawerPaper,
                     }}
                 >
-                    <div className={classes.toolbar} />
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={innerToggleDrawer}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
                     <Divider />
                     <List>
                         {listItems.map((item, index) => (
