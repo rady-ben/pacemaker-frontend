@@ -136,12 +136,12 @@ const Question = ({ drawerOpen }) => {
                 setSynthesis(data?.synthesis)
                 propositionsString = JSON.stringify(tab)
                 setQuestionIndex(Number(questionId)-1)
+                setValidated(false)
             })
             .catch((error) => {
                 console.log(error);
             });
     }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString, isLoading, questionId]);
-
 
     const toggleModal = () => {
         if(showSynthesis) {
@@ -282,7 +282,6 @@ const Question = ({ drawerOpen }) => {
                             onClick={()=>{
                                 logEvent(analytics, CLICK_PREVIOUS_BUTTON);
                                 setQuestionIndex(questionIndex-1)
-                                setValidated(false);
                                 history.push(`/${moduleId}/${courseId}/${Number(questionId)-1}`)
                             }}
                             disabled={questionIndex===0}
@@ -293,7 +292,6 @@ const Question = ({ drawerOpen }) => {
                             onClick={() => {
                                 logEvent(analytics, CLICK_NEXT_BUTTON);
                                 setQuestionIndex(questionIndex+1)
-                                setValidated(false);
                                 history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`)
                             }}
                             disabled={questionIndex===questions?.length-1}
