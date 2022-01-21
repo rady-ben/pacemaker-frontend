@@ -242,20 +242,28 @@ const Question = ({ drawerOpen }) => {
 
                 <List>
                     {
-                        propositions.map((proposition, index) => (
-                            <ListItem
-                                key={index}
-                            >
-                                <ResponseProposition
-                                    label={proposition?.label}
-                                    status={validated ? proposition?.status : 'default'}
-                                    checked={proposition.checked}
-                                    index={index}
-                                    handleCheckProposition={handleCheckProposition}
-                                    propositions={propositions}
-                                />
-                            </ListItem>
-                        ))
+                        propositions.map((proposition, index) => {
+                            let status;
+                            if (!validated || (validateResponses() && proposition?.status==='error')) {
+                                status = 'default';
+                            } else {
+                                status = proposition?.status
+                            }
+                            return (
+                                <ListItem
+                                    key={index}
+                                >
+                                    <ResponseProposition
+                                        label={proposition?.label}
+                                        status={status}
+                                        checked={proposition.checked}
+                                        index={index}
+                                        handleCheckProposition={handleCheckProposition}
+                                        propositions={propositions}
+                                    />
+                                </ListItem>
+                            )
+                        })
                     }
                 </List>
                 {validated && <>
