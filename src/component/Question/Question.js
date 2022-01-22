@@ -103,6 +103,7 @@ const Question = ({ drawerOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
+    const [questionsString, setQuestionsString] = useState('');
     const [question, setQuestion] = useState({});
     const [questionIndex, setQuestionIndex] = useState(Number(questionId)-1);
     const [propositions, setPropositions] = useState([]);
@@ -110,7 +111,6 @@ const Question = ({ drawerOpen }) => {
     const URL = QUESTIONS_API({
         moduleId, courseId  
     });
-    let questionsString =''
     let propositionsString =''
     let questionString=''
 
@@ -122,26 +122,33 @@ const Question = ({ drawerOpen }) => {
             .then((data) => {
                 setIsLoading(false);
                 setQuestions([...data.questions])
-                questionsString = JSON.stringify([...data.questions])
-                const tab = [...data?.questions[questionIndex]?.propositions].map(
-                    (proposition)=>({
-                        ...proposition,
-                        label: proposition?.content,
-                        status: proposition?.is_correct ? 'success' : 'error',
-                        checked: false,
-                    })
-                );
-                setQuestion({...data.questions[questionIndex]})
-                setPropositions(tab)
-                setSynthesis(data?.synthesis)
-                propositionsString = JSON.stringify(tab)
-                setQuestionIndex(Number(questionId)-1)
-                setValidated(false)
+                setQuestionsString(JSON.stringify([...data.questions]));
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [moduleId, courseId, questionsString, propositionsString, synthesis, questionIndex, questionString, isLoading, questionId]);
+    },
+        [courseId]
+    );
+
+    useEffect(() => {
+        if (questions.length > 0){
+            const tab = [...questions[questionIndex]?.propositions].map(
+                (proposition) => ({
+                    ...proposition,
+                    label: proposition?.content,
+                    status: proposition?.is_correct ? 'success' : 'error',
+                    checked: false,
+                })
+            );
+            setQuestion({ ...questions[questionIndex] })
+            setPropositions(tab)
+            setSynthesis(questions?.synthesis)
+            propositionsString = JSON.stringify(tab)
+            setQuestionIndex(Number(questionId) - 1)
+            setValidated(false)
+        }
+    },[questionsString, courseId, questionId])
 
     const toggleModal = () => {
         if(showSynthesis) {
