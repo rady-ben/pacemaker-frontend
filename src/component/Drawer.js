@@ -76,6 +76,7 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                             <ListItem 
                                 item={item}
                                 key={index}
+                                toggleDrawer={toggleDrawer}
                             />
                         ))}
                     </List>

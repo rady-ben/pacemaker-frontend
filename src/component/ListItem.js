@@ -35,14 +35,18 @@ const CustomItem = ({
     name,
     index,
     courseId,
-    moduleId
+    moduleId,
+    toggleDrawer = null
 }) => {
     const { moduleId: moduleIdUrl, courseId: courseIdUrl } = useParams();
     const selected = (JSON.stringify(moduleId)===moduleIdUrl && JSON.stringify(courseId)===courseIdUrl);
     const classes = useStyles({selected});
 
     const logClickCourseEvent = () => {
-        logEvent(analytics, CLICK_COURSE_LINK)
+        logEvent(analytics, CLICK_COURSE_LINK);
+        if (toggleDrawer){
+            toggleDrawer(false);
+        }
     }
 
     return (
@@ -67,7 +71,7 @@ const CustomItem = ({
     );
 }
 
-const ListItem = ({item}) => {
+const ListItem = ({item, toggleDrawer = null }) => {
     const [open, setOpen] = useState(false);
     const handleClick = () => {
         setOpen(!open);
@@ -94,6 +98,7 @@ const ListItem = ({item}) => {
                                 index={index}
                                 moduleId={item?.id}
                                 key={index}
+                                toggleDrawer={toggleDrawer}
                             />
                         ))
                     }
