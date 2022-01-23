@@ -133,6 +133,7 @@ const Question = ({ drawerOpen }) => {
                     value: index + 1,
                     label: `${QUESTION} ${index + 1}`,
                 }))])
+                setSynthesis(data.synthesis)
                 setQuestionsString(JSON.stringify([...data.questions]));
             })
             .catch((error) => {
@@ -152,11 +153,10 @@ const Question = ({ drawerOpen }) => {
                     checked: false,
                 })
             );
-            setQuestion({ ...questions[questionIndex] })
-            setPropositions(tab)
-            setSynthesis(questions?.synthesis)
-            setQuestionIndex(Number(questionId) - 1)
-            setValidated(false)
+            setQuestion({ ...questions[questionIndex] });
+            setPropositions(tab);
+            setQuestionIndex(Number(questionId) - 1);
+            setValidated(false);
         }
     },[questionsString, courseId, questionId])
 
