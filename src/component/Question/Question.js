@@ -9,6 +9,8 @@ import {
     Button,
     ButtonGroup,
     CircularProgress,
+    TextField,
+    MenuItem,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import _ from 'lodash';
@@ -73,7 +75,9 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: 12,
         paddingRight: 12,
         backgroundColor: theme.palette.grey[200],
-        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: theme.palette.grey[400],
+        borderRadius: 4,
     },
     synthesisButtonText: {
         color: theme.palette.grey[800],
@@ -92,6 +96,10 @@ const useStyles = makeStyles((theme) => ({
         transform: 'translate(-50%, -50%)',
         overflow: 'auto'
     },
+    questionLableContainer: {
+        display: 'flex',
+        flexDirection: 'row' 
+    },
 }));
 
 const Question = ({ drawerOpen }) => {
@@ -103,6 +111,7 @@ const Question = ({ drawerOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
+    const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
     const [questionsString, setQuestionsString] = useState('');
     const [question, setQuestion] = useState({});
     const [questionIndex, setQuestionIndex] = useState(Number(questionId)-1);
@@ -111,8 +120,6 @@ const Question = ({ drawerOpen }) => {
     const URL = QUESTIONS_API({
         moduleId, courseId  
     });
-    let propositionsString =''
-    let questionString=''
 
     useEffect(() => {
         fetch(URL)
@@ -121,7 +128,11 @@ const Question = ({ drawerOpen }) => {
             })
             .then((data) => {
                 setIsLoading(false);
-                setQuestions([...data.questions])
+                setQuestions([...data.questions]);
+                setListQuestionsIndexes([...data.questions.map((question, index)=>({
+                    value: index + 1,
+                    label: `${QUESTION} ${index + 1}`,
+                }))])
                 setQuestionsString(JSON.stringify([...data.questions]));
             })
             .catch((error) => {
@@ -144,7 +155,6 @@ const Question = ({ drawerOpen }) => {
             setQuestion({ ...questions[questionIndex] })
             setPropositions(tab)
             setSynthesis(questions?.synthesis)
-            propositionsString = JSON.stringify(tab)
             setQuestionIndex(Number(questionId) - 1)
             setValidated(false)
         }
@@ -191,6 +201,11 @@ const Question = ({ drawerOpen }) => {
         history.push(`/${moduleId}/${courseId}/${Number(questionId)+1}`);
     }
 
+    const selectQuestion = (event) => {
+        setQuestionIndex(event.target.value - 1);
+        history.push(`/${moduleId}/${courseId}/${event.target.value}`);
+    }
+
     const validateResponses = () => {
         const valide = propositions.find((proposition) => (
             (proposition.status === 'success' && !proposition.checked)
@@ -217,15 +232,38 @@ const Question = ({ drawerOpen }) => {
             <div className={classes.toolbar} />
             <Paper className={clsx(classes.container, {[classes.contentShift]: drawerOpen})}>
                 <Box display="flex" flexDirection="row" justifyContent="space-between">
-                    <Typography
-                        variant="h4"
-                    >
-                        {`${QUESTION} ${questionIndex+1}`}
-                    </Typography>
+                    <div className={classes.questionLableContainer}>
+                        <TextField
+                            id="standard-select-currency"
+                            select
+                            variant="outlined"
+                            value={`${questionIndex+1}`}
+                            onChange={selectQuestion}
+                            defaultValue={`${questionIndex+1}`}
+                            InputProps={{ 
+                                disableUnderline: true, 
+                                style: {
+                                    fontSize: 18,
+                                    backgroundColor: '#eeeeee',
+                                    height: 40,
+                                },
+                            }}
+                        >
+                            {listQuestionsIndexes.map((option) => (
+                                <MenuItem 
+                                    key={option.value} 
+                                    value={option.value}
+                                >
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </div>
                     <Button
                         className={classes.synthesisButton}
                         startIcon={<FullscreenIcon />}
                         onClick={toggleModal}
+                        variant="outlined"
                     >
                         <Typography className={classes.synthesisButtonText}>
                             {SYNTHESIS}
@@ -287,13 +325,6 @@ const Question = ({ drawerOpen }) => {
                             </Typography>
                         </>
                     }
-                    {/* <textarea
-                        className={classes.note}
-                        rows={10}
-                        placeholder={PERSONAL_COMMENT_PLACEHOLDER}
-                    >
-
-                    </textarea> */}
                 </>
                 }
                 <Divider className={classes.divider} />
