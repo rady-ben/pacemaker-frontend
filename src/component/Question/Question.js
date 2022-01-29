@@ -111,13 +111,10 @@ const Question = ({ drawerOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
-    const [listQuestionsIndexes, setListQuestionsIndexes] = useState([{
-        label: 'Question 1',
-        value: 1,
-    }]);
+    const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
     const [questionsString, setQuestionsString] = useState('');
     const [question, setQuestion] = useState({});
-    const [questionIndex, setQuestionIndex] = useState(Number(questionId)-1);
+    const [questionIndex, setQuestionIndex] = useState('');
     const [propositions, setPropositions] = useState([]);
 
     const URL = QUESTIONS_API({
@@ -136,6 +133,7 @@ const Question = ({ drawerOpen }) => {
                     value: index + 1,
                     label: `${QUESTION} ${index + 1}`,
                 }))])
+                setQuestionIndex(Number(questionId)-1);
                 setSynthesis(data.synthesis)
                 setQuestionsString(JSON.stringify([...data.questions]));
             })
@@ -240,7 +238,7 @@ const Question = ({ drawerOpen }) => {
                             id="standard-select-currency"
                             select
                             variant="outlined"
-                            value={questionIndex+1}
+                            value={(questionIndex || questionIndex===0) ? questionIndex+1 : ''}
                             onChange={selectQuestion}
                             InputProps={{ 
                                 style: {
