@@ -241,7 +241,6 @@ const Question = ({ drawerOpen }) => {
                             onChange={selectQuestion}
                             defaultValue={`${questionIndex+1}`}
                             InputProps={{ 
-                                disableUnderline: true, 
                                 style: {
                                     fontSize: 18,
                                     backgroundColor: '#eeeeee',
