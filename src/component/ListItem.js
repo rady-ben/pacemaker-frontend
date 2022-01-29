@@ -60,7 +60,7 @@ const CustomItem = ({
                 className={classes.nested}
             >
                 <ListItemIcon>
-                    <ListAltSharpIcon color={selected ? 'primary' : 'default'} />
+                    <ListAltSharpIcon color={selected ? 'primary' : 'inherit'}/>
                 </ListItemIcon>
                 <ListItemText
                     primary={name}
