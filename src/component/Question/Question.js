@@ -111,7 +111,10 @@ const Question = ({ drawerOpen }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [synthesis, setSynthesis] = useState('');
     const [questions, setQuestions] = useState([]);
-    const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
+    const [listQuestionsIndexes, setListQuestionsIndexes] = useState([{
+        label: 'Question 1',
+        value: 1,
+    }]);
     const [questionsString, setQuestionsString] = useState('');
     const [question, setQuestion] = useState({});
     const [questionIndex, setQuestionIndex] = useState(Number(questionId)-1);
@@ -237,9 +240,8 @@ const Question = ({ drawerOpen }) => {
                             id="standard-select-currency"
                             select
                             variant="outlined"
-                            value={`${questionIndex+1}`}
+                            value={questionIndex+1}
                             onChange={selectQuestion}
-                            defaultValue={`${questionIndex+1}`}
                             InputProps={{ 
                                 style: {
                                     fontSize: 18,
