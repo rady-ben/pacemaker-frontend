@@ -107,7 +107,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
     ...(open && {
         marginLeft: DRAWER_WIDTH,
     })
-  }));
+}));
 
 const Question = ({ drawerOpen }) => {
     const { moduleId, courseId, questionId } = useParams();
