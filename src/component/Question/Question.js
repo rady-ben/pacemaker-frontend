@@ -12,7 +12,7 @@ import {
     TextField,
     MenuItem,
 } from '@mui/material';
-import clsx from 'clsx';
+import { styled } from '@mui/system';
 import _ from 'lodash';
 import Alert from '@mui/material/Alert';
 import makeStyles from '@mui/styles/makeStyles';
@@ -101,6 +101,13 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row' 
     },
 }));
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => 
+    ({
+    ...(open && {
+        marginLeft: DRAWER_WIDTH,
+    })
+  }));
 
 const Question = ({ drawerOpen }) => {
     const { moduleId, courseId, questionId } = useParams();
@@ -231,126 +238,128 @@ const Question = ({ drawerOpen }) => {
     return (
         <>
             <div className={classes.toolbar} />
-            <Paper className={clsx(classes.container, {[classes.contentShift]: drawerOpen})}>
-                <Box display="flex" flexDirection="row" justifyContent="space-between">
-                    <div className={classes.questionLableContainer}>
-                        <TextField
-                            id="standard-select-currency"
-                            select
-                            variant="outlined"
-                            value={(questionIndex || questionIndex===0) ? questionIndex+1 : ''}
-                            onChange={selectQuestion}
-                            InputProps={{ 
-                                style: {
-                                    fontSize: 18,
-                                    backgroundColor: '#eeeeee',
-                                    height: 40,
-                                },
-                            }}
-                        >
-                            {listQuestionsIndexes.map((option) => (
-                                <MenuItem 
-                                    key={option.value} 
-                                    value={option.value}
-                                >
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </div>
-                    <Button
-                        className={classes.synthesisButton}
-                        startIcon={<FullscreenIcon />}
-                        onClick={toggleModal}
-                        variant="outlined"
-                    >
-                        <Typography className={classes.synthesisButtonText}>
-                            {SYNTHESIS}
-                        </Typography>
-                    </Button>
-                </Box>
-                <Divider className={classes.divider} />
-                <Typography variant="subtitle1">
-                    {
-                        question?.content
-                    }
-                </Typography>
-                <Divider className={classes.divider} />
-                {
-                    !validated
-                        ? null
-                        : validateResponses()
-                            ? <Alert severity="success">{CORRECT_ANSWER}</Alert>
-                            : <Alert severity="error">{WRONG_ANSWER}</Alert>
-                }
-
-                <List>
-                    {
-                        propositions.map((proposition, index) => {
-                            let status;
-                            if (!validated || (validateResponses() && proposition?.status==='error')) {
-                                status = 'default';
-                            } else {
-                                status = proposition?.status
-                            }
-                            return (
-                                <ListItem
-                                    key={index}
-                                >
-                                    <ResponseProposition
-                                        label={proposition?.label}
-                                        status={status}
-                                        checked={proposition.checked}
-                                        index={index}
-                                        handleCheckProposition={handleCheckProposition}
-                                        propositions={propositions}
-                                    />
-                                </ListItem>
-                            )
-                        })
-                    }
-                </List>
-                {validated && <>
-                    {question?.comment &&
-                        <>
-                            <Divider className={classes.divider} />
-                            <Typography
-                                variant="h6"
+            <Main open={drawerOpen}>
+                <Paper className={classes.container}>
+                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                        <div className={classes.questionLableContainer}>
+                            <TextField
+                                id="standard-select-currency"
+                                select
+                                variant="outlined"
+                                value={(questionIndex || questionIndex === 0) ? questionIndex + 1 : ''}
+                                onChange={selectQuestion}
+                                InputProps={{
+                                    style: {
+                                        fontSize: 18,
+                                        backgroundColor: '#eeeeee',
+                                        height: 40,
+                                    },
+                                }}
                             >
-                                {COMMENT}
+                                {listQuestionsIndexes.map((option) => (
+                                    <MenuItem
+                                        key={option.value}
+                                        value={option.value}
+                                    >
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </div>
+                        <Button
+                            className={classes.synthesisButton}
+                            startIcon={<FullscreenIcon />}
+                            onClick={toggleModal}
+                            variant="outlined"
+                        >
+                            <Typography className={classes.synthesisButtonText}>
+                                {SYNTHESIS}
                             </Typography>
-                            <Typography variant="subtitle1">
-                                {question?.comment}
-                            </Typography>
-                        </>
+                        </Button>
+                    </Box>
+                    <Divider className={classes.divider} />
+                    <Typography variant="subtitle1">
+                        {
+                            question?.content
+                        }
+                    </Typography>
+                    <Divider className={classes.divider} />
+                    {
+                        !validated
+                            ? null
+                            : validateResponses()
+                                ? <Alert severity="success">{CORRECT_ANSWER}</Alert>
+                                : <Alert severity="error">{WRONG_ANSWER}</Alert>
                     }
-                </>
-                }
-                <Divider className={classes.divider} />
-                <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={toggleValidation}
-                    >
-                        {validated ? REDO : VALIDATE}
-                    </Button>
-                    <ButtonGroup color="primary" aria-label="outlined primary button group">
+
+                    <List>
+                        {
+                            propositions.map((proposition, index) => {
+                                let status;
+                                if (!validated || (validateResponses() && proposition?.status === 'error')) {
+                                    status = 'default';
+                                } else {
+                                    status = proposition?.status
+                                }
+                                return (
+                                    <ListItem
+                                        key={index}
+                                    >
+                                        <ResponseProposition
+                                            label={proposition?.label}
+                                            status={status}
+                                            checked={proposition.checked}
+                                            index={index}
+                                            handleCheckProposition={handleCheckProposition}
+                                            propositions={propositions}
+                                        />
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </List>
+                    {validated && <>
+                        {question?.comment &&
+                            <>
+                                <Divider className={classes.divider} />
+                                <Typography
+                                    variant="h6"
+                                >
+                                    {COMMENT}
+                                </Typography>
+                                <Typography variant="subtitle1">
+                                    {question?.comment}
+                                </Typography>
+                            </>
+                        }
+                    </>
+                    }
+                    <Divider className={classes.divider} />
+                    <Box display="flex" justifyContent="space-between" m={1} p={1} bgcolor="background.paper">
                         <Button
-                            onClick={clickPreviousButton}
-                            disabled={questionIndex===0}
+                            variant="contained"
+                            color="primary"
+                            onClick={toggleValidation}
                         >
-                            {PREVIOUS}
+                            {validated ? REDO : VALIDATE}
                         </Button>
-                        <Button
-                            onClick={clickNextButton}
-                            disabled={questionIndex===questions?.length-1}
-                        >
-                            {NEXT}
-                        </Button>
-                    </ButtonGroup>
-                </Box>
-            </Paper>
+                        <ButtonGroup color="primary" aria-label="outlined primary button group">
+                            <Button
+                                onClick={clickPreviousButton}
+                                disabled={questionIndex === 0}
+                            >
+                                {PREVIOUS}
+                            </Button>
+                            <Button
+                                onClick={clickNextButton}
+                                disabled={questionIndex === questions?.length - 1}
+                            >
+                                {NEXT}
+                            </Button>
+                        </ButtonGroup>
+                    </Box>
+                </Paper>
+            </Main>
             <CustomModal 
                 showSynthesis={showSynthesis}
                 toggleModal={toggleModal}
