@@ -105,7 +105,9 @@ const useStyles = makeStyles((theme) => ({
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => 
     ({
     ...(open && {
-        marginLeft: DRAWER_WIDTH,
+        [theme.breakpoints.up('md')]: {
+            marginLeft: DRAWER_WIDTH,
+        }
     })
 }));
 
