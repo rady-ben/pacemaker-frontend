@@ -2,9 +2,10 @@ import {
     FormControlLabel,
     Checkbox,
     Typography,
-} from '@material-ui/core';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
-import { green, red } from '@material-ui/core/colors';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import withStyles from '@mui/styles/withStyles';
+import { green, red } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
     container: {

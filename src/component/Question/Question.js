@@ -11,12 +11,12 @@ import {
     CircularProgress,
     TextField,
     MenuItem,
-} from '@material-ui/core';
+} from '@mui/material';
 import clsx from 'clsx';
 import _ from 'lodash';
-import Alert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
-import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import Alert from '@mui/material/Alert';
+import makeStyles from '@mui/styles/makeStyles';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import { useParams } from 'react-router';
 import { useHistory } from "react-router-dom";
 import { logEvent } from "firebase/analytics";

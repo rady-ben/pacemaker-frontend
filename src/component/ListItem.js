@@ -5,16 +5,16 @@ import {
     ListItemText,
     Collapse,
     List
-} from '@material-ui/core';
+} from '@mui/material';
 import { useParams } from 'react-router';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { Link } from "react-router-dom";
 import {
     ExpandLess,
     ExpandMore,
     MenuBookRounded
-} from '@material-ui/icons'
-import ListAltSharpIcon from '@material-ui/icons/ListAltSharp';
+} from '@mui/icons-material'
+import ListAltSharpIcon from '@mui/icons-material/ListAltSharp';
 import { logEvent } from "firebase/analytics";
 import { analytics } from '../index';
 import { CLICK_COURSE_LINK } from '../constant/analyticsEvents';

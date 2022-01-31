@@ -4,10 +4,10 @@ import {
     Typography,
     IconButton,
     Button
-} from '@material-ui/core';
+} from '@mui/material';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
 import { DISCONNECT, SERIES_200 } from '../constant/text';
 import { DRAWER_WIDTH } from '../constant/ui';
 
@@ -36,13 +36,13 @@ const Header = ({drawerOpen, toggleDrawer}) => {
     return (
         <AppBar>
             <Toolbar>
-                <IconButton 
+                <IconButton
                     edge="start"
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="menu"
                     onClick={innerToggleDrawer}
-                >
+                    size="large">
                     <MenuIcon />
                 </IconButton>
                 <Typography 
