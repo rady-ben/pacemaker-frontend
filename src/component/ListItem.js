@@ -14,6 +14,7 @@ import {
     ExpandMore,
     MenuBookRounded
 } from '@mui/icons-material'
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import ListAltSharpIcon from '@mui/icons-material/ListAltSharp';
 import { logEvent } from "firebase/analytics";
 import { analytics } from '../index';
@@ -24,10 +25,18 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
     listItemText: {
+        color: props => (props.granted ? '#000' : theme.palette.grey[600]),
+    },
+    listSubItemText: {
         color: props => (props.selected ? theme.palette.primary.dark : '#000'),
         '& span, & svg': {
             fontWeight: props => (props.selected ? theme.typography.fontWeightBold : null)
         }
+    },
+    disabledIcon: {
+        color:  theme.palette.grey[600],
+        height: 26,
+        width: 26
     }
 }));
 
@@ -64,7 +73,7 @@ const CustomItem = ({
                 </ListItemIcon>
                 <ListItemText
                     primary={name}
-                    className={classes.listItemText}
+                    className={classes.listSubItemText}
                 />
             </MuListItem>
         </Link>
@@ -73,6 +82,11 @@ const CustomItem = ({
 
 const ListItem = ({item, toggleDrawer = null }) => {
     const [open, setOpen] = useState(false);
+    
+    const granted = (item?.courses?.length && item?.courses?.length > 0);
+    
+    const classes = useStyles({ granted });
+
     const handleClick = () => {
         setOpen(!open);
     };
@@ -85,8 +99,17 @@ const ListItem = ({item, toggleDrawer = null }) => {
                 onClick={handleClick}
             >
                 <ListItemIcon><MenuBookRounded /></ListItemIcon>
-                <ListItemText primary={item?.name?.substring(5)} />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText 
+                    primary={item?.name?.substring(5)}
+                    className={classes.listItemText}
+                />
+                
+                {
+                    granted ?
+                    (open ? <ExpandLess /> : <ExpandMore />)
+                    : <DoDisturbIcon className={classes.disabledIcon} />
+                }
+                
             </MuListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
