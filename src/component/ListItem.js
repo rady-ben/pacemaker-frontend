@@ -85,7 +85,7 @@ const ListItem = ({item, toggleDrawer = null }) => {
                 onClick={handleClick}
             >
                 <ListItemIcon><MenuBookRounded /></ListItemIcon>
-                <ListItemText primary={item?.name} />
+                <ListItemText primary={item?.name?.substring(5)} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </MuListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
