@@ -22,16 +22,15 @@ import { CLICK_COURSE_LINK } from '../constant/analyticsEvents';
 
 const useStyles = makeStyles((theme) => ({
     nested: {
-        paddingLeft: theme.spacing(4),
+        paddingLeft: theme.spacing(3),
     },
     listItemText: {
         color: props => (props.granted ? '#000' : theme.palette.grey[600]),
     },
     listSubItemText: {
         color: props => (props.selected ? theme.palette.primary.dark : '#000'),
-        '& span, & svg': {
-            fontWeight: props => (props.selected ? theme.typography.fontWeightBold : null)
-        }
+        fontWeight: props => (props.selected ? theme.typography.fontWeightBold : null),
+        marginLeft: -20
     },
     disabledIcon: {
         color:  theme.palette.grey[600],
@@ -122,7 +121,7 @@ const ListItem = ({item, toggleDrawer = null, toggleAlert = null }) => {
                     {
                         item?.courses?.map((course, index) => (
                             <CustomItem 
-                                name={course.name}
+                                name={course.title}
                                 courseId={course.id}
                                 index={index}
                                 moduleId={item?.id}
