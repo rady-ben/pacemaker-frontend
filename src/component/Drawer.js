@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     Drawer as MuDrawer,
     Divider,
@@ -9,6 +10,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import makeStyles from '@mui/styles/makeStyles';
 import { DRAWER_WIDTH } from '../constant/ui';
 import ListItem from './ListItem';
+import CustomModal from './Modal';
+import { ALERT_UNAVAILABLE_MODULE } from '../constant/text';
+
 
 const useStyles = makeStyles((theme) => ({
     drawerPaper: {
@@ -26,9 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
     const classes = useStyles();
+    const [showAlert, setShowAlert] = useState(false)
     const innerToggleDrawer = () => {
         toggleDrawer(!drawerOpen)
     }
+
+    const toggleAlert = () => {
+        setShowAlert(!showAlert)
+    }
+
     return <>
         <Hidden
             mdDown
@@ -52,6 +62,7 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                         <ListItem 
                             item={item}
                             key={index}
+                            toggleAlert={toggleAlert}
                         />
                     ))}
                 </List>
@@ -76,11 +87,17 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
                             item={item}
                             key={index}
                             toggleDrawer={toggleDrawer}
+                            toggleAlert={toggleAlert}
                         />
                     ))}
                 </List>
             </MuDrawer>
         </Hidden>
+        <CustomModal
+            showSynthesis={showAlert}
+            toggleModal={toggleAlert}
+            modalContent={ALERT_UNAVAILABLE_MODULE}
+        />
     </>;
 }
 

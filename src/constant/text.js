@@ -11,3 +11,4 @@ export const NEXT = 'Suivant';
 export const PREVIOUS = 'Précédent';
 export const REDO = 'Refaire';
 export const CLOSE = 'Fermer';
+export const ALERT_UNAVAILABLE_MODULE = `Ce module n'est pas encore disponible, il sera ajouté durant les prochains jours. Restez connecté :)`;

@@ -80,7 +80,7 @@ const CustomItem = ({
     );
 }
 
-const ListItem = ({item, toggleDrawer = null }) => {
+const ListItem = ({item, toggleDrawer = null, toggleAlert = null }) => {
     const [open, setOpen] = useState(false);
     
     const granted = (item?.courses?.length && item?.courses?.length > 0);
@@ -88,7 +88,13 @@ const ListItem = ({item, toggleDrawer = null }) => {
     const classes = useStyles({ granted });
 
     const handleClick = () => {
-        setOpen(!open);
+        if (granted) {
+            setOpen(!open);
+        } else {
+            if(toggleAlert) {
+                toggleAlert()
+            }
+        }
     };
 
     return (
