@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
-import Home from './routes/home';
+import Home from './routes/Home';
 import { MODULES_API } from './config/api';
 
 const theme = createTheme();
