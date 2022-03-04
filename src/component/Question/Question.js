@@ -34,7 +34,8 @@ import {
     CLICK_VALIDATION_BUTTON,
     CLICK_REDO_BUTTON,
     CLICK_NEXT_BUTTON,
-    CLICK_PREVIOUS_BUTTON
+    CLICK_PREVIOUS_BUTTON,
+    SELECT_QUESTION,
 } from '../../constant/analyticsEvents';
 
 
@@ -95,10 +96,6 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         transform: 'translate(-50%, -50%)',
         overflow: 'auto'
-    },
-    questionLableContainer: {
-        display: 'flex',
-        flexDirection: 'row' 
     },
 }));
 
@@ -212,6 +209,7 @@ const Question = ({ drawerOpen }) => {
     }
 
     const selectQuestion = (event) => {
+        logEvent(analytics, SELECT_QUESTION);
         setQuestionIndex(event.target.value - 1);
         history.push(`/${moduleId}/${courseId}/${event.target.value}`);
     }
@@ -243,31 +241,29 @@ const Question = ({ drawerOpen }) => {
             <Main open={drawerOpen}>
                 <Paper className={classes.container}>
                     <Box display="flex" flexDirection="row" justifyContent="space-between">
-                        <div className={classes.questionLableContainer}>
-                            <TextField
-                                id="standard-select-currency"
-                                select
-                                variant="outlined"
-                                value={(questionIndex || questionIndex === 0) ? questionIndex + 1 : ''}
-                                onChange={selectQuestion}
-                                InputProps={{
-                                    style: {
-                                        fontSize: 18,
-                                        backgroundColor: '#eeeeee',
-                                        height: 40,
-                                    },
-                                }}
-                            >
-                                {listQuestionsIndexes.map((option) => (
-                                    <MenuItem
-                                        key={option.value}
-                                        value={option.value}
-                                    >
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </div>
+                        <TextField
+                            id="standard-select-currency"
+                            select
+                            variant="outlined"
+                            value={(questionIndex || questionIndex === 0) ? questionIndex + 1 : ''}
+                            onChange={selectQuestion}
+                            InputProps={{
+                                style: {
+                                    fontSize: 18,
+                                    backgroundColor: '#eeeeee',
+                                    height: 40,
+                                },
+                            }}
+                        >
+                            {listQuestionsIndexes.map((option) => (
+                                <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                >
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                         <Button
                             className={classes.synthesisButton}
                             startIcon={<FullscreenIcon />}
