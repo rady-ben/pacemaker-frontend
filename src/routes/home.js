@@ -3,16 +3,29 @@ import {
     useLocation,
     Redirect
 } from "react-router-dom";
+import { logEvent } from "firebase/analytics";
 import '../App.css';
 import Header from '../component/Header';
 import Drawer from '../component/Drawer';
 import Question from '../component/Question/Question';
 import { useStore } from '../store/Store';
+import { analytics } from '../index';
+import { CLOSE_DRAWER, OPEN_DRAWER } from '../constant/analyticsEvents';
+
 
 function Home() {
-    const [drawerOpen, toggleDrawer] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [globalState] = useStore();
     const location = useLocation();
+
+    const toggleDrawer = (drawerState) => {
+        if (drawerOpen) {
+            logEvent(analytics, CLOSE_DRAWER);
+        } else {
+            logEvent(analytics, OPEN_DRAWER);
+        }
+        setDrawerOpen(drawerState);
+    }
 
     if (location.pathname === '/') {
         if (globalState?.modules[0]?.id && globalState?.modules[0]?.courses[0]?.id){
