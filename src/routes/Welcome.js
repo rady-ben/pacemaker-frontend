@@ -1,7 +1,6 @@
 import { Container, Typography, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
-import backgroundImg from '../assets/backgroundImage.jpg'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -55,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
     sourseSectionContainer: {
         height: '100vh',
-        backgroundColor: '#0f0',
+        paddingTop: theme.spacing(2),
     },
 
 }));
@@ -125,6 +124,26 @@ const Welcome = () => {
                 className={classes.sourseSectionContainer}
                 id="sourses"
             >
+                <Container
+                    className={classes.titleContainer}
+                >
+                    <Typography
+                        variant='h1'
+                        className={classes.title}
+                    >
+                        Nos sources
+                    </Typography>
+                </Container>
+                <Container
+                    className={classes.descriptionTextContainer}
+                >
+                    <Typography
+                        variant='h1'
+                        className={classes.descriptionText}
+                    >
+                        Pacemaker vous propose les sources suivantes, et Et on est à jour avec les dernières source pour mieux préparer votre examen.
+                    </Typography>
+                </Container>
 
             </Container>
         </div>
