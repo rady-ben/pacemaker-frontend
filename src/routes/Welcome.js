@@ -2,7 +2,10 @@ import { Container, Typography, Button, Grid, Paper, Card } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { MenuBookRounded } from '@mui/icons-material';
+import { Link } from "react-router-dom";
 import CustomModal from '../component/Modal';
+import { useStore } from '../store/Store';
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -116,6 +119,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SourceItem = ({toggleAlert, title, available}) => {
     const classes = useStyles();
+    const [globalState] = useStore();
+
     return (
         <Grid
             item
@@ -123,6 +128,11 @@ const SourceItem = ({toggleAlert, title, available}) => {
             md={6}
             lg={4}
         >
+            <Link
+                to={available?
+                    `/${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}/1`: '#'}
+                style={{ textDecoration: "none" }}
+            >
             <div
                 className={classes.sourseItemContainer}
                 onClick={available ? ()=>{} : toggleAlert}
@@ -148,6 +158,7 @@ const SourceItem = ({toggleAlert, title, available}) => {
                     }
                 </Typography>
             </div>
+            </Link>
         </Grid>
     )
 }
