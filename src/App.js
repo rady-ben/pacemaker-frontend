@@ -4,7 +4,7 @@ import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/
 import { useStore } from './store/Store';
 import { setModules } from './store/reducer';
 import { MODULES_API } from './config/api';
-import Home from './routes/Home';
+import Home from './routes/home';
 import Welcome from './routes/Welcome';
 
 const theme = createTheme();
