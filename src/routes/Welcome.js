@@ -2,6 +2,7 @@ import { Container, Typography, Button, Grid, Paper, Card } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
 import { MenuBookRounded } from '@mui/icons-material';
+import CustomModal from '../component/Modal';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -77,7 +78,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#151719'
+        backgroundColor: '#151719',
+        cursor: 'pointer',
+        "&:hover": {
+            opacity: 0.5
+        }
     },
     sourceIconContainer: {
         height: 100,
@@ -97,7 +102,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.grey.A400,
         fontSize: 20,
         textAlign: 'center',
-        marginBottom: theme.spacing(8)
+        marginBottom: theme.spacing(8),
+        marginTop: theme.spacing(8)
     },
     linkText: {
         color: theme.palette.primary.dark,
@@ -108,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SourceItem = () => {
+const SourceItem = ({toggleAlert, title, available}) => {
     const classes = useStyles();
     return (
         <Grid
@@ -119,6 +125,8 @@ const SourceItem = () => {
         >
             <div
                 className={classes.sourseItemContainer}
+                onClick={available ? ()=>{} : toggleAlert}
+                disabled={available}
             >
                 <div
                     className={classes.sourceIconContainer}
@@ -129,13 +137,15 @@ const SourceItem = () => {
                     variant='h2'
                     className={classes.sourceTitle}
                 >
-                    séries 200
+                    {title}
                 </Typography>
                 <Typography
                     variant='h2'
                     className={classes.sourceStatusTesxt}
                 >
-                    Source disponible
+                    {
+                        available ? 'Source disponible': 'En cours de traitement'
+                    }
                 </Typography>
             </div>
         </Grid>
@@ -146,7 +156,11 @@ const Welcome = () => {
     const classes = useStyles();
     const [imgWidth, setImgWidth] = useState(0);
     const [imgHeight, setImgHeight] = useState(0);
+    const [showAlert, setShowAlert] = useState(false);
 
+    const toggleAlert = () => {
+        setShowAlert(!showAlert)
+    }
 
     useEffect(() => {
         if (window.innerWidth>768) {
@@ -225,16 +239,36 @@ const Welcome = () => {
                         variant='h1'
                         className={classes.descriptionText}
                     >
-                        Pacemaker vous propose les sources suivantes, et Et on est à jour avec les dernières source pour mieux préparer votre examen.
+                        Pacemaker vous propose les sources suivantes, et on est à jour avec les dernières source pour mieux préparer votre examen.
                     </Typography>
                 </Container>
 
                 <Grid container spacing={4} rowSpacing={6}>
-                    <SourceItem/>
-                    <SourceItem/>
-                    <SourceItem/>
-                    <SourceItem/>
-                    <SourceItem/>
+                    <SourceItem 
+                        toggleAlert={toggleAlert}
+                        title={'Serie 200'}
+                        available={true}
+                    />
+                    <SourceItem
+                        toggleAlert={toggleAlert}
+                        title={'Diagest'}
+                        available={false}
+                    />
+                    <SourceItem
+                        toggleAlert={toggleAlert}
+                        title={'Hyperqcm'}
+                        available={false}
+                    />
+                    <SourceItem
+                        toggleAlert={toggleAlert}
+                        title={'Banques Profs'}
+                        available={false}
+                    />
+                    <SourceItem
+                        toggleAlert={toggleAlert}
+                        title={'Training cours'}
+                        available={false}
+                    />
                 </Grid>
                 </div>
                 
@@ -253,6 +287,11 @@ const Welcome = () => {
                     </Typography>
                 
             </Container>
+            <CustomModal
+                showSynthesis={showAlert}
+                toggleModal={toggleAlert}
+                modalContent={'Cette source n est pas disponible pour le moment'}
+            />
         </div>
         
     );
