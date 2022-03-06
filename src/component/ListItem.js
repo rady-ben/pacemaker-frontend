@@ -13,7 +13,7 @@ import {
     ExpandLess,
     ExpandMore,
     MenuBookRounded
-} from '@mui/icons-material'
+} from '@mui/icons-material';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import ListAltSharpIcon from '@mui/icons-material/ListAltSharp';
 import { logEvent } from "firebase/analytics";

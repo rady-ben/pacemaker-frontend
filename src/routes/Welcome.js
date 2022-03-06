@@ -1,6 +1,7 @@
-import { Container, Typography, Button } from '@mui/material';
+import { Container, Typography, Button, Grid, Paper, Card } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import makeStyles from '@mui/styles/makeStyles';
+import { MenuBookRounded } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -8,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
         width: '100%'
     },
     welcomeSectionContainer: {
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: theme.spacing(4),
+        height: '100vh',
     },
     titleContainer: {
         marginBottom: theme.spacing(2)
@@ -23,6 +24,19 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 40,
         textAlign: 'center'
     },
+    sourceTitle: {
+        color: theme.palette.primary.contrastText,
+        fontWeight: 'bold',
+        fontSize: 30,
+        textAlign: 'center',
+        marginBottom: theme.spacing(2)
+    },
+    sourceStatusTesxt: {
+        color: theme.palette.grey.A400,
+        fontSize: 20,
+        textAlign: 'center',
+        marginBottom: theme.spacing(2)
+    },
     qcmText: {
         color: theme.palette.primary.dark,
         fontWeight: 'bold',
@@ -30,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     descriptionTextContainer: {
         maxWidth: 600,
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(8)
     },
     descriptionText: {
         color: theme.palette.grey.A400,
@@ -50,14 +64,83 @@ const useStyles = makeStyles((theme) => ({
     imgContainer: {
         width: '100%',
         flex: 1,
-        backgroundColor: '#f00',
     },
     sourseSectionContainer: {
-        height: '100vh',
+        minHeight: '100vh',
         paddingTop: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
-
+    sourseItemContainer: {
+        minHeight: 200,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#151719'
+    },
+    sourceIconContainer: {
+        height: 100,
+        width: 100,
+        borderRadius: 80,
+        backgroundColor: theme.palette.primary.dark,
+        marginBottom: theme.spacing(2),
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    sourceIcon: { 
+        color: '#fff',
+        fontSize: 40 
+    },
+    contactText: {
+        color: theme.palette.grey.A400,
+        fontSize: 20,
+        textAlign: 'center',
+        marginBottom: theme.spacing(8)
+    },
+    linkText: {
+        color: theme.palette.primary.dark,
+        fontSize: 20,
+        textAlign: 'center',
+        textDecoration: 'none',
+        marginLeft: theme.spacing(1)
+    },
 }));
+
+const SourceItem = () => {
+    const classes = useStyles();
+    return (
+        <Grid
+            item
+            xs={12}
+            md={6}
+            lg={4}
+        >
+            <div
+                className={classes.sourseItemContainer}
+            >
+                <div
+                    className={classes.sourceIconContainer}
+                >
+                    <MenuBookRounded className={classes.sourceIcon} />
+                </div>
+                <Typography
+                    variant='h2'
+                    className={classes.sourceTitle}
+                >
+                    séries 200
+                </Typography>
+                <Typography
+                    variant='h2'
+                    className={classes.sourceStatusTesxt}
+                >
+                    Source disponible
+                </Typography>
+            </div>
+        </Grid>
+    )
+}
 
 const Welcome = () => {
     const classes = useStyles();
@@ -96,7 +179,7 @@ const Welcome = () => {
                     className={classes.descriptionTextContainer}
                 >
                     <Typography
-                        variant='h1'
+                        variant='h2'
                         className={classes.descriptionText}
                     >
                         Votre guide qui vous accompagnera durant vos révisions pour le résidanat, profitez des nombreuses sources fiables est enrichissantes pour vôtre succès
@@ -124,6 +207,7 @@ const Welcome = () => {
                 className={classes.sourseSectionContainer}
                 id="sourses"
             >
+                <div>
                 <Container
                     className={classes.titleContainer}
                 >
@@ -145,6 +229,29 @@ const Welcome = () => {
                     </Typography>
                 </Container>
 
+                <Grid container spacing={4} rowSpacing={6}>
+                    <SourceItem/>
+                    <SourceItem/>
+                    <SourceItem/>
+                    <SourceItem/>
+                    <SourceItem/>
+                </Grid>
+                </div>
+                
+                    <Typography
+                        variant='h2'
+                        className={classes.contactText}
+                    >
+                        Pour plus d'informations veuillez nous suivre sur notre 
+                    <a
+                        href="https://www.facebook.com/pacemakerqcm"
+                        className={classes.linkText}
+                        target="_blank"
+                    >
+                        page facebook
+                    </a>
+                    </Typography>
+                
             </Container>
         </div>
         
