@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: theme.spacing(4),
-        height: '100vh',
+        minHeight: '100vh',
     },
     titleContainer: {
         marginBottom: theme.spacing(2)
