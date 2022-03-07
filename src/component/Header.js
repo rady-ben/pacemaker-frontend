@@ -6,6 +6,7 @@ import {
     Button
 } from '@mui/material';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DISCONNECT, SERIES_200 } from '../constant/text';
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         textAlign: 'left'
     },
+    disconnectButton: {
+        color: theme.palette.primary.contrastText,
+    }
 }));
 
 const Header = ({drawerOpen, toggleDrawer}) => {
@@ -51,7 +55,14 @@ const Header = ({drawerOpen, toggleDrawer}) => {
                 >
                     {SERIES_200}
                 </Typography>
-                <Button color="inherit">{DISCONNECT}</Button>
+                <Link
+                    to={`/`}
+                    style={{ textDecoration: "none" }}
+                >
+                    <Button className={classes.disconnectButton}>
+                        {DISCONNECT}
+                    </Button>
+                </Link>
             </Toolbar>
         </AppBar>
     );
