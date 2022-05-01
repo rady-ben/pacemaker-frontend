@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { DISCONNECT, SERIES_200 } from '../constant/text';
+import { HOME, SERIES_200 } from '../constant/text';
 import { DRAWER_WIDTH } from '../constant/ui';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ const Header = ({drawerOpen, toggleDrawer}) => {
                     style={{ textDecoration: "none" }}
                 >
                     <Button className={classes.disconnectButton}>
-                        {DISCONNECT}
+                        {HOME}
                     </Button>
                 </Link>
             </Toolbar>

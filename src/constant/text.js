@@ -1,4 +1,4 @@
-export const DISCONNECT = 'Déconnecter';
+export const HOME = 'Accueil';
 export const SERIES_200 = 'Séries 200';
 export const QUESTION = 'Question';
 export const SYNTHESIS = 'Synthèse';
