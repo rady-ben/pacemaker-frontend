@@ -5,6 +5,8 @@ import { MenuBookRounded } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import CustomModal from '../component/Modal';
 import { useStore } from '../store/Store';
+import { isMobile } from '../utils/ui';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -174,12 +176,12 @@ const Welcome = () => {
     }
 
     useEffect(() => {
-        if (window.innerWidth>768) {
-            setImgWidth(window.innerWidth * 0.6);
-            setImgHeight(window.innerHeight * 0.7);
-        } else {
+        if (isMobile()) {
             setImgWidth(window.innerWidth * 0.9);
             setImgHeight(window.innerHeight * 0.6);
+        } else {
+            setImgWidth(window.innerWidth * 0.6);
+            setImgHeight(window.innerHeight * 0.7);
         }
     }, [])
 

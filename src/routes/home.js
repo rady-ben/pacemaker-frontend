@@ -11,10 +11,11 @@ import Question from '../component/Question/Question';
 import { useStore } from '../store/Store';
 import { analytics } from '../index';
 import { CLOSE_DRAWER, OPEN_DRAWER } from '../constant/analyticsEvents';
+import { isMobile } from '../utils/ui';
 
 
 function Home() {
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(isMobile() ? false : true);
     const [globalState] = useStore();
     const location = useLocation();
 
