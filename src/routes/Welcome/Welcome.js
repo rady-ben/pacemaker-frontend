@@ -9,7 +9,7 @@ import {
   WELCOME_MESSAGE_1,
   START_REVIEW,
 } from "../../constant/text";
-import SourceItemGrid from "./SourceItemGrid";
+import SourceItemsGrid from "./SourceItemsGrid";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -140,7 +140,7 @@ const Welcome = () => {
           height={imgHeight}
         />
       </Container>
-      <SourceItemGrid />
+      <SourceItemsGrid />
     </div>
   );
 };

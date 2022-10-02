@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SourceItemGrid = () => {
+const SourceItemsGrid = () => {
   const classes = useStyles();
   const [showAlert, setShowAlert] = useState(false);
 
@@ -126,4 +126,4 @@ const SourceItemGrid = () => {
   );
 };
 
-export default SourceItemGrid;
+export default SourceItemsGrid;
