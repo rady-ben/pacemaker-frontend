@@ -16,6 +16,7 @@ import {
   MORE_INFO,
   FACEBOOK_PAGE,
 } from "../constant/text";
+import { SourceItem } from "../component/SourceItem";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,19 +38,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: 40,
     textAlign: "center",
-  },
-  sourceTitle: {
-    color: theme.palette.primary.contrastText,
-    fontWeight: "bold",
-    fontSize: 30,
-    textAlign: "center",
-    marginBottom: theme.spacing(2),
-  },
-  sourceStatusTesxt: {
-    color: theme.palette.grey.A400,
-    fontSize: 20,
-    textAlign: "center",
-    marginBottom: theme.spacing(2),
   },
   qcmText: {
     color: theme.palette.primary.dark,
@@ -79,37 +67,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     flex: 1,
   },
-  sourseSectionContainer: {
+  sourceSectionContainer: {
     minHeight: "100vh",
     paddingTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-  },
-  sourseItemContainer: {
-    minHeight: 200,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "#151719",
-    cursor: "pointer",
-    "&:hover": {
-      opacity: 0.5,
-    },
-  },
-  sourceIconContainer: {
-    height: 100,
-    width: 100,
-    borderRadius: 80,
-    backgroundColor: theme.palette.primary.dark,
-    marginBottom: theme.spacing(2),
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sourceIcon: {
-    color: "#fff",
-    fontSize: 40,
   },
   contactText: {
     color: theme.palette.grey.A400,
@@ -126,40 +89,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
   },
 }));
-
-const SourceItem = ({ toggleAlert, title, available }) => {
-  const classes = useStyles();
-  const [globalState] = useStore();
-
-  return (
-    <Grid item xs={12} md={6} lg={4}>
-      <Link
-        to={
-          available
-            ? `/${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}/1`
-            : "#"
-        }
-        style={{ textDecoration: "none" }}
-      >
-        <div
-          className={classes.sourseItemContainer}
-          onClick={available ? () => {} : toggleAlert}
-          disabled={available}
-        >
-          <div className={classes.sourceIconContainer}>
-            <MenuBookRounded className={classes.sourceIcon} />
-          </div>
-          <Typography variant="h2" className={classes.sourceTitle}>
-            {title}
-          </Typography>
-          <Typography variant="h2" className={classes.sourceStatusTesxt}>
-            {available ? "Source disponible" : "En cours de traitement"}
-          </Typography>
-        </div>
-      </Link>
-    </Grid>
-  );
-};
 
 const Welcome = () => {
   const classes = useStyles();
@@ -213,7 +142,7 @@ const Welcome = () => {
           </Typography>
         </Container>
         <Container className={classes.startButtonContainer}>
-          <Button size="large" className={classes.startButton} href="#sourses">
+          <Button size="large" className={classes.startButton} href="#sources">
             {START_REVIEW}
           </Button>
         </Container>
@@ -223,7 +152,7 @@ const Welcome = () => {
           height={imgHeight}
         />
       </Container>
-      <Container className={classes.sourseSectionContainer} id="sourses">
+      <Container className={classes.sourceSectionContainer} id="sources">
         <div>
           <Container className={classes.titleContainer}>
             <Typography variant="h1" className={classes.title}>
