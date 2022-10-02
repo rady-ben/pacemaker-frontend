@@ -1,22 +1,15 @@
-import { Container, Typography, Button, Grid } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import { MenuBookRounded } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import CustomModal from "../component/Modal";
-import { useStore } from "../store/Store";
-import { isMobile } from "../utils/ui";
+
+import { isMobile } from "../../utils/ui";
 import {
   PACEMAKER,
   QCM,
   WELCOME_MESSAGE_1,
   START_REVIEW,
-  OUR_SOURCES,
-  WELCOME_MESSAGE_2,
-  MORE_INFO,
-  FACEBOOK_PAGE,
-} from "../constant/text";
-import { SourceItem } from "../component/SourceItem";
+} from "../../constant/text";
+import SourceItemGrid from "./SourceItemGrid";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -94,11 +87,6 @@ const Welcome = () => {
   const classes = useStyles();
   const [imgWidth, setImgWidth] = useState(0);
   const [imgHeight, setImgHeight] = useState(0);
-  const [showAlert, setShowAlert] = useState(false);
-
-  const toggleAlert = () => {
-    setShowAlert(!showAlert);
-  };
 
   useEffect(() => {
     if (isMobile()) {
@@ -147,69 +135,12 @@ const Welcome = () => {
           </Button>
         </Container>
         <img
-          src={require("../assets/backgroundImage.jpg")}
+          src={require("../../assets/backgroundImage.jpg")}
           width={imgWidth}
           height={imgHeight}
         />
       </Container>
-      <Container className={classes.sourceSectionContainer} id="sources">
-        <div>
-          <Container className={classes.titleContainer}>
-            <Typography variant="h1" className={classes.title}>
-              {OUR_SOURCES}
-            </Typography>
-          </Container>
-          <Container className={classes.descriptionTextContainer}>
-            <Typography variant="h1" className={classes.descriptionText}>
-              {WELCOME_MESSAGE_2}
-            </Typography>
-          </Container>
-
-          <Grid container spacing={4} rowSpacing={6}>
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Serie 200"}
-              available={true}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Diagest"}
-              available={false}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Hyperqcm"}
-              available={false}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Banques Profs"}
-              available={false}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Training cours"}
-              available={false}
-            />
-          </Grid>
-        </div>
-
-        <Typography variant="h2" className={classes.contactText}>
-          {MORE_INFO}
-          <a
-            href="https://www.facebook.com/pacemakerqcm"
-            className={classes.linkText}
-            target="_blank"
-          >
-            {FACEBOOK_PAGE}
-          </a>
-        </Typography>
-      </Container>
-      <CustomModal
-        showSynthesis={showAlert}
-        toggleModal={toggleAlert}
-        modalContent={"Cette source n est pas disponible pour le moment"}
-      />
+      <SourceItemGrid />
     </div>
   );
 };
