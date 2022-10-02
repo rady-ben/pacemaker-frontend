@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SourceItemsGrid = () => {
+const SourceItemsGrid = ({ sourcesList }) => {
   const classes = useStyles();
   const [showAlert, setShowAlert] = useState(false);
 
@@ -77,11 +77,14 @@ const SourceItemsGrid = () => {
           </Container>
 
           <Grid container spacing={4} rowSpacing={6}>
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Serie 200"}
-              available={true}
-            />
+            {sourcesList.map((source) => (
+              <SourceItem
+                key={source.id}
+                toggleAlert={toggleAlert}
+                title={source.name}
+                available={true}
+              />
+            ))}
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Diagest"}
@@ -90,11 +93,6 @@ const SourceItemsGrid = () => {
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Hyperqcm"}
-              available={false}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Banques Profs"}
               available={false}
             />
             <SourceItem

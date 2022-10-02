@@ -1,5 +1,5 @@
-import { Container, Typography, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Container, Typography, Button } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 
 import { isMobile } from "../../utils/ui";
@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Welcome = () => {
   const classes = useStyles();
+  const [sourcesList, setSourcesList] = useState([]);
   const [imgWidth, setImgWidth] = useState(0);
   const [imgHeight, setImgHeight] = useState(0);
 
@@ -99,7 +100,6 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    console.log("ici ====>");
     fetch(
       "https://ahebn8her4.execute-api.eu-south-1.amazonaws.com/Prod/v1.0/source"
     )
@@ -107,8 +107,7 @@ const Welcome = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("data =======>");
-        console.log(data);
+        setSourcesList(data);
       })
       .catch((error) => {
         console.log("error ======>");
@@ -140,7 +139,7 @@ const Welcome = () => {
           height={imgHeight}
         />
       </Container>
-      <SourceItemsGrid />
+      <SourceItemsGrid sourcesList={sourcesList} />
     </div>
   );
 };
