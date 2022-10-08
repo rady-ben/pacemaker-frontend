@@ -4,6 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
 import { useStore } from "../store/Store";
+import { SOURCE_AVAILABLE, BEING_PROCESSED } from "../constant/text";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
@@ -72,7 +73,7 @@ export const SourceItem = ({ toggleAlert, title, available }) => {
             {title}
           </Typography>
           <Typography variant="h2" className={classes.sourceStatusText}>
-            {available ? "Source disponible" : "En cours de traitement"}
+            {available ? SOURCE_AVAILABLE : BEING_PROCESSED}
           </Typography>
         </div>
       </Link>
