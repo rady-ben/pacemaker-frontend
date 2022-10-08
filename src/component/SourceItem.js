@@ -20,18 +20,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: theme.spacing(2),
   },
-  sourseItemContainer: {
+  sourseItemContainer: (props) => ({
     minHeight: 200,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#151719",
     cursor: "pointer",
-    "&:hover": {
-      opacity: 0.5,
-    },
-  },
-  sourceIconContainer: {
+    opacity: props.available ? 1 : 0.5,
+  }),
+  sourceIconContainer: (props) => ({
     height: 100,
     width: 100,
     borderRadius: 80,
@@ -40,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
+    "&:hover": {
+      backgroundColor: props.available
+        ? theme.palette.success.light
+        : theme.palette.primary.dark,
+    },
+  }),
   sourceIcon: {
     color: "#fff",
     fontSize: 40,
@@ -48,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SourceItem = ({ toggleAlert, title, available }) => {
-  const classes = useStyles();
+  const classes = useStyles({ available });
   const [globalState] = useStore();
 
   return (
