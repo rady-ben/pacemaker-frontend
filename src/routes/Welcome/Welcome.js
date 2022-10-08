@@ -10,6 +10,7 @@ import {
   START_REVIEW,
 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
+import { SOURCES_API } from "../../config/api";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -100,9 +101,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    fetch(
-      "https://ahebn8her4.execute-api.eu-south-1.amazonaws.com/Prod/v1.0/source"
-    )
+    fetch(SOURCES_API)
       .then((response) => {
         return response.json();
       })
@@ -110,7 +109,6 @@ const Welcome = () => {
         setSourcesList(data);
       })
       .catch((error) => {
-        console.log("error ======>");
         console.log(error);
       });
   }, []);
