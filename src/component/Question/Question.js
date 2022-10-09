@@ -130,7 +130,15 @@ const Question = ({ drawerOpen }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [synthesis, setSynthesis] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
+  const initiallistQuestionsIndexes = Array.apply(null, Array(5)).map(
+    (x, i) => ({
+      value: i + 1,
+      label: `${QUESTION} ${i + 1}`,
+    })
+  );
+  const [listQuestionsIndexes, setListQuestionsIndexes] = useState(
+    initiallistQuestionsIndexes
+  );
   const [questionsString, setQuestionsString] = useState("");
   const [question, setQuestion] = useState({});
   const [questionIndex, setQuestionIndex] = useState("");
@@ -152,12 +160,14 @@ const Question = ({ drawerOpen }) => {
         setQuestions([...response.data.questions]);
         setTotalQuestions(response.total);
         setNext(response.next);
-        setListQuestionsIndexes([
-          ...response.data.questions.map((question, index) => ({
-            value: index + 1,
-            label: `${QUESTION} ${index + 1}`,
-          })),
-        ]);
+        const listQuestionsIndexesTemp = Array.apply(
+          null,
+          Array(questions?.length)
+        ).map((x, i) => ({
+          value: i + 1,
+          label: `${QUESTION} ${i + 1}`,
+        }));
+        setListQuestionsIndexes(listQuestionsIndexesTemp);
         setQuestionIndex(Number(questionId) - 1);
         setSynthesis(response.data.synthesis);
         setQuestionsString(JSON.stringify([...response.data.questions]));
@@ -283,7 +293,7 @@ const Question = ({ drawerOpen }) => {
             flexDirection="row"
             justifyContent="space-between"
           >
-            {/* <TextField
+            <TextField
               id="standard-select-currency"
               select
               variant="outlined"
@@ -304,7 +314,7 @@ const Question = ({ drawerOpen }) => {
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField> */}
+            </TextField>
             <Button
               className={classes.synthesisButton}
               startIcon={<FullscreenIcon />}
