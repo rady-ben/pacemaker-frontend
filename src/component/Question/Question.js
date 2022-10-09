@@ -229,7 +229,9 @@ const Question = ({ drawerOpen }) => {
   const selectQuestion = (event) => {
     logEvent(analytics, SELECT_QUESTION);
     setQuestionIndex(event.target.value - 1);
-    history.push(`/${moduleId}/${courseId}/${event.target.value}`);
+    history.push(
+      `/workspace/${sourceId}/${moduleId}/${courseId}/${event.target.value}`
+    );
   };
 
   const validateResponses = () => {
