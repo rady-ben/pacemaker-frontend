@@ -8,6 +8,8 @@ import {
   WELCOME_MESSAGE_2,
   MORE_INFO,
   FACEBOOK_PAGE,
+  SOURCE_AVAILABLE,
+  BEING_PROCESSED,
 } from "../../constant/text";
 import { SourceItem } from "../../component/SourceItem";
 
@@ -82,23 +84,29 @@ const SourceItemsGrid = ({ sourcesList }) => {
                 key={source.id}
                 toggleAlert={toggleAlert}
                 title={source.name}
+                subTitle={SOURCE_AVAILABLE}
                 available={true}
+                sourceId={source.id}
+                url={`/${source.id}/modules`}
               />
             ))}
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Diagest"}
               available={false}
+              subTitle={BEING_PROCESSED}
             />
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Hyperqcm"}
               available={false}
+              subTitle={BEING_PROCESSED}
             />
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Training cours"}
               available={false}
+              subTitle={BEING_PROCESSED}
             />
           </Grid>
         </div>

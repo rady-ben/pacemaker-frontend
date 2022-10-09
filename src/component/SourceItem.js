@@ -3,8 +3,6 @@ import { Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
-import { useStore } from "../store/Store";
-import { SOURCE_AVAILABLE, BEING_PROCESSED } from "../constant/text";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
@@ -50,20 +48,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SourceItem = ({ toggleAlert, title, available }) => {
+export const SourceItem = ({
+  toggleAlert,
+  title,
+  subTitle,
+  available,
+  url = "#",
+}) => {
   const classes = useStyles({ available });
-  const [globalState] = useStore();
 
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Link
-        to={
-          available
-            ? `/${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}/1`
-            : "#"
-        }
-        style={{ textDecoration: "none" }}
-      >
+      <Link to={available ? url : "#"} style={{ textDecoration: "none" }}>
         <div
           className={classes.sourseItemContainer}
           onClick={available ? () => {} : toggleAlert}
@@ -76,7 +72,7 @@ export const SourceItem = ({ toggleAlert, title, available }) => {
             {title}
           </Typography>
           <Typography variant="h2" className={classes.sourceStatusText}>
-            {available ? SOURCE_AVAILABLE : BEING_PROCESSED}
+            {subTitle}
           </Typography>
         </div>
       </Link>
