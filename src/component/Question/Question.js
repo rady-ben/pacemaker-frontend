@@ -162,7 +162,7 @@ const Question = ({ drawerOpen }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [courseId]);
+  }, [moduleId, courseId]);
 
   useEffect(() => {
     if (questions.length > 0) {
