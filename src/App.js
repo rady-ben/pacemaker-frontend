@@ -11,7 +11,7 @@ import { MODULES_API } from "./config/api";
 import Home from "./routes/home";
 import Welcome from "./routes/Welcome";
 import ModulesList from "./routes/ModulesList";
-
+import CoursesList from "./routes/CoursesList";
 const theme = createTheme();
 
 function App() {
@@ -37,11 +37,14 @@ function App() {
             <Route exact path="/">
               <Welcome />
             </Route>
-            <Route path="/:moduleId/:courseId/:questionId">
+            {/* <Route path="/:moduleId/:courseId/:questionId">
               <Home />
-            </Route>
+            </Route> */}
             <Route path="/:serieId/modules">
               <ModulesList />
+            </Route>
+            <Route path="/:serieId/:moduleId/:moduleName">
+              <CoursesList />
             </Route>
           </Switch>
         </BrowserRouter>

@@ -62,7 +62,7 @@ export const SourceItem = ({
       <Link to={available ? url : "#"} style={{ textDecoration: "none" }}>
         <div
           className={classes.sourseItemContainer}
-          onClick={available ? () => {} : toggleAlert}
+          onClick={available ? () => {} : toggleAlert ? toggleAlert : () => {}}
           disabled={available}
         >
           <div className={classes.sourceIconContainer}>

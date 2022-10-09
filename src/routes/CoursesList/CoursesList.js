@@ -4,12 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_API_1 } from "../../config/api";
-import {
-  MODULES_SERIE_200,
-  NUMBER_200,
-  MODULES_BANC_01,
-  BANC_01,
-} from "../../constant/text";
+import { COURSES_LIST_TITLE } from "../../constant/text";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModulesList = () => {
+const CoursesList = () => {
   const classes = useStyles();
-  const [moduleList, setModuleList] = useState([]);
-  const { serieId } = useParams();
+  const [coursesList, setCoursesList] = useState([]);
+  const { serieId, moduleId, moduleName } = useParams();
 
   useEffect(() => {
     fetch(MODULES_API_1({ serieId }))
@@ -54,7 +49,13 @@ const ModulesList = () => {
         return response.json();
       })
       .then((data) => {
-        setModuleList(data);
+        const found = data.find(
+          (element) => JSON.stringify(element.id) === moduleId
+        );
+
+        if (found?.courses?.length) {
+          setCoursesList(found?.courses);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -65,26 +66,14 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          {serieId === "1" ? (
-            <Typography variant="h1" className={classes.title}>
-              {MODULES_SERIE_200}
-              <span className={classes.qcmText}>{NUMBER_200}</span>
-            </Typography>
-          ) : (
-            <Typography variant="h1" className={classes.title}>
-              {MODULES_BANC_01}
-              <span className={classes.qcmText}>{BANC_01}</span>
-            </Typography>
-          )}
+          <Typography variant="h1" className={classes.title}>
+            {COURSES_LIST_TITLE}
+            <span className={classes.qcmText}>{moduleName}</span>
+          </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
-          {moduleList.map((module) => (
-            <SourceItem
-              key={module.id}
-              title={module.name}
-              available={true}
-              url={`/${serieId}/${module.id}/${module.name}`}
-            />
+          {coursesList.map((coure) => (
+            <SourceItem key={coure.id} title={coure.title} available={true} />
           ))}
         </Grid>
       </Container>
@@ -92,4 +81,4 @@ const ModulesList = () => {
   );
 };
 
-export default ModulesList;
+export default CoursesList;
