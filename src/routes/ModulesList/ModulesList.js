@@ -4,6 +4,12 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_API_1 } from "../../config/api";
+import {
+  MODULES_SERIE_200,
+  NUMBER_200,
+  MODULES_BANC_01,
+  BANC_01,
+} from "../../constant/text";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -59,10 +65,17 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          <Typography variant="h1" className={classes.title}>
-            {"Liste des modules de la serie "}
-            <span className={classes.qcmText}>{"200"}</span>
-          </Typography>
+          {serieId === "1" ? (
+            <Typography variant="h1" className={classes.title}>
+              {MODULES_SERIE_200}
+              <span className={classes.qcmText}>{NUMBER_200}</span>
+            </Typography>
+          ) : (
+            <Typography variant="h1" className={classes.title}>
+              {MODULES_BANC_01}
+              <span className={classes.qcmText}>{BANC_01}</span>
+            </Typography>
+          )}
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
           {moduleList.map((module) => (

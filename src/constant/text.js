@@ -13,6 +13,12 @@ export const FACEBOOK_PAGE = "page facebook";
 export const SOURCE_AVAILABLE = "Source disponible";
 export const BEING_PROCESSED = "En cours de traitement";
 
+// Module list
+export const MODULES_SERIE_200 = "Liste des modules de la serie ";
+export const NUMBER_200 = "200 ";
+export const MODULES_BANC_01 = "Liste des modules de la banque ";
+export const BANC_01 = "01 ";
+
 // workspace
 export const HOME = "Accueil";
 export const SERIES_200 = "Séries 200";
