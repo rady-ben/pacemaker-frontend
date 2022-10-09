@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
+import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_API_1 } from "../../config/api";
 
@@ -39,16 +40,15 @@ const useStyles = makeStyles((theme) => ({
 const ModulesList = () => {
   const classes = useStyles();
   const [moduleList, setModuleList] = useState([]);
+  const { serieId } = useParams();
 
   useEffect(() => {
-    fetch(MODULES_API_1({ serieId: "2" }))
+    fetch(MODULES_API_1({ serieId }))
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         setModuleList(data);
-        console.log("data =====>");
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
