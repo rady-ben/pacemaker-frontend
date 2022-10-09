@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
 const ModulesList = () => {
   const classes = useStyles();
   const [moduleList, setModuleList] = useState([]);
-  const { serieId } = useParams();
+  const { sourceId } = useParams();
 
   useEffect(() => {
-    fetch(MODULES_API_1({ serieId }))
+    fetch(MODULES_API_1({ sourceId }))
       .then((response) => {
         return response.json();
       })
@@ -65,7 +65,7 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          {serieId === "1" ? (
+          {sourceId === "1" ? (
             <Typography variant="h1" className={classes.title}>
               {MODULES_SERIE_200}
               <span className={classes.qcmText}>{NUMBER_200}</span>
@@ -83,7 +83,7 @@ const ModulesList = () => {
               key={module.id}
               title={module.name}
               available={true}
-              url={`/${serieId}/${module.id}/${module.name}`}
+              url={`/${sourceId}/${module.id}/${module.name}`}
             />
           ))}
         </Grid>

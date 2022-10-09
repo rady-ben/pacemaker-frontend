@@ -37,13 +37,13 @@ function App() {
             <Route exact path="/">
               <Welcome />
             </Route>
-            {/* <Route path="/:moduleId/:courseId/:questionId">
+            <Route path="/workspace/:sourceId/:moduleId/:courseId/:questionId">
               <Home />
-            </Route> */}
-            <Route path="/:serieId/modules">
+            </Route>
+            <Route path="/:sourceId/modules">
               <ModulesList />
             </Route>
-            <Route path="/:serieId/:moduleId/:moduleName">
+            <Route path="/:sourceId/:moduleId/:moduleName">
               <CoursesList />
             </Route>
           </Switch>

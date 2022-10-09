@@ -41,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
 const CoursesList = () => {
   const classes = useStyles();
   const [coursesList, setCoursesList] = useState([]);
-  const { serieId, moduleId, moduleName } = useParams();
+  const { sourceId, moduleId, moduleName } = useParams();
 
   useEffect(() => {
-    fetch(MODULES_API_1({ serieId }))
+    fetch(MODULES_API_1({ sourceId }))
       .then((response) => {
         return response.json();
       })
@@ -73,7 +73,12 @@ const CoursesList = () => {
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
           {coursesList.map((coure) => (
-            <SourceItem key={coure.id} title={coure.title} available={true} />
+            <SourceItem
+              key={coure.id}
+              title={coure.title}
+              available={true}
+              url={`/workspace/${sourceId}/${moduleId}/${coure.id}/1`}
+            />
           ))}
         </Grid>
       </Container>
