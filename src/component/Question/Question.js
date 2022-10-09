@@ -125,6 +125,8 @@ const Question = ({ drawerOpen }) => {
   const classes = useStyles();
   const [validated, setValidated] = useState(false);
   const [showSynthesis, setShowSynthesis] = useState(false);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [next, setNext] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [synthesis, setSynthesis] = useState("");
   const [questions, setQuestions] = useState([]);
@@ -147,8 +149,9 @@ const Question = ({ drawerOpen }) => {
       })
       .then((response) => {
         setIsLoading(false);
-        console.log();
         setQuestions([...response.data.questions]);
+        setTotalQuestions(response.total);
+        setNext(response.next);
         setListQuestionsIndexes([
           ...response.data.questions.map((question, index) => ({
             value: index + 1,
@@ -180,6 +183,22 @@ const Question = ({ drawerOpen }) => {
       setValidated(false);
     }
   }, [questionsString, courseId, questionId]);
+
+  useEffect(() => {
+    if (next && next?.substring(7, next?.length) === questionId) {
+      fetch(`${URL}${next}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          setQuestions([...questions, ...response.data.questions]);
+          setNext(response.next);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [questionId]);
 
   const toggleModal = () => {
     if (showSynthesis) {
@@ -214,7 +233,7 @@ const Question = ({ drawerOpen }) => {
     logEvent(analytics, CLICK_PREVIOUS_BUTTON);
     setQuestionIndex(questionIndex - 1);
     history.push(
-      `/workspace/1/${moduleId}/${courseId}/${Number(questionId) - 1}`
+      `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) - 1}`
     );
   };
 
@@ -222,7 +241,7 @@ const Question = ({ drawerOpen }) => {
     logEvent(analytics, CLICK_NEXT_BUTTON);
     setQuestionIndex(questionIndex + 1);
     history.push(
-      `/workspace/1/${moduleId}/${courseId}/${Number(questionId) + 1}`
+      `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) + 1}`
     );
   };
 
@@ -264,7 +283,7 @@ const Question = ({ drawerOpen }) => {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <TextField
+            {/* <TextField
               id="standard-select-currency"
               select
               variant="outlined"
@@ -285,7 +304,7 @@ const Question = ({ drawerOpen }) => {
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
             <Button
               className={classes.synthesisButton}
               startIcon={<FullscreenIcon />}
