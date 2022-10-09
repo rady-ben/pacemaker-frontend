@@ -60,7 +60,7 @@ const CoursesList = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [sourceId]);
 
   return (
     <div className={classes.container}>
