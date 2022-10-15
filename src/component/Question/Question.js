@@ -9,9 +9,8 @@ import {
   Button,
   ButtonGroup,
   CircularProgress,
-  TextField,
-  MenuItem,
 } from "@mui/material";
+import Select from "react-select";
 import { styled } from "@mui/system";
 import _ from "lodash";
 import Alert from "@mui/material/Alert";
@@ -130,15 +129,8 @@ const Question = ({ drawerOpen }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [synthesis, setSynthesis] = useState("");
   const [questions, setQuestions] = useState([]);
-  const initiallistQuestionsIndexes = Array.apply(null, Array(5)).map(
-    (x, i) => ({
-      value: i + 1,
-      label: `${QUESTION} ${i + 1}`,
-    })
-  );
-  const [listQuestionsIndexes, setListQuestionsIndexes] = useState(
-    initiallistQuestionsIndexes
-  );
+
+  const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
   const [questionsString, setQuestionsString] = useState("");
   const [question, setQuestion] = useState({});
   const [questionIndex, setQuestionIndex] = useState("");
@@ -162,7 +154,7 @@ const Question = ({ drawerOpen }) => {
         setNext(response.next);
         const listQuestionsIndexesTemp = Array.apply(
           null,
-          Array(questions?.length)
+          Array(totalQuestions)
         ).map((x, i) => ({
           value: i + 1,
           label: `${QUESTION} ${i + 1}`,
@@ -272,6 +264,10 @@ const Question = ({ drawerOpen }) => {
     return _.isEmpty(valide);
   };
 
+  console.log("========>");
+  console.log(listQuestionsIndexes);
+  console.log(totalQuestions);
+
   if (isLoading) {
     return (
       <>
@@ -293,28 +289,7 @@ const Question = ({ drawerOpen }) => {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <TextField
-              id="standard-select-currency"
-              select
-              variant="outlined"
-              value={
-                questionIndex || questionIndex === 0 ? questionIndex + 1 : ""
-              }
-              onChange={selectQuestion}
-              InputProps={{
-                style: {
-                  fontSize: 18,
-                  backgroundColor: "#eeeeee",
-                  height: 40,
-                },
-              }}
-            >
-              {listQuestionsIndexes.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+            {/* <Select options={options} /> */}
             <Button
               className={classes.synthesisButton}
               startIcon={<FullscreenIcon />}

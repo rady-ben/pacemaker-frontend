@@ -5,9 +5,6 @@ import {
   StyledEngineProvider,
   createTheme,
 } from "@mui/material/styles";
-import { useStore } from "./store/Store";
-import { setModules } from "./store/reducer";
-import { MODULES_API } from "./config/api";
 import Home from "./routes/home";
 import Welcome from "./routes/Welcome";
 import ModulesList from "./routes/ModulesList";
@@ -15,20 +12,6 @@ import CoursesList from "./routes/CoursesList";
 const theme = createTheme();
 
 function App() {
-  const [, dispatch] = useStore();
-  useEffect(() => {
-    fetch(MODULES_API)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        dispatch(setModules(data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>

@@ -8,8 +8,8 @@ import Question from "../component/Question/Question";
 import { analytics } from "../index";
 import { CLOSE_DRAWER, OPEN_DRAWER } from "../constant/analyticsEvents";
 import { isMobile } from "../utils/ui";
-import { MODULES_API_1 } from "../config/api";
-MODULES_API_1;
+import { MODULES_COURSES_API } from "../config/api";
+MODULES_COURSES_API;
 
 function Home() {
   const [drawerOpen, setDrawerOpen] = useState(isMobile() ? false : true);
@@ -18,7 +18,7 @@ function Home() {
   const [tab, setTab] = useState([]);
 
   useEffect(() => {
-    fetch(MODULES_API_1({ sourceId }))
+    fetch(MODULES_COURSES_API({ sourceId }))
       .then((response) => {
         return response.json();
       })

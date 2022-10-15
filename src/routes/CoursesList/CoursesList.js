@@ -3,7 +3,7 @@ import { Container, Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
-import { MODULES_API_1 } from "../../config/api";
+import { MODULES_COURSES_API } from "../../config/api";
 import { COURSES_LIST_TITLE } from "../../constant/text";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ const CoursesList = () => {
   const { sourceId, moduleId, moduleName } = useParams();
 
   useEffect(() => {
-    fetch(MODULES_API_1({ sourceId }))
+    fetch(MODULES_COURSES_API({ sourceId }))
       .then((response) => {
         return response.json();
       })
