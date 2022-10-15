@@ -1,53 +1,55 @@
-import { useState } from 'react';
-import {
-    useLocation,
-    Redirect
-} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { logEvent } from "firebase/analytics";
-import '../App.css';
-import Header from '../component/Header';
-import Drawer from '../component/Drawer';
-import Question from '../component/Question/Question';
-import { useStore } from '../store/Store';
-import { analytics } from '../index';
-import { CLOSE_DRAWER, OPEN_DRAWER } from '../constant/analyticsEvents';
-import { isMobile } from '../utils/ui';
-
+import { useParams } from "react-router";
+import "../App.css";
+import Header from "../component/Header";
+import Drawer from "../component/Drawer";
+import Question from "../component/Question/Question";
+import { analytics } from "../index";
+import { CLOSE_DRAWER, OPEN_DRAWER } from "../constant/analyticsEvents";
+import { isMobile } from "../utils/ui";
+import { MODULES_COURSES_API } from "../config/api";
+MODULES_COURSES_API;
 
 function Home() {
-    const [drawerOpen, setDrawerOpen] = useState(isMobile() ? false : true);
-    const [globalState] = useStore();
-    const location = useLocation();
+  const [drawerOpen, setDrawerOpen] = useState(isMobile() ? false : true);
+  const { sourceId } = useParams();
 
-    const toggleDrawer = (drawerState) => {
-        if (drawerOpen) {
-            logEvent(analytics, CLOSE_DRAWER);
-        } else {
-            logEvent(analytics, OPEN_DRAWER);
-        }
-        setDrawerOpen(drawerState);
-    }
+  const [tab, setTab] = useState([]);
 
-    if (location.pathname === '/') {
-        if (globalState?.modules[0]?.id && globalState?.modules[0]?.courses[0]?.id){
-            return <Redirect to={`${globalState?.modules[0]?.id}/${globalState?.modules[0]?.courses[0]?.id}/1`} />
-        }
+  useEffect(() => {
+    fetch(MODULES_COURSES_API({ sourceId }))
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setTab(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [sourceId]);
+
+  const toggleDrawer = (drawerState) => {
+    if (drawerOpen) {
+      logEvent(analytics, CLOSE_DRAWER);
+    } else {
+      logEvent(analytics, OPEN_DRAWER);
     }
-    
-    return (
-        <div>
-            <Header
-                drawerOpen={drawerOpen}
-                toggleDrawer={toggleDrawer}
-            />
-            <Drawer
-                listItems={globalState.modules}
-                drawerOpen={drawerOpen}
-                toggleDrawer={toggleDrawer}
-            />
-            <Question drawerOpen={drawerOpen} />
-        </div>
-    );
+    setDrawerOpen(drawerState);
+  };
+
+  return (
+    <div>
+      <Header drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+      <Drawer
+        listItems={tab}
+        drawerOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+      />
+      <Question drawerOpen={drawerOpen} />
+    </div>
+  );
 }
 
 export default Home;

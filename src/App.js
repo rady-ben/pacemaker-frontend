@@ -1,30 +1,17 @@
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
-import { useStore } from './store/Store';
-import { setModules } from './store/reducer';
-import { MODULES_API } from './config/api';
-import Home from './routes/home';
-import Welcome from './routes/Welcome';
-
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+} from "@mui/material/styles";
+import Home from "./routes/home";
+import Welcome from "./routes/Welcome";
+import ModulesList from "./routes/ModulesList";
+import CoursesList from "./routes/CoursesList";
 const theme = createTheme();
 
-
 function App() {
-  const [ ,dispatch] = useStore();
-  useEffect(() => {
-    fetch(MODULES_API)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      dispatch(setModules(data))
-    })
-    .catch((error)=>{
-      console.log(error);
-    });
-  }, [])
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -33,8 +20,14 @@ function App() {
             <Route exact path="/">
               <Welcome />
             </Route>
-            <Route path="/:moduleId/:courseId/:questionId">
+            <Route path="/workspace/:sourceId/:moduleId/:courseId/:questionId">
               <Home />
+            </Route>
+            <Route path="/:sourceId/modules">
+              <ModulesList />
+            </Route>
+            <Route path="/:sourceId/:moduleId/:moduleName">
+              <CoursesList />
             </Route>
           </Switch>
         </BrowserRouter>
