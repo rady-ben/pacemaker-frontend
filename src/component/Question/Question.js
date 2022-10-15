@@ -25,6 +25,7 @@ import CustomModal from "../Modal";
 import { QUESTIONS_API } from "../../config/api";
 import {
   QUESTION,
+  QUESTION_NUMBER,
   SYNTHESIS,
   CORRECT_ANSWER,
   WRONG_ANSWER,
@@ -89,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.grey[400],
     borderRadius: 4,
   },
+  selectQuestion: {
+    width: 150,
+  },
   synthesisButtonText: {
     color: theme.palette.grey[800],
     textTransform: "none",
@@ -150,15 +154,16 @@ const Question = ({ drawerOpen }) => {
       .then((response) => {
         setIsLoading(false);
         setQuestions([...response.data.questions]);
-        setTotalQuestions(response.total);
+        setTotalQuestions(Number(response.total));
         setNext(response.next);
-        const listQuestionsIndexesTemp = Array.apply(
-          null,
-          Array(totalQuestions)
-        ).map((x, i) => ({
-          value: i + 1,
-          label: `${QUESTION} ${i + 1}`,
-        }));
+        const listQuestionsIndexesTemp = [];
+
+        for (let index = 0; index < response.total; index++) {
+          listQuestionsIndexesTemp.push({
+            value: index + 1,
+            label: `${QUESTION} ${index + 1}`,
+          });
+        }
         setListQuestionsIndexes(listQuestionsIndexesTemp);
         setQuestionIndex(Number(questionId) - 1);
         setSynthesis(response.data.synthesis);
@@ -249,9 +254,9 @@ const Question = ({ drawerOpen }) => {
 
   const selectQuestion = (event) => {
     logEvent(analytics, SELECT_QUESTION);
-    setQuestionIndex(event.target.value - 1);
+    setQuestionIndex(event.value - 1);
     history.push(
-      `/workspace/${sourceId}/${moduleId}/${courseId}/${event.target.value}`
+      `/workspace/${sourceId}/${moduleId}/${courseId}/${event.value}`
     );
   };
 
@@ -263,10 +268,6 @@ const Question = ({ drawerOpen }) => {
     );
     return _.isEmpty(valide);
   };
-
-  console.log("========>");
-  console.log(listQuestionsIndexes);
-  console.log(totalQuestions);
 
   if (isLoading) {
     return (
@@ -289,7 +290,20 @@ const Question = ({ drawerOpen }) => {
             flexDirection="row"
             justifyContent="space-between"
           >
-            {/* <Select options={options} /> */}
+            <Select
+              className={classes.selectQuestion}
+              defaultValue={{
+                value: 1,
+                label: `${QUESTION} 1`,
+              }}
+              value={{
+                value: Number(questionIndex) + 1,
+                label: `${QUESTION} ${Number(questionIndex) + 1}`,
+              }}
+              options={listQuestionsIndexes}
+              placeholder={QUESTION_NUMBER}
+              onChange={selectQuestion}
+            />
             <Button
               className={classes.synthesisButton}
               startIcon={<FullscreenIcon />}
