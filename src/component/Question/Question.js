@@ -137,7 +137,6 @@ const Question = ({ drawerOpen }) => {
   const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
   const [questionsString, setQuestionsString] = useState("");
   const [question, setQuestion] = useState({});
-  const [questionIndex, setQuestionIndex] = useState("");
   const [propositions, setPropositions] = useState([]);
 
   const URL = QUESTIONS_API({
@@ -165,7 +164,6 @@ const Question = ({ drawerOpen }) => {
           });
         }
         setListQuestionsIndexes(listQuestionsIndexesTemp);
-        setQuestionIndex(Number(questionId) - 1);
         setSynthesis(response.data.synthesis);
         setQuestionsString(JSON.stringify([...response.data.questions]));
       })
@@ -176,7 +174,7 @@ const Question = ({ drawerOpen }) => {
 
   useEffect(() => {
     if (questions.length > 0) {
-      const tab = [...questions[questionIndex]?.propositions].map(
+      const tab = [...questions[Number(questionId) - 1]?.propositions].map(
         (proposition) => ({
           ...proposition,
           label: proposition?.content,
@@ -184,9 +182,8 @@ const Question = ({ drawerOpen }) => {
           checked: false,
         })
       );
-      setQuestion({ ...questions[questionIndex] });
+      setQuestion({ ...questions[Number(questionId) - 1] });
       setPropositions(tab);
-      setQuestionIndex(Number(questionId) - 1);
       setValidated(false);
     }
   }, [questionsString, courseId, questionId]);
@@ -238,7 +235,6 @@ const Question = ({ drawerOpen }) => {
 
   const clickPreviousButton = () => {
     logEvent(analytics, CLICK_PREVIOUS_BUTTON);
-    setQuestionIndex(questionIndex - 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) - 1}`
     );
@@ -246,7 +242,6 @@ const Question = ({ drawerOpen }) => {
 
   const clickNextButton = () => {
     logEvent(analytics, CLICK_NEXT_BUTTON);
-    setQuestionIndex(questionIndex + 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) + 1}`
     );
@@ -254,7 +249,6 @@ const Question = ({ drawerOpen }) => {
 
   const selectQuestion = (event) => {
     logEvent(analytics, SELECT_QUESTION);
-    setQuestionIndex(event.value - 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${event.value}`
     );
@@ -297,8 +291,8 @@ const Question = ({ drawerOpen }) => {
                 label: `${QUESTION} 1`,
               }}
               value={{
-                value: Number(questionIndex) + 1,
-                label: `${QUESTION} ${Number(questionIndex) + 1}`,
+                value: Number(questionId),
+                label: `${QUESTION} ${Number(questionId)}`,
               }}
               options={listQuestionsIndexes}
               placeholder={QUESTION_NUMBER}
@@ -383,13 +377,13 @@ const Question = ({ drawerOpen }) => {
             >
               <Button
                 onClick={clickPreviousButton}
-                disabled={questionIndex === 0}
+                disabled={Number(questionId) === 1}
               >
                 {PREVIOUS}
               </Button>
               <Button
                 onClick={clickNextButton}
-                disabled={questionIndex === questions?.length - 1}
+                disabled={Number(questionId) === questions?.length}
               >
                 {NEXT}
               </Button>
