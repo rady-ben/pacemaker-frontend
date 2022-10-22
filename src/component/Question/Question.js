@@ -228,6 +228,8 @@ const Question = ({ drawerOpen }) => {
         }
       }
     } else {
+      numberNext = 20;
+      NumberQuestionId = Number(questionId);
       if (questions.length > 0) {
         const tempQuestion = questions.find(
           (element) => element.id === NumberQuestionId
