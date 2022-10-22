@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   selectQuestion: {
-    width: 150,
+    width: 180,
   },
   synthesisButtonText: {
     color: theme.palette.grey[800],
@@ -178,7 +178,10 @@ const Question = ({ drawerOpen }) => {
     if (next) {
       numberNext = Number(next?.substring(7, next?.length));
       NumberQuestionId = Number(questionId);
-      if (NumberQuestionId > numberNext) {
+      if (
+        NumberQuestionId > numberNext ||
+        numberNext - NumberQuestionId >= 20
+      ) {
         const tempNumberNext =
           (Math.floor(NumberQuestionId / 20) + 1) * 20 - 20;
         setNext(`?index=${tempNumberNext}`);
@@ -198,7 +201,6 @@ const Question = ({ drawerOpen }) => {
                 status: proposition?.is_correct ? "success" : "error",
                 checked: false,
               }));
-
               setQuestion(tempQuestion);
               setPropositions(tab);
               setValidated(false);
@@ -423,7 +425,7 @@ const Question = ({ drawerOpen }) => {
               </Button>
               <Button
                 onClick={clickNextButton}
-                // disabled={Number(questionId) === questions?.length}
+                disabled={Number(questionId) === totalQuestions}
               >
                 {NEXT}
               </Button>
