@@ -173,36 +173,76 @@ const Question = ({ drawerOpen }) => {
   }, [moduleId, courseId]);
 
   useEffect(() => {
-    if (questions.length > 0) {
-      const tab = [...questions[Number(questionId) - 1]?.propositions].map(
-        (proposition) => ({
+    let numberNext;
+    let NumberQuestionId;
+    if (next) {
+      numberNext = Number(next?.substring(7, next?.length));
+      NumberQuestionId = Number(questionId);
+      if (NumberQuestionId > numberNext) {
+        const tempNumberNext =
+          (Math.floor(NumberQuestionId / 20) + 1) * 20 - 20;
+        setNext(`?index=${tempNumberNext}`);
+        fetch(`${URL}?index=${tempNumberNext}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((response) => {
+            if (response.data?.questions?.length) {
+              setQuestions([...response.data.questions]);
+              const tempQuestion = response.data.questions.find(
+                (element) => element.id === NumberQuestionId
+              );
+              const tab = [...tempQuestion.propositions].map((proposition) => ({
+                ...proposition,
+                label: proposition?.content,
+                status: proposition?.is_correct ? "success" : "error",
+                checked: false,
+              }));
+
+              setQuestion(tempQuestion);
+              setPropositions(tab);
+              setValidated(false);
+              setNext(response.next);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        if (questions.length > 0) {
+          const tempQuestion = questions.find(
+            (element) => element.id === NumberQuestionId
+          );
+
+          const tab = [...tempQuestion.propositions].map((proposition) => ({
+            ...proposition,
+            label: proposition?.content,
+            status: proposition?.is_correct ? "success" : "error",
+            checked: false,
+          }));
+          setQuestion({ ...questions[Number(questionId) - 1] });
+          setPropositions(tab);
+          setValidated(false);
+        }
+      }
+    } else {
+      if (questions.length > 0) {
+        const tempQuestion = questions.find(
+          (element) => element.id === NumberQuestionId
+        );
+
+        const tab = [...tempQuestion.propositions].map((proposition) => ({
           ...proposition,
           label: proposition?.content,
           status: proposition?.is_correct ? "success" : "error",
           checked: false,
-        })
-      );
-      setQuestion({ ...questions[Number(questionId) - 1] });
-      setPropositions(tab);
-      setValidated(false);
+        }));
+        setQuestion({ ...questions[Number(questionId) - 1] });
+        setPropositions(tab);
+        setValidated(false);
+      }
     }
   }, [questionsString, courseId, questionId]);
-
-  useEffect(() => {
-    if (next && next?.substring(7, next?.length) === questionId) {
-      fetch(`${URL}${next}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          setQuestions([...questions, ...response.data.questions]);
-          setNext(response.next);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [questionId]);
 
   const toggleModal = () => {
     if (showSynthesis) {
@@ -383,7 +423,7 @@ const Question = ({ drawerOpen }) => {
               </Button>
               <Button
                 onClick={clickNextButton}
-                disabled={Number(questionId) === questions?.length}
+                // disabled={Number(questionId) === questions?.length}
               >
                 {NEXT}
               </Button>
