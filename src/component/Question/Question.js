@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   selectQuestion: {
-    width: 150,
+    width: 180,
   },
   synthesisButtonText: {
     color: theme.palette.grey[800],
@@ -137,7 +137,6 @@ const Question = ({ drawerOpen }) => {
   const [listQuestionsIndexes, setListQuestionsIndexes] = useState([]);
   const [questionsString, setQuestionsString] = useState("");
   const [question, setQuestion] = useState({});
-  const [questionIndex, setQuestionIndex] = useState("");
   const [propositions, setPropositions] = useState([]);
 
   const URL = QUESTIONS_API({
@@ -165,7 +164,6 @@ const Question = ({ drawerOpen }) => {
           });
         }
         setListQuestionsIndexes(listQuestionsIndexesTemp);
-        setQuestionIndex(Number(questionId) - 1);
         setSynthesis(response.data.synthesis);
         setQuestionsString(JSON.stringify([...response.data.questions]));
       })
@@ -175,37 +173,80 @@ const Question = ({ drawerOpen }) => {
   }, [moduleId, courseId]);
 
   useEffect(() => {
-    if (questions.length > 0) {
-      const tab = [...questions[questionIndex]?.propositions].map(
-        (proposition) => ({
+    let numberNext;
+    let NumberQuestionId;
+    if (next) {
+      numberNext = Number(next?.substring(7, next?.length));
+      NumberQuestionId = Number(questionId);
+      if (
+        NumberQuestionId > numberNext ||
+        numberNext - NumberQuestionId >= 20
+      ) {
+        const tempNumberNext =
+          (Math.floor(NumberQuestionId / 20) + 1) * 20 - 20;
+        setNext(`?index=${tempNumberNext}`);
+        fetch(`${URL}?index=${tempNumberNext}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((response) => {
+            if (response.data?.questions?.length) {
+              setQuestions([...response.data.questions]);
+              const tempQuestion = response.data.questions.find(
+                (element) => element.id === NumberQuestionId
+              );
+              const tab = [...tempQuestion.propositions].map((proposition) => ({
+                ...proposition,
+                label: proposition?.content,
+                status: proposition?.is_correct ? "success" : "error",
+                checked: false,
+              }));
+              setQuestion(tempQuestion);
+              setPropositions(tab);
+              setValidated(false);
+              setNext(response.next);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        if (questions.length > 0) {
+          const tempQuestion = questions.find(
+            (element) => element.id === NumberQuestionId
+          );
+
+          const tab = [...tempQuestion.propositions].map((proposition) => ({
+            ...proposition,
+            label: proposition?.content,
+            status: proposition?.is_correct ? "success" : "error",
+            checked: false,
+          }));
+          setQuestion({ ...questions[Number(questionId) - 1] });
+          setPropositions(tab);
+          setValidated(false);
+        }
+      }
+    } else {
+      numberNext = 20;
+      NumberQuestionId = Number(questionId);
+      if (questions.length > 0) {
+        const tempQuestion = questions.find(
+          (element) => element.id === NumberQuestionId
+        );
+
+        const tab = [...tempQuestion.propositions].map((proposition) => ({
           ...proposition,
           label: proposition?.content,
           status: proposition?.is_correct ? "success" : "error",
           checked: false,
-        })
-      );
-      setQuestion({ ...questions[questionIndex] });
-      setPropositions(tab);
-      setQuestionIndex(Number(questionId) - 1);
-      setValidated(false);
+        }));
+        setQuestion({ ...questions[Number(questionId) - 1] });
+        setPropositions(tab);
+        setValidated(false);
+      }
     }
   }, [questionsString, courseId, questionId]);
-
-  useEffect(() => {
-    if (next && next?.substring(7, next?.length) === questionId) {
-      fetch(`${URL}${next}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          setQuestions([...questions, ...response.data.questions]);
-          setNext(response.next);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [questionId]);
 
   const toggleModal = () => {
     if (showSynthesis) {
@@ -238,7 +279,6 @@ const Question = ({ drawerOpen }) => {
 
   const clickPreviousButton = () => {
     logEvent(analytics, CLICK_PREVIOUS_BUTTON);
-    setQuestionIndex(questionIndex - 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) - 1}`
     );
@@ -246,7 +286,6 @@ const Question = ({ drawerOpen }) => {
 
   const clickNextButton = () => {
     logEvent(analytics, CLICK_NEXT_BUTTON);
-    setQuestionIndex(questionIndex + 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${Number(questionId) + 1}`
     );
@@ -254,7 +293,6 @@ const Question = ({ drawerOpen }) => {
 
   const selectQuestion = (event) => {
     logEvent(analytics, SELECT_QUESTION);
-    setQuestionIndex(event.value - 1);
     history.push(
       `/workspace/${sourceId}/${moduleId}/${courseId}/${event.value}`
     );
@@ -297,8 +335,8 @@ const Question = ({ drawerOpen }) => {
                 label: `${QUESTION} 1`,
               }}
               value={{
-                value: Number(questionIndex) + 1,
-                label: `${QUESTION} ${Number(questionIndex) + 1}`,
+                value: Number(questionId),
+                label: `${QUESTION} ${Number(questionId)}`,
               }}
               options={listQuestionsIndexes}
               placeholder={QUESTION_NUMBER}
@@ -383,13 +421,13 @@ const Question = ({ drawerOpen }) => {
             >
               <Button
                 onClick={clickPreviousButton}
-                disabled={questionIndex === 0}
+                disabled={Number(questionId) === 1}
               >
                 {PREVIOUS}
               </Button>
               <Button
                 onClick={clickNextButton}
-                disabled={questionIndex === questions?.length - 1}
+                disabled={Number(questionId) === totalQuestions}
               >
                 {NEXT}
               </Button>
