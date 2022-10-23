@@ -10,6 +10,7 @@ import {
   MODULES_BANC_01,
   BANC_01,
 } from "../../constant/text";
+import Loading from "../../component/Loading";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,8 +48,10 @@ const ModulesList = () => {
   const classes = useStyles();
   const [moduleList, setModuleList] = useState([]);
   const { sourceId } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(MODULES_COURSES_API({ sourceId }))
       .then((response) => {
         return response.json();
@@ -58,6 +61,9 @@ const ModulesList = () => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -78,14 +84,18 @@ const ModulesList = () => {
           )}
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
-          {moduleList.map((module) => (
-            <SourceItem
-              key={module.id}
-              title={module.name}
-              available={true}
-              url={`/${sourceId}/${module.id}/${module.name}`}
-            />
-          ))}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            moduleList.map((module) => (
+              <SourceItem
+                key={module.id}
+                title={module.name}
+                available={true}
+                url={`/${sourceId}/${module.id}/${module.name}`}
+              />
+            ))
+          )}
         </Grid>
       </Container>
     </div>

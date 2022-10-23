@@ -182,8 +182,16 @@ const Question = ({ drawerOpen }) => {
         NumberQuestionId > numberNext ||
         numberNext - NumberQuestionId >= 20
       ) {
-        const tempNumberNext =
-          (Math.floor(NumberQuestionId / 20) + 1) * 20 - 20;
+        let tempNumberNext = 0;
+        if (NumberQuestionId > numberNext) {
+          tempNumberNext = (Math.floor(NumberQuestionId / 20) + 1) * 20 - 20;
+        } else {
+          if (NumberQuestionId % 20 === 0) {
+            tempNumberNext = NumberQuestionId - 20;
+          } else {
+            tempNumberNext = NumberQuestionId - (NumberQuestionId % 20);
+          }
+        }
         setNext(`?index=${tempNumberNext}`);
         fetch(`${URL}?index=${tempNumberNext}`)
           .then((response) => {
@@ -222,7 +230,7 @@ const Question = ({ drawerOpen }) => {
             status: proposition?.is_correct ? "success" : "error",
             checked: false,
           }));
-          setQuestion({ ...questions[Number(questionId) - 1] });
+          setQuestion({ ...tempQuestion });
           setPropositions(tab);
           setValidated(false);
         }

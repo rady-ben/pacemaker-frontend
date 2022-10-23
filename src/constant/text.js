@@ -3,7 +3,7 @@ export const PACEMAKER = "Pacemaker";
 export const QCM = "QCM";
 export const WELCOME_MESSAGE_1 = `Votre guide qui vous accompagnera durant vos révisions pour le
 résidanat, profitez des nombreuses sources fiables est
-enrichissantes pour vôtre succès`;
+enrichissantes pour vôtre succès, c'est partie 🚀 !!`;
 export const START_REVIEW = "Commencer votre révision";
 export const OUR_SOURCES = "Nos sources";
 export const WELCOME_MESSAGE_2 = `Pacemaker vous propose les sources suivantes, et on est à jour

@@ -15,12 +15,12 @@ import { SourceItem } from "../../component/SourceItem";
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(6),
   },
   title: {
     color: theme.palette.primary.contrastText,
     fontWeight: "bold",
-    fontSize: 40,
+    fontSize: 35,
     textAlign: "center",
   },
 
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   sourceSectionContainer: {
-    minHeight: "100vh",
     paddingTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
     textAlign: "center",
     marginBottom: theme.spacing(8),
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(12),
   },
   linkText: {
     color: theme.palette.primary.dark,
@@ -67,18 +66,7 @@ const SourceItemsGrid = ({ sourcesList }) => {
     <>
       <Container className={classes.sourceSectionContainer} id="sources">
         <div>
-          <Container className={classes.titleContainer}>
-            <Typography variant="h1" className={classes.title}>
-              {OUR_SOURCES}
-            </Typography>
-          </Container>
-          <Container className={classes.descriptionTextContainer}>
-            <Typography variant="h1" className={classes.descriptionText}>
-              {WELCOME_MESSAGE_2}
-            </Typography>
-          </Container>
-
-          <Grid container spacing={4} rowSpacing={6}>
+          <Grid container spacing={1} rowSpacing={6}>
             {sourcesList.map((source) => (
               <SourceItem
                 key={source.id}
@@ -93,12 +81,6 @@ const SourceItemsGrid = ({ sourcesList }) => {
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Diagest"}
-              available={false}
-              subTitle={BEING_PROCESSED}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
-              title={"Hyperqcm"}
               available={false}
               subTitle={BEING_PROCESSED}
             />

@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
 import { COURSES_LIST_TITLE } from "../../constant/text";
+import Loading from "../../component/Loading";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,8 +43,10 @@ const CoursesList = () => {
   const classes = useStyles();
   const [coursesList, setCoursesList] = useState([]);
   const { sourceId, moduleId, moduleName } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(MODULES_COURSES_API({ sourceId }))
       .then((response) => {
         return response.json();
@@ -52,13 +55,15 @@ const CoursesList = () => {
         const found = data.find(
           (element) => JSON.stringify(element.id) === moduleId
         );
-
         if (found?.courses?.length) {
           setCoursesList(found?.courses);
         }
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [sourceId]);
 
@@ -72,14 +77,18 @@ const CoursesList = () => {
           </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
-          {coursesList.map((coure) => (
-            <SourceItem
-              key={coure.id}
-              title={coure.title}
-              available={true}
-              url={`/workspace/${sourceId}/${moduleId}/${coure.id}/1`}
-            />
-          ))}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            coursesList.map((coure) => (
+              <SourceItem
+                key={coure.id}
+                title={coure.title}
+                available={true}
+                url={`/workspace/${sourceId}/${moduleId}/${coure.id}/1`}
+              />
+            ))
+          )}
         </Grid>
       </Container>
     </div>
