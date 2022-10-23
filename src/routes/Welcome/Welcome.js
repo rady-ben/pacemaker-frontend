@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 
-import { isMobile } from "../../utils/ui";
-import {
-  PACEMAKER,
-  QCM,
-  WELCOME_MESSAGE_1,
-  START_REVIEW,
-} from "../../constant/text";
+import { PACEMAKER, QCM, WELCOME_MESSAGE_1 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
 import { SOURCES_API } from "../../config/api";
 import Loading from "../../component/Loading";
@@ -23,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     paddingTop: theme.spacing(4),
-    minHeight: "100vh",
+    marginBottom: theme.spacing(8),
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
@@ -41,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionTextContainer: {
     maxWidth: 600,
-    marginBottom: theme.spacing(8),
+    marginBottom: theme.spacing(2),
   },
   descriptionText: {
     color: theme.palette.grey.A400,
-    fontSize: 20,
+    fontSize: 26,
     textAlign: "center",
   },
   startButtonContainer: {
@@ -88,19 +82,8 @@ const useStyles = makeStyles((theme) => ({
 const Welcome = () => {
   const classes = useStyles();
   const [sourcesList, setSourcesList] = useState([]);
-  const [imgWidth, setImgWidth] = useState(0);
-  const [imgHeight, setImgHeight] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (isMobile()) {
-      setImgWidth(window.innerWidth * 0.9);
-      setImgHeight(window.innerHeight * 0.6);
-    } else {
-      setImgWidth(window.innerWidth * 0.6);
-      setImgHeight(window.innerHeight * 0.7);
-    }
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -128,20 +111,14 @@ const Welcome = () => {
           </Typography>
         </Container>
         <Container className={classes.descriptionTextContainer}>
-          <Typography variant="h2" className={classes.descriptionText}>
+          <Typography
+            style={{ lineHeight: "35px" }}
+            variant="h2"
+            className={classes.descriptionText}
+          >
             {WELCOME_MESSAGE_1}
           </Typography>
         </Container>
-        <Container className={classes.startButtonContainer}>
-          <Button size="large" className={classes.startButton} href="#sources">
-            {START_REVIEW}
-          </Button>
-        </Container>
-        <img
-          src={require("../../assets/backgroundImage.jpg")}
-          width={imgWidth}
-          height={imgHeight}
-        />
       </Container>
       {isLoading ? <Loading /> : <SourceItemsGrid sourcesList={sourcesList} />}
     </div>
