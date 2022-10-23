@@ -73,7 +73,7 @@ export const SourceItem = ({
           </Typography>
           {available ? (
             <Button variant="outlined" color="primary">
-              Commancer
+              Commencer
             </Button>
           ) : (
             <Typography variant="h2" className={classes.sourceStatusText}>
