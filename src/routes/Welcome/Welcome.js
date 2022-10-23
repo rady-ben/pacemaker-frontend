@@ -11,6 +11,7 @@ import {
 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
 import { SOURCES_API } from "../../config/api";
+import Loading from "../../component/Loading";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -89,6 +90,7 @@ const Welcome = () => {
   const [sourcesList, setSourcesList] = useState([]);
   const [imgWidth, setImgWidth] = useState(0);
   const [imgHeight, setImgHeight] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (isMobile()) {
@@ -101,6 +103,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(SOURCES_API)
       .then((response) => {
         return response.json();
@@ -110,6 +113,9 @@ const Welcome = () => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -137,7 +143,7 @@ const Welcome = () => {
           height={imgHeight}
         />
       </Container>
-      <SourceItemsGrid sourcesList={sourcesList} />
+      {isLoading ? <Loading /> : <SourceItemsGrid sourcesList={sourcesList} />}
     </div>
   );
 };
