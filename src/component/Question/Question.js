@@ -222,7 +222,7 @@ const Question = ({ drawerOpen }) => {
             status: proposition?.is_correct ? "success" : "error",
             checked: false,
           }));
-          setQuestion({ ...questions[Number(questionId) - 1] });
+          setQuestion({ ...tempQuestion });
           setPropositions(tab);
           setValidated(false);
         }
