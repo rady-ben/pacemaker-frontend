@@ -8,7 +8,7 @@ import {
   MODULES_SERIE_200,
   NUMBER_200,
   MODULES_BANC_01,
-  BANC_01,
+  BANC_01_NUMBER,
 } from "../../constant/text";
 import Loading from "../../component/Loading";
 
@@ -79,7 +79,7 @@ const ModulesList = () => {
           ) : (
             <Typography variant="h1" className={classes.title}>
               {MODULES_BANC_01}
-              <span className={classes.qcmText}>{BANC_01}</span>
+              <span className={classes.qcmText}>{BANC_01_NUMBER}</span>
             </Typography>
           )}
         </Container>

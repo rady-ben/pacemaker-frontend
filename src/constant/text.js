@@ -15,7 +15,7 @@ export const BEING_PROCESSED = "En cours de traitement";
 export const MODULES_SERIE_200 = "Liste des modules de la serie ";
 export const NUMBER_200 = "200 ";
 export const MODULES_BANC_01 = "Liste des modules de la banque ";
-export const BANC_01 = "01 ";
+export const BANC_01_NUMBER = "01 ";
 
 // Courses list
 export const COURSES_LIST_TITLE = "Liste des coures du module ";
@@ -23,6 +23,7 @@ export const COURSES_LIST_TITLE = "Liste des coures du module ";
 // Workspace
 export const HOME = "Accueil";
 export const SERIES_200 = "Séries 200";
+export const BANC_01 = "Banque 01";
 export const QUESTION = "Question";
 export const QUESTION_NUMBER = "Num de question";
 export const SYNTHESIS = "Synthèse";
