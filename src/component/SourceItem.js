@@ -3,12 +3,16 @@ import { Typography, Grid, Button } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
+import { START } from "../constant/text";
+import { isMobile } from "../utils/ui";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
     color: theme.palette.primary.contrastText,
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 18,
+    maxWidth: 150,
+    height: 50,
     textAlign: "center",
     marginBottom: theme.spacing(2),
   },
@@ -56,6 +60,10 @@ export const SourceItem = ({
   url = "#",
 }) => {
   const classes = useStyles({ available });
+  const titleToDisplay =
+    !isMobile() && title?.length && title?.length > 20
+      ? `${title.substring(0, 17)}...`
+      : title;
 
   return (
     <Grid item xs={12} md={6} lg={4}>
@@ -69,11 +77,11 @@ export const SourceItem = ({
             <MenuBookRounded className={classes.sourceIcon} />
           </div>
           <Typography variant="h2" className={classes.sourceTitle}>
-            {title}
+            {titleToDisplay}
           </Typography>
           {available ? (
             <Button variant="outlined" color="primary">
-              Commencer
+              {START}
             </Button>
           ) : (
             <Typography variant="h2" className={classes.sourceStatusText}>

@@ -16,6 +16,7 @@ export const MODULES_SERIE_200 = "Liste des modules de la serie ";
 export const NUMBER_200 = "200 ";
 export const MODULES_BANC_01 = "Liste des modules de la banque ";
 export const BANC_01_NUMBER = "01 ";
+export const START = "Commencer";
 
 // Courses list
 export const COURSES_LIST_TITLE = "Liste des coures du module ";
