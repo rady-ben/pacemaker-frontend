@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid, Button } from "@mui/material";
+import { Typography, Grid, Button, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
@@ -76,9 +76,11 @@ export const SourceItem = ({
           <div className={classes.sourceIconContainer}>
             <MenuBookRounded className={classes.sourceIcon} />
           </div>
-          <Typography variant="h2" className={classes.sourceTitle}>
-            {titleToDisplay}
-          </Typography>
+          <Tooltip title={title} placement="top">
+            <Typography variant="h2" className={classes.sourceTitle}>
+              {titleToDisplay}
+            </Typography>
+          </Tooltip>
           {available ? (
             <Button variant="outlined" color="primary">
               {START}
