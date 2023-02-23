@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#151719",
-    cursor: "pointer",
     opacity: props.available ? 1 : 0.5,
   }),
   sourceIconContainer: (props) => ({
@@ -40,11 +39,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    "&:hover": {
-      backgroundColor: props.available
-        ? theme.palette.success.light
-        : theme.palette.primary.dark,
-    },
   }),
   sourceIcon: {
     color: "#fff",
@@ -67,31 +61,31 @@ export const SourceItem = ({
 
   return (
     <Grid item xs={12} md={6} lg={4}>
-      <Link to={available ? url : "#"} style={{ textDecoration: "none" }}>
-        <div
-          className={classes.sourseItemContainer}
-          onClick={available ? () => {} : toggleAlert ? toggleAlert : () => {}}
-          disabled={available}
-        >
-          <div className={classes.sourceIconContainer}>
-            <MenuBookRounded className={classes.sourceIcon} />
-          </div>
-          <Tooltip title={title} placement="top">
-            <Typography variant="h2" className={classes.sourceTitle}>
-              {titleToDisplay}
-            </Typography>
-          </Tooltip>
-          {available ? (
+      <div
+        className={classes.sourseItemContainer}
+        onClick={available ? () => {} : toggleAlert ? toggleAlert : () => {}}
+        disabled={available}
+      >
+        <div className={classes.sourceIconContainer}>
+          <MenuBookRounded className={classes.sourceIcon} />
+        </div>
+        <Tooltip title={title} placement="top">
+          <Typography variant="h2" className={classes.sourceTitle}>
+            {titleToDisplay}
+          </Typography>
+        </Tooltip>
+        {available ? (
+          <Link to={available ? url : "#"} style={{ textDecoration: "none" }}>
             <Button variant="outlined" color="primary">
               {START}
             </Button>
-          ) : (
-            <Typography variant="h2" className={classes.sourceStatusText}>
-              {subTitle}
-            </Typography>
-          )}
-        </div>
-      </Link>
+          </Link>
+        ) : (
+          <Typography variant="h2" className={classes.sourceStatusText}>
+            {subTitle}
+          </Typography>
+        )}
+      </div>
     </Grid>
   );
 };
