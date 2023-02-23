@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#151719",
     width: "100%",
+    paddingBottom: 60,
   },
   welcomeSectionContainer: {
     display: "flex",
