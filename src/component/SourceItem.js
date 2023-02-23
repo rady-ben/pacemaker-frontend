@@ -12,9 +12,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: 18,
     maxWidth: 160,
-    height: 30,
+    height: 50,
     textAlign: "center",
     marginBottom: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 250,
+      height: "auto",
+    },
   },
   sourceStatusText: {
     color: theme.palette.grey.A400,
