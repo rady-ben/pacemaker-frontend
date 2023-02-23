@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     fontWeight: "bold",
     fontSize: 18,
-    maxWidth: 150,
-    height: 50,
+    maxWidth: 160,
+    height: 30,
     textAlign: "center",
     marginBottom: theme.spacing(2),
   },
@@ -61,8 +61,8 @@ export const SourceItem = ({
 }) => {
   const classes = useStyles({ available });
   const titleToDisplay =
-    !isMobile() && title?.length && title?.length > 20
-      ? `${title.substring(0, 17)}...`
+    !isMobile() && title?.length && title?.length > 18
+      ? `${title.substring(0, 14)}...`
       : title;
 
   return (
