@@ -11,12 +11,13 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#151719",
     width: "100%",
+    minHeight: "100vh",
   },
   welcomeSectionContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
   },
   titleContainer: {
