@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
 import { START } from "../constant/text";
 import { ellipsisString } from "../utils/stringManipulation";
+import { ELLIPS_LENGTH } from "../constant/ui";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
@@ -69,11 +70,17 @@ export const SourceItem = ({
         <div className={classes.sourceIconContainer}>
           <MenuBookRounded className={classes.sourceIcon} />
         </div>
-        <Tooltip title={title} placement="top">
+        {title.length > ELLIPS_LENGTH ? (
+          <Tooltip title={title} placement="top">
+            <Typography variant="h2" className={classes.sourceTitle}>
+              {titleToDisplay}
+            </Typography>
+          </Tooltip>
+        ) : (
           <Typography variant="h2" className={classes.sourceTitle}>
             {titleToDisplay}
           </Typography>
-        </Tooltip>
+        )}
         {available ? (
           <Link to={available ? url : "#"} style={{ textDecoration: "none" }}>
             <Button variant="outlined" color="primary">
