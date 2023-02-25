@@ -4,7 +4,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
 import { START } from "../constant/text";
-import { isMobile } from "../utils/ui";
+import { ellipsisString } from "../utils/stringManipulation";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
@@ -58,11 +58,7 @@ export const SourceItem = ({
   url = "#",
 }) => {
   const classes = useStyles({ available });
-  const titleToDisplay =
-    !isMobile() && title?.length && title?.length > 18
-      ? `${title.substring(0, 14)}...`
-      : title;
-
+  const titleToDisplay = ellipsisString(title);
   return (
     <Grid item xs={12} md={6} lg={4}>
       <div
