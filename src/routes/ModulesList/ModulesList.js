@@ -72,17 +72,12 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          {sourceId === "1" ? (
-            <Typography variant="h1" className={classes.title}>
-              {MODULES_SERIE_200}
-              <span className={classes.qcmText}>{NUMBER_200}</span>
-            </Typography>
-          ) : (
-            <Typography variant="h1" className={classes.title}>
-              {MODULES_BANC_01}
-              <span className={classes.qcmText}>{BANC_01_NUMBER}</span>
-            </Typography>
-          )}
+          <Typography variant="h1" className={classes.title}>
+            {sourceId === "1" ? MODULES_SERIE_200 : MODULES_BANC_01}
+            <span className={classes.qcmText}>
+              {sourceId === "1" ? NUMBER_200 : BANC_01_NUMBER}
+            </span>
+          </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
           {isLoading ? (
