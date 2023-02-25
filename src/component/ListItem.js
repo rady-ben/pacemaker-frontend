@@ -17,6 +17,7 @@ import { logEvent } from "firebase/analytics";
 import { analytics } from "../index";
 import { CLICK_COURSE_LINK } from "../constant/analyticsEvents";
 import { ellipsisString } from "../utils/stringManipulation";
+import { ELLIPS_LENGTH } from "../constant/ui";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -72,12 +73,19 @@ const CustomItem = ({
         <ListItemIcon>
           <ListAltSharpIcon color={selected ? "primary" : "inherit"} />
         </ListItemIcon>
-        <Tooltip title={name} placement="top">
+        {name.length > ELLIPS_LENGTH ? (
+          <Tooltip title={name} placement="top">
+            <ListItemText
+              primary={ellipsisString(name)}
+              className={classes.listSubItemText}
+            />
+          </Tooltip>
+        ) : (
           <ListItemText
             primary={ellipsisString(name)}
             className={classes.listSubItemText}
           />
-        </Tooltip>
+        )}
       </MuListItem>
     </Link>
   );
