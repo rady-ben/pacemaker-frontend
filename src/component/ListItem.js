@@ -5,6 +5,7 @@ import {
   ListItemText,
   Collapse,
   List,
+  Tooltip,
 } from "@mui/material";
 import { useParams } from "react-router";
 import makeStyles from "@mui/styles/makeStyles";
@@ -15,6 +16,7 @@ import ListAltSharpIcon from "@mui/icons-material/ListAltSharp";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../index";
 import { CLICK_COURSE_LINK } from "../constant/analyticsEvents";
+import { ellipsisString } from "../utils/stringManipulation";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -70,7 +72,12 @@ const CustomItem = ({
         <ListItemIcon>
           <ListAltSharpIcon color={selected ? "primary" : "inherit"} />
         </ListItemIcon>
-        <ListItemText primary={name} className={classes.listSubItemText} />
+        <Tooltip title={name} placement="top">
+          <ListItemText
+            primary={ellipsisString(name)}
+            className={classes.listSubItemText}
+          />
+        </Tooltip>
       </MuListItem>
     </Link>
   );
