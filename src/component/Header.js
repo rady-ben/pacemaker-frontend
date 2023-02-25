@@ -1,10 +1,13 @@
+import React, { useState } from "react";
 import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import makeStyles from "@mui/styles/makeStyles";
 import MenuIcon from "@mui/icons-material/Menu";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { HOME } from "../constant/text";
 import { DRAWER_WIDTH } from "../constant/ui";
+import BasicMenu from "./menu";
 
 const useStyles = makeStyles((theme) => ({
   contentShift: {
@@ -15,8 +18,15 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
+  titleCOntainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     flexGrow: 1,
+    cursor: "pointer",
+  },
+  title: {
     textAlign: "left",
   },
   disconnectButton: {
@@ -26,6 +36,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ drawerOpen, toggleDrawer, title }) => {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const innerToggleDrawer = () => {
     toggleDrawer(!drawerOpen);
@@ -44,14 +64,20 @@ const Header = ({ drawerOpen, toggleDrawer, title }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant="h6"
-          className={clsx(classes.title, {
+
+        <div
+          className={clsx(classes.titleCOntainer, {
             [classes.contentShift]: drawerOpen,
           })}
+          onClick={handleClick}
         >
-          {title}
-        </Typography>
+          <Typography id="basic-button" variant="h6">
+            {title}
+          </Typography>
+          <ArrowDropDownIcon />
+        </div>
+
+        <BasicMenu anchorEl={anchorEl} open={open} handleClose={handleClose} />
         <Link to={`/`} style={{ textDecoration: "none" }}>
           <Button className={classes.disconnectButton}>{HOME}</Button>
         </Link>

@@ -170,7 +170,7 @@ const Question = ({ drawerOpen }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [moduleId, courseId]);
+  }, [sourceId, moduleId, courseId]);
 
   useEffect(() => {
     let numberNext;
