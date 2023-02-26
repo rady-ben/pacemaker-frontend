@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Grid } from "@mui/material";
+import { Container, Typography, Grid, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
-import { COURSES_LIST_TITLE } from "../../constant/text";
+import { COURSES_LIST_TITLE, BACK } from "../../constant/text";
 import Loading from "../../component/Loading";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     color: theme.palette.primary.contrastText,
@@ -38,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     justifyContent: "center",
   },
+  backIcon: {
+    cursor: "pointer",
+    marginRight: theme.spacing(2),
+    "&:hover": {
+      color: theme.palette.secondary.dark,
+    },
+    "&:active": {
+      color: theme.palette.primary.main,
+    },
+  },
 }));
 
 const CoursesList = () => {
@@ -45,6 +60,7 @@ const CoursesList = () => {
   const [coursesList, setCoursesList] = useState([]);
   const { sourceId, moduleId, moduleName } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
@@ -68,10 +84,22 @@ const CoursesList = () => {
       });
   }, [sourceId]);
 
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
+          <Tooltip title={BACK}>
+            <ArrowBackIosIcon
+              className={classes.backIcon}
+              color="primary"
+              fontSize="large"
+              onClick={goBack}
+            />
+          </Tooltip>
           <Typography variant="h1" className={classes.title}>
             {COURSES_LIST_TITLE}
             <span className={classes.qcmText}>{moduleName}</span>
