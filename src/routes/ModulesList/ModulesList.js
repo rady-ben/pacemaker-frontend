@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Grid } from "@mui/material";
+import { Container, Typography, Grid, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useParams } from "react-router";
@@ -10,6 +10,7 @@ import {
   NUMBER_200,
   MODULES_BANC_01,
   BANC_01_NUMBER,
+  BACK,
 } from "../../constant/text";
 import Loading from "../../component/Loading";
 
@@ -84,11 +85,13 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          <ArrowBackIosIcon
-            className={classes.backIcon}
-            color="primary"
-            fontSize="large"
-          />
+          <Tooltip title={BACK}>
+            <ArrowBackIosIcon
+              className={classes.backIcon}
+              color="primary"
+              fontSize="large"
+            />
+          </Tooltip>
           <Typography variant="h1" className={classes.title}>
             {sourceId === "1" ? MODULES_SERIE_200 : MODULES_BANC_01}
             <span className={classes.qcmText}>

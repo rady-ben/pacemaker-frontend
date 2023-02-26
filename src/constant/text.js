@@ -17,6 +17,7 @@ export const NUMBER_200 = "200 ";
 export const MODULES_BANC_01 = "Liste des modules de la banque ";
 export const BANC_01_NUMBER = "01 ";
 export const START = "Commencer";
+export const BACK = "Retour";
 
 // Courses list
 export const COURSES_LIST_TITLE = "Liste des coures du module ";
