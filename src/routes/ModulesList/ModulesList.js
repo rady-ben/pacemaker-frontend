@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Typography, Grid, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
 import {
@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: theme.palette.secondary.dark,
     },
+    "&:active": {
+      color: theme.palette.primary.main,
+    },
   },
 }));
 
@@ -63,6 +66,7 @@ const ModulesList = () => {
   const [moduleList, setModuleList] = useState([]);
   const { sourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
@@ -81,6 +85,10 @@ const ModulesList = () => {
       });
   }, []);
 
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
@@ -90,6 +98,7 @@ const ModulesList = () => {
               className={classes.backIcon}
               color="primary"
               fontSize="large"
+              onClick={goBack}
             />
           </Tooltip>
           <Typography variant="h1" className={classes.title}>
