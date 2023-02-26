@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Grid, Tooltip, Hidden } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Grid,
+  Tooltip,
+  Hidden,
+  Button,
+} from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useParams, useHistory } from "react-router";
@@ -60,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.primary.main,
     },
   },
+  backButtonMobile: {
+    marginLeft: theme.spacing(2),
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const ModulesList = () => {
@@ -92,6 +103,22 @@ const ModulesList = () => {
 
   return (
     <div className={classes.container}>
+      <Hidden mdUp>
+        <Button
+          className={classes.backButtonMobile}
+          size="large"
+          startIcon={
+            <ArrowBackIosIcon
+              color="primary"
+              fontSize="large"
+              onClick={goBack}
+            />
+          }
+          onClick={goBack}
+        >
+          {BACK}
+        </Button>
+      </Hidden>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
           <Hidden mdDown>
