@@ -3,7 +3,7 @@ import { Typography, Grid, Button, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
-import { START } from "../constant/text";
+import { START, BEING_PROCESSED_DESCRIPTION } from "../constant/text";
 import { ellipsisString } from "../utils/stringManipulation";
 import { ELLIPS_LENGTH } from "../constant/ui";
 
@@ -88,9 +88,11 @@ export const SourceItem = ({
             </Button>
           </Link>
         ) : (
-          <Typography variant="h2" className={classes.sourceStatusText}>
-            {subTitle}
-          </Typography>
+          <Tooltip title={BEING_PROCESSED_DESCRIPTION}>
+            <Typography variant="h2" className={classes.sourceStatusText}>
+              {subTitle}
+            </Typography>
+          </Tooltip>
         )}
       </div>
     </Grid>

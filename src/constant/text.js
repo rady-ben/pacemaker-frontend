@@ -10,6 +10,8 @@ export const MORE_INFO = `Pour plus d'informations veuillez nous suivre sur notr
 export const FACEBOOK_PAGE = "page facebook";
 export const SOURCE_AVAILABLE = "Source disponible";
 export const BEING_PROCESSED = "En cours de traitement";
+export const BEING_PROCESSED_DESCRIPTION =
+  "Ce cours est en cours de traitement il sera bientôt disponible";
 
 // Module list
 export const MODULES_SERIE_200 = "Liste des modules de la serie ";

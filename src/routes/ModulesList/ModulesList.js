@@ -11,6 +11,7 @@ import {
   MODULES_BANC_01,
   BANC_01_NUMBER,
   BACK,
+  BEING_PROCESSED,
 } from "../../constant/text";
 import Loading from "../../component/Loading";
 
@@ -118,7 +119,8 @@ const ModulesList = () => {
               <SourceItem
                 key={module.id}
                 title={module.name}
-                available={true}
+                subTitle={module.courses?.length ? "" : BEING_PROCESSED}
+                available={module.courses?.length}
                 url={`/${sourceId}/${module.id}/${module.name}`}
               />
             ))
