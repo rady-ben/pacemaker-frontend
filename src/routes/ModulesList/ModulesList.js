@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useParams } from "react-router";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   titleContainer: {
     marginBottom: theme.spacing(2),
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     color: theme.palette.primary.contrastText,
@@ -42,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
   list: {
     marginTop: theme.spacing(8),
     justifyContent: "center",
+  },
+  backIcon: {
+    cursor: "pointer",
+    marginRight: theme.spacing(2),
+    "&:hover": {
+      color: theme.palette.secondary.dark,
+    },
   },
 }));
 
@@ -72,6 +84,11 @@ const ModulesList = () => {
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
+          <ArrowBackIosIcon
+            className={classes.backIcon}
+            color="primary"
+            fontSize="large"
+          />
           <Typography variant="h1" className={classes.title}>
             {sourceId === "1" ? MODULES_SERIE_200 : MODULES_BANC_01}
             <span className={classes.qcmText}>
