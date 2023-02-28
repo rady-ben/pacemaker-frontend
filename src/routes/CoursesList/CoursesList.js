@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Typography,
-  Grid,
-  Tooltip,
-  Hidden,
-  Button,
-} from "@mui/material";
+import { Container, Typography, Grid, Tooltip, Hidden } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { useParams, useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
-import { COURSES_LIST_TITLE, BACK } from "../../constant/text";
+import {
+  COURSES_LIST_TITLE,
+  BACK,
+  MORE_INFO,
+  FACEBOOK_PAGE,
+  HOME,
+  BACK_HOME,
+} from "../../constant/text";
 import Loading from "../../component/Loading";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +65,27 @@ const useStyles = makeStyles((theme) => ({
   backButtonMobile: {
     marginLeft: theme.spacing(2),
     marginTop: theme.spacing(2),
+  },
+  contactText: {
+    color: theme.palette.grey.A400,
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: theme.spacing(8),
+    marginTop: theme.spacing(1),
+  },
+  homeLinkText: {
+    color: theme.palette.grey.A400,
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(12),
+  },
+  linkText: {
+    color: theme.palette.primary.dark,
+    fontSize: 20,
+    textAlign: "center",
+    textDecoration: "none",
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -141,6 +163,28 @@ const CoursesList = () => {
             ))
           )}
         </Grid>
+        <Typography variant="h2" className={classes.homeLinkText}>
+          {BACK_HOME}
+          <Link
+            to={`/`}
+            className={classes.linkText}
+            style={{ textDecoration: "none" }}
+            rel="noreferrer"
+          >
+            {HOME}
+          </Link>
+        </Typography>
+        <Typography variant="h2" className={classes.contactText}>
+          {MORE_INFO}
+          <a
+            href="https://www.facebook.com/pacemakerqcm"
+            className={classes.linkText}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {FACEBOOK_PAGE}
+          </a>
+        </Typography>
       </Container>
     </div>
   );

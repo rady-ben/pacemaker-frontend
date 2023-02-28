@@ -8,6 +8,7 @@ export const WELCOME_MESSAGE_2 = `Pacemaker vous propose les sources suivantes, 
 avec les dernières source pour mieux préparer votre examen.`;
 export const MORE_INFO = `Pour plus d'informations veuillez nous suivre sur notre`;
 export const FACEBOOK_PAGE = "page facebook";
+export const BACK_HOME = "Retour vers la page";
 export const SOURCE_AVAILABLE = "Source disponible";
 export const BEING_PROCESSED = "En cours de traitement";
 export const BEING_PROCESSED_DESCRIPTION =

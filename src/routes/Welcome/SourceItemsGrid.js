@@ -4,8 +4,6 @@ import makeStyles from "@mui/styles/makeStyles";
 import CustomModal from "../../component/Modal";
 
 import {
-  OUR_SOURCES,
-  WELCOME_MESSAGE_2,
   MORE_INFO,
   FACEBOOK_PAGE,
   SOURCE_AVAILABLE,
