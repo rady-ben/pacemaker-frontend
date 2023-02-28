@@ -10,6 +10,7 @@ import {
 import makeStyles from "@mui/styles/makeStyles";
 import { useParams, useHistory } from "react-router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
 import { COURSES_LIST_TITLE, BACK } from "../../constant/text";
@@ -102,20 +103,12 @@ const CoursesList = () => {
   return (
     <div className={classes.container}>
       <Hidden mdUp>
-        <Button
-          className={classes.backButtonMobile}
-          size="large"
-          startIcon={
-            <ArrowBackIosIcon
-              color="primary"
-              fontSize="large"
-              onClick={goBack}
-            />
-          }
+        <ArrowBackIcon
+          color="primary"
+          fontSize="large"
           onClick={goBack}
-        >
-          {BACK}
-        </Button>
+          className={classes.backButtonMobile}
+        />
       </Hidden>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
