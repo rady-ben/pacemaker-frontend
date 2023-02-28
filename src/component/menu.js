@@ -17,16 +17,10 @@ export default function BasicMenu({ anchorEl, open, handleClose }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <Link
-          to={`/workspace/${1}/${1}/${1}/1`}
-          style={{ textDecoration: "none" }}
-        >
+        <Link to={`/1/modules`} style={{ textDecoration: "none" }}>
           <MenuItem onClick={handleClose}>{SERIES_200}</MenuItem>
         </Link>
-        <Link
-          to={`/workspace/${2}/${1}/${1}/1`}
-          style={{ textDecoration: "none" }}
-        >
+        <Link to={`/2/modules`} style={{ textDecoration: "none" }}>
           <MenuItem onClick={handleClose}>{BANC_01}</MenuItem>
         </Link>
       </Menu>
