@@ -78,7 +78,19 @@ const SourceItemsGrid = ({ sourcesList }) => {
             ))}
             <SourceItem
               toggleAlert={toggleAlert}
-              title={"Training cours"}
+              title={"Série 120 "}
+              available={false}
+              subTitle={BEING_PROCESSED}
+            />
+            <SourceItem
+              toggleAlert={toggleAlert}
+              title={"Training book"}
+              available={false}
+              subTitle={BEING_PROCESSED}
+            />
+            <SourceItem
+              toggleAlert={toggleAlert}
+              title={"Série 1000"}
               available={false}
               subTitle={BEING_PROCESSED}
             />

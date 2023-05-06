@@ -1,7 +1,7 @@
 // welcome page
 export const PACEMAKER = "Pacemaker";
 export const QCM = "QCM";
-export const WELCOME_MESSAGE_1 = `Votre support de résidanat`;
+export const WELCOME_MESSAGE_1 = `Votre support de révision`;
 export const START_REVIEW = "Commencer votre révision";
 export const OUR_SOURCES = "Nos sources";
 export const WELCOME_MESSAGE_2 = `Pacemaker vous propose les sources suivantes, et on est à jour
