@@ -78,12 +78,6 @@ const SourceItemsGrid = ({ sourcesList }) => {
             ))}
             <SourceItem
               toggleAlert={toggleAlert}
-              title={"Diagest"}
-              available={false}
-              subTitle={BEING_PROCESSED}
-            />
-            <SourceItem
-              toggleAlert={toggleAlert}
               title={"Training cours"}
               available={false}
               subTitle={BEING_PROCESSED}
