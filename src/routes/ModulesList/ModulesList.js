@@ -8,10 +8,6 @@ import { Link } from "react-router-dom";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
 import {
-  MODULES_SERIE_200,
-  NUMBER_200,
-  MODULES_BANC_01,
-  BANC_01_NUMBER,
   BACK,
   BEING_PROCESSED,
   MORE_INFO,
@@ -41,17 +37,28 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 0,
+    },
   },
   title: {
     color: theme.palette.primary.contrastText,
     fontWeight: "bold",
     fontSize: 40,
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 28,
+      lineHeight: "100%",
+    },
   },
   qcmText: {
     color: theme.palette.primary.dark,
     fontWeight: "bold",
     fontSize: 40,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 28,
+      lineHeight: "100%",
+    },
   },
   list: {
     marginTop: theme.spacing(8),
@@ -65,6 +72,10 @@ const useStyles = makeStyles((theme) => ({
     },
     "&:active": {
       color: theme.palette.primary.main,
+    },
+    [theme.breakpoints.down("md")]: {
+      height: 25,
+      width: 25,
     },
   },
   backButtonMobile: {

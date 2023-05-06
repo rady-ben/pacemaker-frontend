@@ -36,12 +36,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 0,
+    },
   },
   title: {
     color: theme.palette.primary.dark,
     fontWeight: "bold",
     fontSize: 40,
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 28,
+      lineHeight: "100%",
+    },
   },
   list: {
     marginTop: theme.spacing(8),
@@ -55,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
     },
     "&:active": {
       color: theme.palette.primary.main,
+    },
+    [theme.breakpoints.down("md")]: {
+      height: 25,
+      width: 25,
     },
   },
   backButtonMobile: {
@@ -130,7 +141,7 @@ const CoursesList = () => {
             />
           </Tooltip>
           <Typography variant="h1" className={classes.title}>
-            <span className={classes.qcmText}>{moduleName}</span>
+            {moduleName}
           </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>

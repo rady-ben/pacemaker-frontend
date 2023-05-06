@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-
+import { useTheme } from "@mui/material/styles";
 import { PACEMAKER, QCM, WELCOME_MESSAGE_1 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
 import { SOURCES_API } from "../../config/api";
@@ -28,11 +28,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: 40,
     textAlign: "center",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 28,
+      lineHeight: "100%",
+    },
   },
   qcmText: {
     color: theme.palette.primary.dark,
     fontWeight: "bold",
     fontSize: 40,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 28,
+      lineHeight: "100%",
+    },
   },
   descriptionTextContainer: {
     maxWidth: 600,
