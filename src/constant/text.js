@@ -29,6 +29,7 @@ export const COURSES_LIST_TITLE = "Liste des coures du module ";
 export const HOME = "Accueil";
 export const SERIES_200 = "Séries 200";
 export const BANC_01 = "Banque 01";
+export const DIAGEST = "Diagest";
 export const QUESTION = "Question";
 export const QUESTION_NUMBER = "Num de question";
 export const SYNTHESIS = "Synthèse";
