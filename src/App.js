@@ -9,6 +9,8 @@ import Home from "./routes/home";
 import Welcome from "./routes/Welcome";
 import ModulesList from "./routes/ModulesList";
 import CoursesList from "./routes/CoursesList";
+import ScrollToTop from "./ScrollToTop";
+
 const theme = createTheme();
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <ScrollToTop />
           <Switch>
             <Route exact path="/">
               <Welcome />
