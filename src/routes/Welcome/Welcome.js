@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(8),
   },
   titleContainer: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   title: {
     color: theme.palette.primary.contrastText,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionText: {
     color: theme.palette.grey.A400,
-    fontSize: 26,
+    fontSize: 18,
     textAlign: "center",
   },
   startButtonContainer: {
@@ -112,11 +112,7 @@ const Welcome = () => {
           </Typography>
         </Container>
         <Container className={classes.descriptionTextContainer}>
-          <Typography
-            style={{ lineHeight: "35px" }}
-            variant="h2"
-            className={classes.descriptionText}
-          >
+          <Typography variant="h2" className={classes.descriptionText}>
             {WELCOME_MESSAGE_1}
           </Typography>
         </Container>
