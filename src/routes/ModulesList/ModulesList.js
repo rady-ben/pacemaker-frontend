@@ -20,6 +20,7 @@ import {
   BACK_HOME,
 } from "../../constant/text";
 import Loading from "../../component/Loading";
+import { SOURCES } from "../../constant/collections";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -144,10 +145,8 @@ const ModulesList = () => {
             </Tooltip>
           </Hidden>
           <Typography variant="h1" className={classes.title}>
-            {sourceId === "1" ? MODULES_SERIE_200 : MODULES_BANC_01}
-            <span className={classes.qcmText}>
-              {sourceId === "1" ? NUMBER_200 : BANC_01_NUMBER}
-            </span>
+            {SOURCES[sourceId].label1}
+            <span className={classes.qcmText}>{SOURCES[sourceId].label2}</span>
           </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
