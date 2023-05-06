@@ -124,26 +124,16 @@ const ModulesList = () => {
 
   return (
     <div className={classes.container}>
-      <Hidden mdUp>
-        <ArrowBackIcon
-          color="primary"
-          fontSize="large"
-          onClick={goBack}
-          className={classes.backButtonMobile}
-        />
-      </Hidden>
       <Container className={classes.welcomeSectionContainer}>
         <Container className={classes.titleContainer}>
-          <Hidden mdDown>
-            <Tooltip title={BACK}>
-              <ArrowBackIosIcon
-                className={classes.backIcon}
-                color="primary"
-                fontSize="large"
-                onClick={goBack}
-              />
-            </Tooltip>
-          </Hidden>
+          <Tooltip title={BACK}>
+            <ArrowBackIosIcon
+              className={classes.backIcon}
+              color="primary"
+              fontSize="large"
+              onClick={goBack}
+            />
+          </Tooltip>
           <Typography variant="h1" className={classes.title}>
             {SOURCES[sourceId].label1}
             <span className={classes.qcmText}>{SOURCES[sourceId].label2}</span>

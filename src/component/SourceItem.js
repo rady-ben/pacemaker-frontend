@@ -61,7 +61,7 @@ export const SourceItem = ({
   const classes = useStyles({ available });
   const titleToDisplay = ellipsisString(title);
   return (
-    <Grid item xs={12} md={6} lg={4}>
+    <Grid item xs={6} md={6} lg={4}>
       <div
         className={classes.sourseItemContainer}
         onClick={available ? () => {} : toggleAlert ? toggleAlert : () => {}}
