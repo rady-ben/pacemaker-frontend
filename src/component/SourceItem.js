@@ -3,9 +3,10 @@ import { Typography, Grid, Button, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
-import { START, BEING_PROCESSED_DESCRIPTION } from "../constant/text";
+import { START } from "../constant/text";
 import { ellipsisString } from "../utils/stringManipulation";
 import { ELLIPS_LENGTH } from "../constant/ui";
+import { isMobile } from "../utils/ui";
 
 const useStyles = makeStyles((theme) => ({
   sourceTitle: {
@@ -13,9 +14,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: 18,
     maxWidth: 160,
-    height: 50,
+    marginBottom: 15,
     textAlign: "center",
-    marginBottom: theme.spacing(2),
     [theme.breakpoints.down("md")]: {
       maxWidth: 250,
       height: "auto",
@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   sourseItemContainer: (props) => ({
-    minHeight: 200,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#151719",
     opacity: props.available ? 1 : 0.5,
+    cursor: props.available ? "default" : "not-allowed",
   }),
   sourceIconContainer: (props) => ({
     height: 100,
@@ -51,26 +51,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SourceItem = ({
-  toggleAlert,
-  title,
-  subTitle,
-  available,
-  url = "#",
-}) => {
+export const SourceItem = ({ title, subTitle, available, url = "#" }) => {
   const classes = useStyles({ available });
   const titleToDisplay = ellipsisString(title);
   return (
     <Grid item xs={6} md={6} lg={4}>
-      <div
-        className={classes.sourseItemContainer}
-        onClick={available ? () => {} : toggleAlert ? toggleAlert : () => {}}
-        disabled={available}
-      >
+      <div className={classes.sourseItemContainer}>
         <div className={classes.sourceIconContainer}>
           <MenuBookRounded className={classes.sourceIcon} />
         </div>
-        {title.length > ELLIPS_LENGTH ? (
+        {title.length > ELLIPS_LENGTH && !isMobile() ? (
           <Tooltip title={title} placement="top">
             <Typography variant="h2" className={classes.sourceTitle}>
               {titleToDisplay}
@@ -88,11 +78,9 @@ export const SourceItem = ({
             </Button>
           </Link>
         ) : (
-          <Tooltip title={BEING_PROCESSED_DESCRIPTION}>
-            <Typography variant="h2" className={classes.sourceStatusText}>
-              {subTitle}
-            </Typography>
-          </Tooltip>
+          <Typography variant="h2" className={classes.sourceStatusText}>
+            {subTitle}
+          </Typography>
         )}
       </div>
     </Grid>

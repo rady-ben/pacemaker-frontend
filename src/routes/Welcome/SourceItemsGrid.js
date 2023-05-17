@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import CustomModal from "../../component/Modal";
 
 import {
   MORE_INFO,
@@ -109,11 +108,6 @@ const SourceItemsGrid = ({ sourcesList }) => {
           </a>
         </Typography>
       </Container>
-      <CustomModal
-        showSynthesis={showAlert}
-        toggleModal={toggleAlert}
-        modalContent={"Cette source n est pas disponible pour le moment"}
-      />
     </>
   );
 };
