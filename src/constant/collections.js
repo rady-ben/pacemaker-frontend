@@ -5,7 +5,7 @@ export const SOURCES = {
   },
   2: {
     label1: "Banque",
-    label2: " 01",
+    label2: " Oran",
   },
   3: {
     label1: "Diagest",

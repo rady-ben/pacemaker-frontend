@@ -28,7 +28,7 @@ export const COURSES_LIST_TITLE = "Liste des coures du module ";
 // Workspace
 export const HOME = "Accueil";
 export const SERIES_200 = "Séries 200";
-export const BANC_01 = "Banque 01";
+export const BANC_ORAN = "Banque Oran";
 export const DIAGEST = "Diagest";
 export const QUESTION = "Question";
 export const QUESTION_NUMBER = "Num de question";
