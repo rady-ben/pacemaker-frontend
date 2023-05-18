@@ -350,16 +350,18 @@ const Question = ({ drawerOpen }) => {
               placeholder={QUESTION_NUMBER}
               onChange={selectQuestion}
             />
-            <Button
-              className={classes.synthesisButton}
-              startIcon={<FullscreenIcon />}
-              onClick={toggleModal}
-              variant="outlined"
-            >
-              <Typography className={classes.synthesisButtonText}>
-                {SYNTHESIS}
-              </Typography>
-            </Button>
+            {synthesis ? (
+              <Button
+                className={classes.synthesisButton}
+                startIcon={<FullscreenIcon />}
+                onClick={toggleModal}
+                variant="outlined"
+              >
+                <Typography className={classes.synthesisButtonText}>
+                  {SYNTHESIS}
+                </Typography>
+              </Button>
+            ) : null}
           </Box>
           <Divider className={classes.divider} />
           <Typography variant="subtitle1">{question?.content}</Typography>
