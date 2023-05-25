@@ -278,6 +278,11 @@ const Question = ({ drawerOpen }) => {
 
   const toggleValidation = () => {
     if (validated) {
+      const tab = propositions.map((prop) => ({
+        ...prop,
+        checked: false,
+      }));
+      setPropositions([...tab]);
       logEvent(analytics, CLICK_REDO_BUTTON);
     } else {
       logEvent(analytics, CLICK_VALIDATION_BUTTON);
