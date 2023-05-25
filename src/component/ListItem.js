@@ -24,7 +24,12 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(3),
   },
   listItemText: {
-    color: (props) => (props.granted ? "#000" : theme.palette.grey[600]),
+    color: (props) =>
+      props.granted
+        ? props.isModuleSelected
+          ? theme.palette.primary.main
+          : "#000"
+        : theme.palette.grey[600],
   },
   listSubItemText: {
     color: (props) => (props.selected ? theme.palette.primary.dark : "#000"),
@@ -93,10 +98,11 @@ const CustomItem = ({
 
 const ListItem = ({ item, toggleDrawer = null, toggleAlert = null }) => {
   const [open, setOpen] = useState(false);
-
   const granted = item?.courses?.length && item?.courses?.length > 0;
+  const { moduleId } = useParams();
+  const isModuleSelected = moduleId === JSON.stringify(item.id);
 
-  const classes = useStyles({ granted });
+  const classes = useStyles({ granted, isModuleSelected });
 
   const handleClick = () => {
     if (granted) {
@@ -112,7 +118,7 @@ const ListItem = ({ item, toggleDrawer = null, toggleAlert = null }) => {
     <>
       <MuListItem button key={item?.id} onClick={handleClick}>
         <ListItemIcon>
-          <MenuBookRounded />
+          <MenuBookRounded color={isModuleSelected ? "primary" : "inherit"} />
         </ListItemIcon>
         <ListItemText primary={item?.name} className={classes.listItemText} />
 
