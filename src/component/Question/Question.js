@@ -48,16 +48,9 @@ import {
   CLICK_PREVIOUS_BUTTON,
   SELECT_QUESTION,
 } from "../../constant/analyticsEvents";
+import Loading from "../Loading";
 
 const useStyles = makeStyles((theme) => ({
-  circularProgressContainer: {
-    height: "100vh",
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    marginTop: 50,
-  },
   container: {
     [theme.breakpoints.up("md")]: {
       marginTop: theme.spacing(4),
@@ -321,14 +314,7 @@ const Question = ({ drawerOpen }) => {
   };
 
   if (isLoading) {
-    return (
-      <>
-        <div className={classes.toolbar} />
-        <div className={classes.circularProgressContainer}>
-          <CircularProgress />
-        </div>
-      </>
-    );
+    return <Loading />;
   }
 
   return (
