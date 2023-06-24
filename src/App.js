@@ -10,6 +10,7 @@ import Welcome from "./routes/Welcome";
 import ModulesList from "./routes/ModulesList";
 import CoursesList from "./routes/CoursesList";
 import ScrollToTop from "./ScrollToTop";
+import PrivacyPolicy from "./routes/PravecyPolicy/PravecyPolicy";
 
 const theme = createTheme();
 
@@ -31,6 +32,9 @@ function App() {
             </Route>
             <Route path="/:sourceId/:moduleId/:moduleName">
               <CoursesList />
+            </Route>
+            <Route path="/privacy-policy">
+              <PrivacyPolicy />
             </Route>
           </Switch>
         </BrowserRouter>
