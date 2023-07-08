@@ -111,6 +111,21 @@ const Welcome = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (window?.ReactNativeWebView?.postMessage) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ canGoBack: false })
+      );
+    }
+    return () => {
+      if (window?.ReactNativeWebView?.postMessage) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ canGoBack: true })
+        );
+      }
+    };
+  }, []);
+
   return (
     <div className={classes.container}>
       <Container className={classes.welcomeSectionContainer}>
