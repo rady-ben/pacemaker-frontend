@@ -69,7 +69,7 @@ export default function BasicMenu({ anchorEl, open, handleClose }) {
         <Link to={`/workspace/4/1/1/1`} className={classes.link}>
           <MenuItem
             className={clsx(classes.item, {
-              [classes.selectitem]: sourceId === "3",
+              [classes.selectitem]: sourceId === "4",
             })}
             onClick={handleClose}
           >
