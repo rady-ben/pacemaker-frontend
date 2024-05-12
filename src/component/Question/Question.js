@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   ButtonGroup,
-  CircularProgress,
 } from "@mui/material";
 import Select from "react-select";
 import { styled } from "@mui/system";
@@ -19,6 +18,7 @@ import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import { logEvent } from "firebase/analytics";
+import PropTypes from 'prop-types';
 import { DRAWER_WIDTH } from "../../constant/ui";
 import ResponseProposition from "./ResponseProposition";
 import CustomModal from "../Modal";
@@ -30,7 +30,6 @@ import {
   CORRECT_ANSWER,
   WRONG_ANSWER,
   COMMENT,
-  PERSONAL_COMMENT_PLACEHOLDER,
   VALIDATE,
   NEXT,
   PREVIOUS,
@@ -444,5 +443,9 @@ const Question = ({ drawerOpen }) => {
     </>
   );
 };
+
+Question.propTypes = {
+  drawerOpen: PropTypes.bool
+}
 
 export default Question;

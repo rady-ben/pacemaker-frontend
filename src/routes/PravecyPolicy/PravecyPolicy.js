@@ -16,15 +16,15 @@ const PrivacyPolicy = () => {
       </p>
       <h2>Personal Identification Information</h2>
       <p>
-        The app doesn't require any Identification Information. all content is
+        The app doesn`&lsquo;`t require any Identification Information. all content is
         available without login
       </p>
       <h2>Non-Personal Identification Information</h2>
       <p>
         We may collect non-personal identification information about Users
         whenever they interact with our App. Non-personal identification
-        information may include the User's device name, the type of device,
-        technical information about the User's means of connection to our App
+        information may include the User`&lsquo;`s device name, the type of device,
+        technical information about the User`&lsquo;`s means of connection to our App
         (e.g., the operating system, the Internet service provider utilized,
         etc.), and other similar information.
       </p>
@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
       </p>
       <h2>Sharing Your Personal Information</h2>
       <p>
-        We do not sell, trade, or rent Users' personal identification
+        We do not sell, trade, or rent Users`&lsquo;` personal identification
         information to others.
       </p>
       <h2>Changes to This Privacy Policy</h2>

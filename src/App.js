@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
   ThemeProvider,
@@ -18,7 +18,7 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+         <BrowserRouter basename={process.env.PUBLIC_URL}>  {/* eslint-disable-line */}
           <ScrollToTop />
           <Switch>
             <Route exact path="/">

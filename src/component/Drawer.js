@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import {
   Drawer as MuDrawer,
   Divider,
@@ -92,6 +93,25 @@ const Drawer = ({ listItems, drawerOpen, toggleDrawer }) => {
       />
     </>
   );
+};
+
+Drawer.propTypes = {
+  listItems: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
+    name: PropTypes.string.isRequired,
+    courses: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired,
+    })).isRequired,
+  })).isRequired,
+  drawerOpen: PropTypes.bool.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
 };
 
 export default Drawer;

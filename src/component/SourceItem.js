@@ -3,6 +3,8 @@ import { Typography, Grid, Button, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 import { MenuBookRounded } from "@mui/icons-material";
+import PropTypes from 'prop-types'; // Import PropTypes
+
 import { START } from "../constant/text";
 import { ellipsisString } from "../utils/stringManipulation";
 import { ELLIPS_LENGTH } from "../constant/ui";
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: props.available ? 1 : 0.5,
     cursor: props.available ? "default" : "not-allowed",
   }),
-  sourceIconContainer: (props) => ({
+  sourceIconContainer: () => ({
     height: 100,
     width: 100,
     borderRadius: 80,
@@ -85,4 +87,16 @@ export const SourceItem = ({ title, subTitle, available, url = "#" }) => {
       </div>
     </Grid>
   );
+};
+
+SourceItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  subTitle: PropTypes.string,                 
+  available: PropTypes.bool.isRequired,       
+  url: PropTypes.string                    
+};
+
+SourceItem.defaultProps = {
+  url: "#",                                   
+  subTitle: "",                               
 };

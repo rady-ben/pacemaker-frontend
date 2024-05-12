@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from 'prop-types'; 
 import { withRouter } from "react-router-dom";
 
 function ScrollToTop({ history }) {
@@ -13,5 +14,11 @@ function ScrollToTop({ history }) {
 
   return null;
 }
+
+ScrollToTop.propTypes = {
+  history: PropTypes.shape({
+    listen: PropTypes.func.isRequired
+  }).isRequired
+};
 
 export default withRouter(ScrollToTop);

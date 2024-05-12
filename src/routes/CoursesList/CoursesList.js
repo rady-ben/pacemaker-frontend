@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Typography, Grid, Tooltip, Hidden } from "@mui/material";
+import { Container, Typography, Grid, Tooltip } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { useParams, useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { SourceItem } from "../../component/SourceItem";
 import { MODULES_COURSES_API } from "../../config/api";
 import {
-  COURSES_LIST_TITLE,
   BACK,
   MORE_INFO,
   FACEBOOK_PAGE,

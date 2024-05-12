@@ -1,7 +1,10 @@
+import React from "react";
 import { FormControlLabel, Checkbox, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import withStyles from "@mui/styles/withStyles";
 import { green, red } from "@mui/material/colors";
+import PropTypes from 'prop-types'
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -81,6 +84,14 @@ const ResponseProposition = ({
       label={<Typography className={classes.label}>{label}</Typography>}
     />
   );
+};
+
+ResponseProposition.propTypes = {
+  label: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(['success', 'error', 'none']), // Assuming 'none' as a possible status for neutral cases
+  index: PropTypes.number.isRequired,
+  checked: PropTypes.bool.isRequired,
+  handleCheckProposition: PropTypes.func.isRequired,
 };
 
 export default ResponseProposition;

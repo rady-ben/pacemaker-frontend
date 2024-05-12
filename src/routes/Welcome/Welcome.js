@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import { useTheme } from "@mui/material/styles";
 import { PACEMAKER, QCM, WELCOME_MESSAGE_1 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
 import { SOURCES_API } from "../../config/api";

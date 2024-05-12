@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import makeStyles from "@mui/styles/makeStyles";
+import PropTypes from 'prop-types'; // Import PropTypes
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { HOME } from "../constant/text";
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  titleCOntainer: {
+  titleContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -66,7 +67,7 @@ const Header = ({ drawerOpen, toggleDrawer, title }) => {
         </IconButton>
 
         <div
-          className={clsx(classes.titleCOntainer, {
+          className={clsx(classes.titleContainer, {
             [classes.contentShift]: drawerOpen,
           })}
           onClick={handleClick}
@@ -84,6 +85,13 @@ const Header = ({ drawerOpen, toggleDrawer, title }) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+
+Header.propTypes = {
+  drawerOpen: PropTypes.bool.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default Header;

@@ -22,7 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 
-ReactDOM.render(
+ReactDOM.render( // eslint-disable-line
   <React.StrictMode>
     <StoreProvider initialState={initialState} reducer={modulesReducer}>
       <App />

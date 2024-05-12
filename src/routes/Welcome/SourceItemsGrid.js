@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
+import PropTypes from 'prop-types';
 
 import {
   MORE_INFO,
@@ -9,6 +10,8 @@ import {
   BEING_PROCESSED,
 } from "../../constant/text";
 import { SourceItem } from "../../component/SourceItem";
+
+
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
@@ -110,6 +113,13 @@ const SourceItemsGrid = ({ sourcesList }) => {
       </Container>
     </>
   );
+};
+
+SourceItemsGrid.propTypes = {
+  sourcesList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired
 };
 
 export default SourceItemsGrid;

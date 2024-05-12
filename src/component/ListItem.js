@@ -7,6 +7,8 @@ import {
   List,
   Tooltip,
 } from "@mui/material";
+import PropTypes from 'prop-types'; 
+
 import { useParams } from "react-router";
 import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
@@ -46,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomItem = ({
   name,
-  index,
   courseId,
   moduleId,
   toggleDrawer = null,
@@ -149,5 +150,26 @@ const ListItem = ({ item, toggleDrawer = null, toggleAlert = null }) => {
     </>
   );
 };
+
+ListItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+    courses: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    })).isRequired
+  }).isRequired,
+  toggleDrawer: PropTypes.func,
+  toggleAlert: PropTypes.func
+};
+
+CustomItem.propTypes = {
+  name: PropTypes.string,
+  courseId: PropTypes.number,
+  moduleId: PropTypes.number,
+  toggleDrawer: PropTypes.func,
+}
+
 
 export default ListItem;

@@ -6,6 +6,8 @@ import { SERIES_200, BANC_ORAN, DIAGEST, EXT_ORAN } from "../constant/text";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import clsx from "clsx";
+import PropTypes from 'prop-types'; // Import PropTypes
+
 
 const useStyles = makeStyles({
   link: {
@@ -21,6 +23,18 @@ const useStyles = makeStyles({
     color: "#fff",
   },
 });
+
+
+
+BasicMenu.propTypes = {
+  anchorEl: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ node: PropTypes.instanceOf(Element) })
+  ]),
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
+
 
 export default function BasicMenu({ anchorEl, open, handleClose }) {
   const { sourceId } = useParams();
