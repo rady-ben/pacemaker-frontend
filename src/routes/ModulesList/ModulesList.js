@@ -15,7 +15,7 @@ import {
   BACK_HOME,
 } from "../../constant/text";
 import Loading from "../../component/Loading";
-import { SOURCES } from "../../constant/collections";
+import useSources from "../../hooks/sources";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -110,6 +110,8 @@ const ModulesList = () => {
   const { sourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
+  const {sourcesList} = useSources()
+  console.log(sourcesList)
 
   useEffect(() => {
     setIsLoading(true);
@@ -145,8 +147,8 @@ const ModulesList = () => {
             />
           </Tooltip>
           <Typography variant="h1" className={classes.title}>
-            {SOURCES[sourceId].label1}
-            <span className={classes.qcmText}>{SOURCES[sourceId].label2}</span>
+            {sourcesList?.[sourceId].label1}
+            <span className={classes.qcmText}>{sourcesList?.[sourceId].label2}</span>
           </Typography>
         </Container>
         <Grid className={classes.list} container spacing={4} rowSpacing={6}>
