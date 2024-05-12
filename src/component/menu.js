@@ -73,10 +73,10 @@ export default function BasicMenu({ anchorEl, open, handleClose }) {
             {DIAGEST}
           </MenuItem>
         </Link>
-        <Link to={`/workspace/4/1/1/1`} className={classes.link}>
+        <Link to={`/workspace/6/1/1/1`} className={classes.link}>
           <MenuItem
             className={clsx(classes.item, {
-              [classes.selectitem]: sourceId === "4",
+              [classes.selectitem]: sourceId === "6",
             })}
             onClick={handleClose}
           >
