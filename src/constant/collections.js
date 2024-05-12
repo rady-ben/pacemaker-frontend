@@ -11,4 +11,8 @@ export const SOURCES = {
     label1: "Diagest",
     label2: " QCM",
   },
+  4: {
+    label1: "Externat",
+    label2: " Oran",
+  },
 };
