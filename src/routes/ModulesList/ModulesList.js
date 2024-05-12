@@ -158,7 +158,7 @@ const ModulesList = () => {
                 key={module.id}
                 title={module.name}
                 subTitle={module.courses?.length ? "" : BEING_PROCESSED}
-                available={module.courses?.length}
+                available={module.courses?.length ? true : false}
                 url={`/${sourceId}/${module.id}/${module.name}`}
               />
             ))

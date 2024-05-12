@@ -6,11 +6,6 @@ Store.displayName = 'Store';
 
 export const useStore = () => React.useContext(Store);
 
-StoreProvider.propTypes = {
-  children: PropTypes.node.isRequired, 
-  initialState: PropTypes.object.isRequired,
-  reducer: PropTypes.func.isRequired 
-};
 
 export const StoreProvider = ({ children, initialState, reducer }) => {
   const [globalState, dispatch] = React.useReducer(reducer, initialState);
@@ -21,4 +16,10 @@ export const StoreProvider = ({ children, initialState, reducer }) => {
         {children}
     </Store.Provider>
   );
+};
+
+StoreProvider.propTypes = {
+  children: PropTypes.node.isRequired, 
+  initialState: PropTypes.object.isRequired,
+  reducer: PropTypes.func.isRequired 
 };

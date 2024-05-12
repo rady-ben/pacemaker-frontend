@@ -88,7 +88,7 @@ const ResponseProposition = ({
 
 ResponseProposition.propTypes = {
   label: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(['success', 'error', 'none']), // Assuming 'none' as a possible status for neutral cases
+  status: PropTypes.oneOf(['success', 'error', 'none', 'default']), // Assuming 'none' as a possible status for neutral cases
   index: PropTypes.number.isRequired,
   checked: PropTypes.bool.isRequired,
   handleCheckProposition: PropTypes.func.isRequired,

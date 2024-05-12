@@ -26,14 +26,7 @@ const useStyles = makeStyles({
 
 
 
-BasicMenu.propTypes = {
-  anchorEl: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ node: PropTypes.instanceOf(Element) })
-  ]),
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-};
+
 
 
 export default function BasicMenu({ anchorEl, open, handleClose }) {
@@ -94,3 +87,12 @@ export default function BasicMenu({ anchorEl, open, handleClose }) {
     </div>
   );
 }
+
+BasicMenu.propTypes = {
+  anchorEl: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ node: PropTypes.instanceOf(Element) })
+  ]),
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
