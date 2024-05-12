@@ -73,7 +73,7 @@ const SourceItemsGrid = ({ sourcesList }) => {
                   key={id}
                   toggleAlert={toggleAlert}
                   title={`${label1} ${label2.trim()}`} 
-                  subTitle={'SOURCE_AVAILABLE'} 
+                  subTitle={SOURCE_AVAILABLE} 
                   available={true}
                   sourceId={parseInt(id)}
                   url={`/${id}/modules`}
