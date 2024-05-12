@@ -2,7 +2,7 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import makeStyles from "@mui/styles/makeStyles";
-import { SERIES_200, BANC_ORAN, DIAGEST } from "../constant/text";
+import { SERIES_200, BANC_ORAN, DIAGEST, EXT_ORAN } from "../constant/text";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import clsx from "clsx";
@@ -64,6 +64,16 @@ export default function BasicMenu({ anchorEl, open, handleClose }) {
             onClick={handleClose}
           >
             {DIAGEST}
+          </MenuItem>
+        </Link>
+        <Link to={`/workspace/4/1/1/1`} className={classes.link}>
+          <MenuItem
+            className={clsx(classes.item, {
+              [classes.selectitem]: sourceId === "3",
+            })}
+            onClick={handleClose}
+          >
+            {EXT_ORAN}
           </MenuItem>
         </Link>
       </Menu>

@@ -30,6 +30,7 @@ export const HOME = "Accueil";
 export const SERIES_200 = "Séries 200";
 export const BANC_ORAN = "Banque Oran";
 export const DIAGEST = "Diagest";
+export const EXT_ORAN = "Externat Oran";
 export const QUESTION = "Question";
 export const QUESTION_NUMBER = "Num de question";
 export const SYNTHESIS = "Synthèse";
