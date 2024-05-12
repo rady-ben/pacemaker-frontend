@@ -67,17 +67,19 @@ const SourceItemsGrid = ({ sourcesList }) => {
       <Container className={classes.sourceSectionContainer} id="sources">
         <div>
           <Grid container spacing={1} rowSpacing={6}>
-            {sourcesList.map((source) => (
-              <SourceItem
-                key={source.id}
-                toggleAlert={toggleAlert}
-                title={source.name}
-                subTitle={SOURCE_AVAILABLE}
-                available={true}
-                sourceId={source.id}
-                url={`/${source.id}/modules`}
-              />
-            ))}
+            {Object.entries(sourcesList).map(([id, { label1, label2 }]) => {
+              return (
+                <SourceItem
+                  key={id}
+                  toggleAlert={toggleAlert}
+                  title={`${label1} ${label2.trim()}`} 
+                  subTitle={'SOURCE_AVAILABLE'} 
+                  available={true}
+                  sourceId={parseInt(id)}
+                  url={`/${id}/modules`}
+                />
+              )
+            })}
             <SourceItem
               toggleAlert={toggleAlert}
               title={"Série 120 "}

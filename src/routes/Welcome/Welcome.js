@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Container, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { PACEMAKER, QCM, WELCOME_MESSAGE_1 } from "../../constant/text";
 import SourceItemsGrid from "./SourceItemsGrid";
-import { SOURCES_API } from "../../config/api";
 import Loading from "../../component/Loading";
+import useSources from "../../hooks/sources";
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -89,26 +90,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Welcome = () => {
   const classes = useStyles();
-  const [sourcesList, setSourcesList] = useState([]);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(SOURCES_API)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setSourcesList(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  const {sourcesList,  isLoading} = useSources();
 
   useEffect(() => {
     if (window?.ReactNativeWebView?.postMessage) {
@@ -139,7 +121,7 @@ const Welcome = () => {
           </Typography>
         </Container>
       </Container>
-      {isLoading ? <Loading /> : <SourceItemsGrid sourcesList={sourcesList} />}
+      {isLoading ? <Loading /> : <SourceItemsGrid sourcesList={sourcesList||[]} />}
     </div>
   );
 };
