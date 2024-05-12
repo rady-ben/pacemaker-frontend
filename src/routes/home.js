@@ -9,14 +9,23 @@ import { analytics } from "../index";
 import { CLOSE_DRAWER, OPEN_DRAWER } from "../constant/analyticsEvents";
 import { isMobile } from "../utils/ui";
 import { MODULES_COURSES_API } from "../config/api";
-import { SOURCES_LIST } from "../constant/data";
+import useSources from "../hooks/sources";
+
 
 function Home() {
   const [drawerOpen, setDrawerOpen] = useState(isMobile() ? false : true);
   const { sourceId } = useParams();
   const [tab, setTab] = useState([]);
 
-  const headerTitle = SOURCES_LIST[sourceId];
+
+  const {sourcesList} = useSources()
+  console.log(sourcesList)
+  console.log(sourceId)
+  let headerTitle = "";
+  if (sourcesList) {
+    headerTitle = `${sourcesList[Number(sourceId)].label1} ${sourcesList[Number(sourceId)].label2}`;
+  }
+
 
   useEffect(() => {
     fetch(MODULES_COURSES_API({ sourceId }))
